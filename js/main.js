@@ -1,5 +1,5 @@
 var url = "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.channels.list?&key=AIzaSyBY_GdF-Y0PGDs6navN3K00aZFUUQbOAYspart=id&forUsername=thenetninja";
-var channel = "thenetninja";
+var channels = "thenetninja";
 
 function request(url, channel) {
     console.log("request initiated");
@@ -27,6 +27,7 @@ function request(url, channel) {
         request.send();
     });
 }
+
 
 
 request(url, channel);
