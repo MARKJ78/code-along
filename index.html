@@ -8,23 +8,26 @@
     <meta name="Code Along" content="Study Panel for video tutorials">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <section class="top-row">
-        <div id="video-panel" class="left-panel"></div>
-        <div id="channels" class="right-panel">
+
+    <section class="left-panel">
+        <div id="video-panel" class="top-row"></div>
+        <div id="editor-panel" class="bottom-row">
+            <iframe frameborder="0" id="repl" src="https://repl.it"></iframe>
+        </div>
+    </section>
+
+    <section class="right-panel">
+
+        <div id="channels" class="top-row">
             <ul></ul>
         </div>
-    </section>
-
-    <section class="bottom-row">
-        <div id="editor-panel" class="left-panel">
-            <iframe frameborder="0" height="106.25%" width="100%" src="https://repl.it/languages"></iframe>
-        </div>
-        <div id="notepad" class="right-panel"></div>
+        <div id="notepad" class="bottom-row"></div>
     </section>
 
 
@@ -32,8 +35,8 @@
 
 
 
-    <!--<script type="text/javascript" src="js/vendors/js.cookie.js"></script>-->
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/vendors/js.cookie.js"></script>
+    <script type="text/javascript" src="js/youtube.js"></script>
 </body>
 
 </html>

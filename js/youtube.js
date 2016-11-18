@@ -1,15 +1,51 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
+//                                    Global Variables                                              //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/*////////////////////////////////////////
+Main Panel(top)
+ ////////////////////////////////////////*/
+var panel = document.getElementById("video-panel");
+/*////////////////////////////////////////
+ Load user data from local storage
+ ////////////////////////////////////////*/
+if (typeof Cookies('LastViewedVideo') !== 'undefined') { //if there is a cookie
+    panel.insertAdjacentHTML('beforeend', Cookies('LastViewedVideo'));
+} else {
+    panel.innerHTML = "";
+}
+/*////////////////////////////////////////
+Public Key
+ ////////////////////////////////////////*/
+var apik = "&key=AIzaSyC8RAHhZg50R3V9IRPE6SimzIx9Q9NgBkI";
+/*////////////////////////////////////////
+ Hardcoded channels
+ ////////////////////////////////////////*/
+var channelsList = {
+    freeCodeCamp: "UC8butISFwT-Wl7EV0hUK0BQ",
+    TheNetNinja: "UCW5YeuERMmlnqo4oq8vwUpg",
+    DevTips: "UCyIe-61Y8C4_o-zZCtO4ETQ",
+    LevelUpTuts: "UCJbPGzawDH1njbqV-D5HqKw",
+    coderGuide: "UCwHrYi0GL6dmYaRB0StEbEA",
+    easyDevTuts: "UCI-vEugj8uNGB_ZFuutlMYw",
+    CodeSchool: "UCUFbBYzSUafxMpUbTmroGhg"
+};
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
 //                        0: Fetch data object from API                                             //
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function request(url) {
-    //console.log("request initiated");
     return new Promise(function(resolve) {
-        //console.log("promise initiated");
         var rawData, data;
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -19,13 +55,8 @@ function request(url) {
                 rawData = this.response;
                 response = JSON.parse(this.response);
                 resolve(response);
-
-                //console.log(channel + ' fetch request successful');
-                //console.log(' in request');
             } else {
-                // if result is an error, (single channel only) turn icon red in faves list
-                /*$('#fave-' + channel).addClass('c-not-found');*/
-                console.log('no longer with us, please remove the channel from your favorites list.');
+                console.log('Not found');
             }
         };
         request.send();
@@ -39,13 +70,7 @@ function request(url) {
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-/*////////////////////////////////////////
- Hardcoded channels
- ////////////////////////////////////////*/
-var channelsList = {
-    freeCodeCamp: "UC8butISFwT-Wl7EV0hUK0BQ",
-    TheNetNinja: "UCW5YeuERMmlnqo4oq8vwUpg"
-};
+
 
 /*////////////////////////////////////////
  Loops through channelsList and builds url for each channel to send to fetchChannels
@@ -53,7 +78,6 @@ var channelsList = {
 function getChannels() {
     for (var key in channelsList) {
         /*console.log(key + " " + channelsList[key]);*/
-        var apik = "&key=AIzaSyC8RAHhZg50R3V9IRPE6SimzIx9Q9NgBkI";
         var channel = "&id=" + channelsList[key];
         var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet" + channel + apik;
         fetchChannels(url);
@@ -65,7 +89,6 @@ requests an API call from step 0 waits for response. called as many times as the
 function fetchChannels(url) {
     //console.log(url);
     request(url).then(function(response) {
-        //
         parseChannels(response);
     });
 }
@@ -74,10 +97,11 @@ function fetchChannels(url) {
  Creates & configures entries in channels list
  ////////////////////////////////////////*/
 function parseChannels(response) {
+    var listItem = [];
     var channelId = response.items[0].id;
     var title = response.items[0].snippet.title;
     var logo = response.items[0].snippet.thumbnails.default.url;
-    var listItem = [
+    listItem = [
         '<div class="list-item">',
         '<p class="channel-title">' + title + '</p>',
         '<span class="channel-logo" id="logo-' + channelId + '"><img src="' + logo + '"></span>',
@@ -101,7 +125,6 @@ function parseChannels(response) {
  ////////////////////////////////////////*/
 function creatPlaylistLinks(channelId) {
     var channelListEntries = document.getElementById(channelId);
-    //console.log(showPlaylists);
     channelListEntries.onclick = function() {
         getPlaylists(channelId);
     };
@@ -123,47 +146,118 @@ getChannels();
 Activated when channel is clicked, builds API url to fetch those playlists
  ////////////////////////////////////////*/
 function getPlaylists(channelId) {
-    var apik = "&key=AIzaSyC8RAHhZg50R3V9IRPE6SimzIx9Q9NgBkI";
     var channel = "&channelId=" + channelId;
     var url = "https://www.googleapis.com/youtube/v3/playlists?part=id%2C+contentDetails%2C+player%2C+snippet&maxResults=50" + channel + apik;
     fetchPlaylists(url);
-    //console.log("yay" + channelId);
 }
 
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response.
  ////////////////////////////////////////*/
 function fetchPlaylists(url) {
-    //console.log(url);
     request(url).then(function(response) {
         parsePlaylists(response);
-
     });
 }
+
 
 /*////////////////////////////////////////
  Creates & configures entries in main panel. Playlists.
  ////////////////////////////////////////*/
 function parsePlaylists(response) {
-    //console.log(response);
+    panel.innerHTML = "";
     var playListContainer = [];
     var playLists = response.items;
     for (var i = 0; i < playLists.length; i++) {
-        var thumbnail = response.items[i].snippet.thumbnails.medium.url;
-        var playlistTitle = response.items[i].snippet.localized.title;
-        //console.log(playlistTitle);
+        var playlistId = playLists[i].id;
+        var thumbnail = playLists[i].snippet.thumbnails.medium.url;
+        var playlistTitle = playLists[i].snippet.localized.title;
+        var videoNum = playLists[i].contentDetails.itemCount;
         playListContainer = [
             '<div class="play-list-container">',
-            '<div class="thumbnail"><img src="' + thumbnail + '"></div>',
-            '<div class="playlist-title">' + playlistTitle + '</div>',
+            '<div id="' + playlistId + '" class="thumbnail"><img src="' + thumbnail + '"></div>',
+            '<div class="playlist-title"><p>' + playlistTitle + '</p><p class="video-num">' + videoNum + '</p></div>',
             '</div>'
         ].join('\n');
-        var panel = document.getElementById("video-panel");
+        scrollTo(panel, panel.offsetTop, 0);
         panel.insertAdjacentHTML('beforeend', playListContainer);
+        createPlaylistVideos(playlistId);
     }
 }
 
+/*////////////////////////////////////////
+ Set up playlist thumbnail to bring up video's
+ ////////////////////////////////////////*/
+function createPlaylistVideos(playlistId) {
+    var playlistEntry = document.getElementById(playlistId);
+    playlistEntry.onclick = function() {
+        getPlaylistVideos(playlistId);
+    };
+}
 
-//var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&key=AIzaSyC8RAHhZg50R3V9IRPE6SimzIx9Q9NgBkI&playlistId="//Variable; //for getting video list from playlist
-//var url = "https://www.googleapis.com/youtube/v3/videos?id=qzaBVoti3U0&key=AIzaSyC8RAHhZg50R3V9IRPE6SimzIx9Q9NgBkI&part=snippet,contentDetails,statistics,status";
-//var url = "https://www.googleapis.com/youtube/v3/youtube.channels.list?&part=id&forUsername=";
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//       3: Load playlists entries into main panel  + configure iframe for insertion on click       //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/*////////////////////////////////////////
+Activated when playlist thumbnail is clicked, builds API url to fetch the vdeos
+ ////////////////////////////////////////*/
+function getPlaylistVideos(playlistId) {
+    var playlistVids = "&playlistId=" + playlistId;
+    var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
+    fetchPlaylistVids(url);
+}
+
+/*////////////////////////////////////////
+requests an API call from step 0 waits for response.
+ ////////////////////////////////////////*/
+function fetchPlaylistVids(url) {
+    request(url).then(function(response) {
+        parsePlaylistVids(response);
+    });
+}
+/*////////////////////////////////////////
+ Creates & configures entries in main panel. Playlists individual videos.
+ ////////////////////////////////////////*/
+function parsePlaylistVids(response) {
+    panel.innerHTML = "";
+    var videoContainer = [];
+    var videos = response.items;
+    for (var i = 0; i < videos.length; i++) {
+        var videoId = videos[i].snippet.resourceId.videoId;
+        var thumbnail = videos[i].snippet.thumbnails.medium.url;
+        var videoTitle = videos[i].snippet.title;
+        videoContainer = [
+            '<div class="video-container">',
+            '<div id="' + videoId + '" class="thumbnail"><img src="' + thumbnail + '"></div>',
+            '<div class="video-title">' + videoTitle + '</div>',
+            '</div>'
+        ].join('\n');
+        panel.insertAdjacentHTML('beforeend', videoContainer);
+        createVideo(videoId);
+    }
+}
+/*////////////////////////////////////////
+Set up playlist thumbnail to bring up video's
+////////////////////////////////////////*/
+function createVideo(videoId) {
+    var playlistEntry = document.getElementById(videoId);
+    playlistEntry.onclick = function() {
+        panel.innerHTML = "";
+        var video = [
+            '<iframe',
+            '  src="//www.youtube.com/embed/' + videoId + '"',
+            '  width="100%"',
+            '  height="100%"',
+            '  frameborder="0"',
+            '  scrolling="no"',
+            '  allowfullscreen>',
+            '</iframe>'
+        ].join('\n');
+        panel.insertAdjacentHTML('beforeend', video);
+        Cookies.set('LastViewedVideo', video);
+    };
+}

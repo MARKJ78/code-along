@@ -1,27 +1,61 @@
-.top-row {
-    height: 50vh;
-    display: flex;
-    flex-flow: row;
-}
-
-.bottom-row {
-    height: 50vh;
+body {
+    font-family: 'Questrial', sans-serif;
     display: flex;
     flex-direction: row;
 }
 
 .left-panel {
-    flex: 1 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    resize: vertical;
+    overflow: auto;
+    flex: 1 100%;
+    ;
 }
 
 .right-panel {
-    flex: 1 20%;
-    max-width: 250px;
+    position: relative;
+    width: auto;
+    display: flex;
+    flex-flow: column;
     background-color: #f4f4f4;
+}
+
+#repl {
+    width: 100%;
+    height: calc(100% + 30px)
+}
+
+.top-row {
+    height: 60vh;
+    flex: 1 80%;
+}
+
+.bottom-row {
+    height: 40vh;
+}
+
+@media screen and (max-width: 1024px) {
+    .right-panel {
+        left: 300px;
+        transition: all 0.5s ease;
+    }
 }
 
 #channels ul {
     padding: 0;
+    margin: 0;
+}
+
+#channels {
+    overflow: auto;
+    cursor: pointer;
+    width: 300px;
+}
+
+#channels li:hover {
+    background-color: #fff;
 }
 
 .li-channel {
@@ -42,7 +76,8 @@
 .list-item {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #7998a6;
+    color: #7998a6;
 }
 
 .channel-title {
@@ -66,11 +101,22 @@
     overflow: auto;
 }
 
-.play-list-container {
+.play-list-container, .video-container {
     width: 320px;
     height: 240px;
     margin: .75rem;
-    background-color: #f4f4f4;
+    background-color: #0e1628;
 }
 
-.playlist-title {}
+.playlist-title, .video-title {
+    color: #f4f4f4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+/*.notepad {
+    border-top: 1px dashed #0e1628;
+}*/
