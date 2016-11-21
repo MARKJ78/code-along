@@ -15,14 +15,15 @@
   "bugs": {
     "url": "https://github.com/MARKJ78/code-along/issues"
   },
-  "homepage": "https://github.com/MARKJ78/code-along#readme"
-}
-"devDependencies": {
-  "surge": "latest",
-  "git-scripts": "0.2.1"
-},
-"git": {
+  "git": {
   "scripts": {
-    "pre-push": "surge --project ./ --domain code-along.surge.sh"
+    "post-commit": "npm run deploy",
+    "pre-push": "npm run deploy"
   }
+},
+"scripts": {
+  "deploy": "surge --project ./ --domain code-along.surge.sh"
 }
+}
+  
+
