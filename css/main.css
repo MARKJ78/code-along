@@ -94,16 +94,6 @@ body {
     transition: height .5s ease;
 }
 
-.fa-arrow-up {
-    transform: rotate(120deg);
-}
-
-.welcome {
-    width: 100%;
-    color: #777879;
-    text-align: center;
-}
-
 .editor-panel {
     height: 50vh;
     overflow: hidden;
@@ -116,6 +106,12 @@ body {
     /*height: calc(100% + 30px);*/
     height: calc(100% + 91px);
     top: -61px;
+}
+
+.welcome {
+    width: 100%;
+    color: #777879;
+    text-align: center;
 }
 
 .logo {

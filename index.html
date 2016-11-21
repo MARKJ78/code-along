@@ -24,11 +24,11 @@
                 <h2>1. Sign into <a href="https://repl.it/" target="_blank">repl.it</a> to code along and save your session.</h2>
                 <h2>2. Choose a channel to find playlists</h2>
                 <h2>3. Take and save notes</h2>
-                <p><i class="fa fa-info-circle" aria-hidden="true"></i> </p>
+
             </div>
         </div>
         <div id="editor-panel" class="bottom-row editor-panel">
-            <iframe frameborder="0" id="repl" src="https://repl.it"></iframe>
+            <iframe frameborder="0" id="repl" src="https://repl.it/login"></iframe>
         </div>
     </section>
 
@@ -46,7 +46,13 @@
             <div id="" class="button resize"><i class="fa fa-sticky-note-o fa-3x" aria-hidden="true"></i></div>
         </div>
 
-        <div id="notepad" class="bottom-row-right"></div>
+        <div id="notepad" class="bottom-row-right">
+
+            <input id="noteTitle" type="text" placeholder="title" />
+            <textarea id="note" placeholder="Enter a note"></textarea>
+            <button id="saveNote" class="button">SAVE</button>
+        </div>
+        <div id="oldNotes"></div>
     </section>
 
 
@@ -55,7 +61,9 @@
 
 
     <script type="text/javascript" src="js/vendors/js.cookie.js"></script>
+    <script type="text/javascript" src="js/notes.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
 </body>
 
 </html>

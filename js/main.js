@@ -215,13 +215,13 @@ function parsePlaylistVids(response) {
             '</div>'
         ].join('\n');
         panel.insertAdjacentHTML('beforeend', videoContainer);
-        createVideo(videoId);
+        createVideo(videoId, videoTitle);
     }
 }
 /*////////////////////////////////////////
 Set up playlist thumbnail to bring up video's
 ////////////////////////////////////////*/
-function createVideo(videoId) {
+function createVideo(videoId, videoTitle) {
     var playlistEntry = document.getElementById(videoId);
     playlistEntry.onclick = function() {
         panel.innerHTML = "";
@@ -237,6 +237,7 @@ function createVideo(videoId) {
         ].join('\n');
         panel.insertAdjacentHTML('beforeend', video);
         Cookies.set('LastViewedVideo', video);
+        title.value = videoTitle;
     };
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,11 +248,18 @@ function createVideo(videoId) {
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 /*////////////////////////////////////////
- Load Last video
+ Load Last video & Note
  ////////////////////////////////////////*/
 var lastVidPlayed = document.getElementById('lastVid');
 lastVidPlayed.onclick = function() {
-    panel.innerHTML = Cookies('LastViewedVideo');
+    if (typeof Cookies('LastViewedVideo') !== 'undefined') {
+        panel.innerHTML = Cookies('LastViewedVideo');
+        title.value = myNotes[lastNote].title;
+        note.value = myNotes[lastNote].note;
+    } else {
+        alert('You can\'t continue what you havn\'t started.... silly');
+    }
+
 };
 /*////////////////////////////////////////
 Resize Video panel
