@@ -8,13 +8,15 @@ if (typeof Cookies('storedNotes') !== 'undefined') {
     lastNote = myNotes.length - 1;
     console.log(myNotes);
 }
-saveNoteButton.onclick = function() {
+saveNoteButton.onclick = function(e) {
+    e.preventDefault();
     var thisNote = {};
-    thisNote.title = title.value;
     thisNote.note = note.value;
+    thisNote.title = title.value;
     console.log(thisNote);
     myNotes.push(thisNote);
     Cookies.set('storedNotes', myNotes);
+    note.value = "";
     /*for (var i = 0; i < myNotes.length; i++) {
         //console.log(myNotes[i]);
         switch (thisNote) {

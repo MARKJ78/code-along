@@ -254,10 +254,9 @@ var lastVidPlayed = document.getElementById('lastVid');
 lastVidPlayed.onclick = function() {
     if (typeof Cookies('LastViewedVideo') !== 'undefined') {
         panel.innerHTML = Cookies('LastViewedVideo');
-        title.value = myNotes[lastNote].title;
-        note.value = myNotes[lastNote].note;
+        title.value = myNotes[lastNote].title; //variable is declared in notes.js
     } else {
-        alert('You can\'t continue what you havn\'t started.... silly');
+        alert('You can\'t continue what you havn\'t started.');
     }
 
 };
