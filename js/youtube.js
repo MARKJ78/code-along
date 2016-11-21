@@ -9,14 +9,7 @@
 Main Panel(top)
  ////////////////////////////////////////*/
 var panel = document.getElementById("video-panel");
-/*////////////////////////////////////////
- Load user data from local storage
- ////////////////////////////////////////*/
-if (typeof Cookies('LastViewedVideo') !== 'undefined') { //if there is a cookie
-    panel.insertAdjacentHTML('beforeend', Cookies('LastViewedVideo'));
-} else {
-    panel.innerHTML = "";
-}
+var editor = document.getElementById('editor-panel');
 /*////////////////////////////////////////
 Public Key
  ////////////////////////////////////////*/
@@ -33,9 +26,6 @@ var channelsList = {
     easyDevTuts: "UCI-vEugj8uNGB_ZFuutlMYw",
     CodeSchool: "UCUFbBYzSUafxMpUbTmroGhg"
 };
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -43,7 +33,6 @@ var channelsList = {
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-
 function request(url) {
     return new Promise(function(resolve) {
         var rawData, data;
@@ -62,7 +51,6 @@ function request(url) {
         request.send();
     });
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -70,8 +58,6 @@ function request(url) {
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 /*////////////////////////////////////////
  Loops through channelsList and builds url for each channel to send to fetchChannels
  ////////////////////////////////////////*/
@@ -92,7 +78,6 @@ function fetchChannels(url) {
         parseChannels(response);
     });
 }
-
 /*////////////////////////////////////////
  Creates & configures entries in channels list
  ////////////////////////////////////////*/
@@ -102,7 +87,7 @@ function parseChannels(response) {
     var title = response.items[0].snippet.title;
     var logo = response.items[0].snippet.thumbnails.default.url;
     listItem = [
-        '<div class="list-item">',
+        '<div class="list-item button">',
         '<p class="channel-title">' + title + '</p>',
         '<span class="channel-logo" id="logo-' + channelId + '"><img src="' + logo + '"></span>',
         '</div>'
@@ -119,7 +104,6 @@ function parseChannels(response) {
     newLi.innerHTML = listItem;
     creatPlaylistLinks(channelId);
 }
-
 /*////////////////////////////////////////
  Set up list item to bring up playlists
  ////////////////////////////////////////*/
@@ -127,14 +111,14 @@ function creatPlaylistLinks(channelId) {
     var channelListEntries = document.getElementById(channelId);
     channelListEntries.onclick = function() {
         getPlaylists(channelId);
+        //this.classList.add('active');
+
     };
 }
 /*////////////////////////////////////////
  initialise script
  ////////////////////////////////////////*/
 getChannels();
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -150,7 +134,6 @@ function getPlaylists(channelId) {
     var url = "https://www.googleapis.com/youtube/v3/playlists?part=id%2C+contentDetails%2C+player%2C+snippet&maxResults=50" + channel + apik;
     fetchPlaylists(url);
 }
-
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response.
  ////////////////////////////////////////*/
@@ -159,8 +142,6 @@ function fetchPlaylists(url) {
         parsePlaylists(response);
     });
 }
-
-
 /*////////////////////////////////////////
  Creates & configures entries in main panel. Playlists.
  ////////////////////////////////////////*/
@@ -184,7 +165,6 @@ function parsePlaylists(response) {
         createPlaylistVideos(playlistId);
     }
 }
-
 /*////////////////////////////////////////
  Set up playlist thumbnail to bring up video's
  ////////////////////////////////////////*/
@@ -194,7 +174,6 @@ function createPlaylistVideos(playlistId) {
         getPlaylistVideos(playlistId);
     };
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -210,7 +189,6 @@ function getPlaylistVideos(playlistId) {
     var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
     fetchPlaylistVids(url);
 }
-
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response.
  ////////////////////////////////////////*/
@@ -261,3 +239,50 @@ function createVideo(videoId) {
         Cookies.set('LastViewedVideo', video);
     };
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                           FEATURES                                               //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/*////////////////////////////////////////
+ Load Last video
+ ////////////////////////////////////////*/
+var lastVidPlayed = document.getElementById('lastVid');
+lastVidPlayed.onclick = function() {
+    panel.innerHTML = Cookies('LastViewedVideo');
+};
+/*////////////////////////////////////////
+Resize Video panel
+ ////////////////////////////////////////*/
+var vidLarge = document.getElementById('videoLarge');
+var vidDefault = document.getElementById('videoDefault');
+var vidSmall = document.getElementById('videoSmall');
+vidLarge.onclick = function() {
+    panel.classList.remove('small');
+    panel.classList.add('large');
+    editor.classList.remove('large');
+    editor.classList.add('small');
+    vidDefault.classList.remove('active');
+    vidSmall.classList.remove('active');
+    vidLarge.classList.add('active');
+};
+vidDefault.onclick = function() {
+    panel.classList.remove('small');
+    panel.classList.remove('large');
+    editor.classList.remove('large');
+    editor.classList.remove('small');
+    vidSmall.classList.remove('active');
+    vidLarge.classList.remove('active');
+    vidDefault.classList.add('active');
+};
+vidSmall.onclick = function() {
+    panel.classList.add('small');
+    panel.classList.remove('large');
+    editor.classList.add('large');
+    editor.classList.remove('small');
+    vidDefault.classList.remove('active');
+    vidLarge.classList.remove('active');
+    vidSmall.classList.add('active');
+};
