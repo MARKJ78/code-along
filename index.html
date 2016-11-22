@@ -42,17 +42,35 @@
             <div id="videoLarge" class="resize"><i class="fa fa-youtube fa-3x" aria-hidden="true"></i></div>
             <div id="videoDefault" class="resize active"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></div>
             <div id="videoSmall" class="resize"><i class="fa fa-youtube fa-lg" aria-hidden="true"></i></div>
-            <div id="" class="resize"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></div>
+            <!--<div id="" class="resize"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></div>
             <div id="" class="resize"><i class="fa fa-sticky-note-o fa-2x" aria-hidden="true"></i></div>
-            <div id="" class="resize"><i class="fa fa-sticky-note-o fa-3x" aria-hidden="true"></i></div>
+            <div id="" class="resize"><i class="fa fa-sticky-note-o fa-3x" aria-hidden="true"></i></div>-->
         </div>
 
         <form id="notepad" class="bottom-row-right notepad">
+            <div class="notepad-controls">
+                <button id="saveNote" class="notepad-input btn">Save</button>
+                <button id="myNotes" class="notepad-input btn">My Notes</button>
+                <button id="relatedNotes" class="notepad-input btn">Related</button>
+            </div>
             <input readonly id="noteTitle" type="text" placeholder="Related Video" class="notepad-input note-title" />
             <textarea id="note" placeholder="Enter a note or snippet" class="notepad-input note"></textarea>
-            <button id="saveNote" class="notepad-input btn">SAVE</button>
+
         </form>
-        <div id="oldNotes"></div>
+        <div id="mySavedNotes" class="saved-notes-panel">
+            <i id="close-saved-notes" class="fa fa-times-circle" aria-hidden="true"></i>
+            <ul></ul>
+        </div>
+        <ul class="bottom-nav bottom-container">
+            <li class="nav-item"><a href="https://markj78.github.io/portfolio/" target="_blank"><i class="fa fa-arrow-circle-o-left fa-lg" aria-hidden="true"></i>&nbsp; More toys </a></li>
+            <li>
+
+                <div class="tooltip"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+                    <span class="tooltiptext">Made with plane old HTML5/CSS3 and JavaScript</span>
+                </div>
+            </li>
+            <li class="nav-item"><a href="https://github.com/MARKJ78/code-along" target="_blank">Repo&nbsp; <i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
+        </ul>
     </section>
 
 

@@ -11,9 +11,8 @@ body {
     font-family: 'Questrial', sans-serif;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
     width: 100%;
-    max-height: 100vh;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -54,20 +53,28 @@ button {
     display: flex;
     flex-direction: column;
     flex: 1 100%;
+    height: 100vh;
+    margin-right: 312px;
+    transition: margin .75s ease;
 }
 
 .right-panel {
-    position: relative;
+    position: fixed;
+    right: 0;
     display: flex;
     flex-flow: column;
     background-color: #f4f4f4;
-    transition: margin .75s ease;
     height: 100vh;
+    width: 312px;
+    transition: margin .75s ease;
 }
 
 @media screen and (max-width: 1024px) {
     .right-panel {
         margin-right: -312px;
+    }
+    .left-panel{
+      margin-right: 0;
     }
 }
 
@@ -234,12 +241,11 @@ button {
 /*//////////////////////////////  Control Panel //////////////////////////////////////////////////////*/
 
 .controls {
-    height: 11vh;
+    flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     background-color: #f4f3f3;
-    border: 1px solid #ececec;
 }
 
 .search-youtube {
@@ -266,6 +272,21 @@ button {
 
 /*//////////////////////////////  NOTEPAD /////////////////////////////////////////////////////////////////*/
 
+.saved-notes-panel{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: -312px;
+  transition: margin .75s ease
+}
+.saved-notes-panel.notes-open{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+}
+
+
 .notepad {
     display: flex;
     flex-direction: column;
@@ -274,7 +295,11 @@ button {
     margin: .5rem;
     height: 50vh;
 }
-
+.notepad-controls{
+  display:flex;
+  flex-direction: row;
+  height: 3rem
+}
 .note-title {
     height: 2rem;
     padding-left: .5rem;
@@ -288,6 +313,85 @@ button {
 }
 
 .notepad-input {
-    margin: 0.25rem;
+    flex: 1 1 auto;
     border: 1px solid #ececec;
+}
+
+
+
+
+
+/*/////////////////////////////Signature/////////////////////////////////////////////////////////////////////*/
+
+.bottom-container {
+    list-style: none;
+    padding: .5rem;
+    margin: .5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.bottom-nav {
+    justify-content: space-between;
+}
+
+.bottom-nav a,
+.bottom-nav i {
+  text-decoration: none;
+  color: #777879;
+}
+
+.bottom-nav a:hover,
+.bottom-nav i:hover{
+  color: #7998a6;
+  cursor: pointer;
+}
+
+/*Taken from internet for quick solution*/
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+
+    width: 130px;
+    background-color: #ececec;
+    color: #777879;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    padding: .5rem;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 40%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #7998a6 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

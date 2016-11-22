@@ -256,7 +256,7 @@ lastVidPlayed.onclick = function() {
         panel.innerHTML = Cookies('LastViewedVideo');
         title.value = myNotes[lastNote].title; //variable is declared in notes.js
     } else {
-        alert('You can\'t continue what you havn\'t started.');
+        alert('You can\'t continue what you havn\'t started. Choose a playlist and watch a video to get started.');
     }
 
 };
