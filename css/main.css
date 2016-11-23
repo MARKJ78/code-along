@@ -67,14 +67,15 @@ button {
     height: 100vh;
     width: 312px;
     transition: margin .75s ease;
+    border-left: 1px solid #ececec;
 }
 
 @media screen and (max-width: 1024px) {
     .right-panel {
         margin-right: -312px;
     }
-    .left-panel{
-      margin-right: 0;
+    .left-panel {
+        margin-right: 0;
     }
 }
 
@@ -99,6 +100,7 @@ button {
     justify-content: center;
     align-items: center;
     transition: height .5s ease;
+    border-bottom: 1px solid #ececec;
 }
 
 .welcome {
@@ -186,10 +188,6 @@ button {
     width: 312px;
 }
 
-#channels li:hover {
-    background-color: #7998a6;
-}
-
 .li-channel {
     list-style: none;
     text-align: center;
@@ -204,8 +202,13 @@ button {
 .list-item {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #777879;
+    border-bottom: 1px solid #ececec;
     color: #777879;
+}
+
+.list-item:hover {
+    background-color: #7998a6;
+    color: #fff;
 }
 
 .channel-title {
@@ -222,17 +225,17 @@ button {
     width: 46px;
 }
 
-#channels::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: .5rem;
 }
 
-#channels::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #ececec;
     border-radius: 10%;
 }
 
-#channels::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #7998a6;
     outline: 1px solid #7998a6;
 }
@@ -272,49 +275,59 @@ button {
 
 /*//////////////////////////////  NOTEPAD /////////////////////////////////////////////////////////////////*/
 
-.saved-notes-panel{
-  position: absolute;
-  height: 100%;
-  overflow: auto;
-  bottom: 0;
-  right: -320px;
-  width: 312px;
-  transition: right .75s ease;
-  background-color: #f4f3f3;
-  color: #777879;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-left: 1px solid #7998a6;
-  z-index: 10;
-}
-.saved-notes-panel.notes-open{
-  right: 0;
+.saved-notes-panel {
+    position: absolute;
+    height: 100%;
+    overflow: auto;
+    bottom: 0;
+    right: -320px;
+    width: 312px;
+    transition: right .75s ease;
+    background-color: #fff;
+    color: #777879;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid #7998a6;
+    z-index: 10;
 }
 
-.saved-notes-list{
-  padding: .5rem;
-  margin: 0;
-  list-style: none;
+.saved-notes-panel.notes-open {
+    right: 0;
 }
-.saved-notes-list-item{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #ececec;
-  margin: .5rem;
-  padding: .5rem;
 
+.saved-notes-list {
+    padding: .5rem;
+    margin: 0;
+    list-style: none;
+}
+
+.saved-notes-list-item {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ececec;
+    outline: 0px;
+    background-color: #f4f3f3;
+    color: #777879;
+    margin: .5rem;
+    padding: .5rem;
 }
 
 .saved-notes-list-item:hover {
-  background-color: #7998a6;
-  color: #fff;
+    border: 1px solid #7998a6;
 }
 
-.close-notes{
-  margin: .5rem;
+.saved-note {
+    background-color: #fff;
+    width: 100%;
+    padding: .25rem;
+    border: 1px solid #ececec;
+}
+
+.close-notes {
+    margin: .5rem;
 }
 
 .notepad {
@@ -325,14 +338,21 @@ button {
     margin: .5rem;
     height: 50vh;
 }
-.notepad-controls{
-  display:flex;
-  flex-direction: row;
-  height: 3rem
+
+.notepad-controls {
+    display: flex;
+    flex-direction: row;
+    height: 3rem
 }
+
 .note-title {
-    height: 2rem;
-    padding-left: .5rem;
+    padding: .25rem;
+    flex: 1 1 60%
+}
+
+.date {
+    flex: 1 1 25%;
+    padding: .25rem;
 }
 
 .note {
@@ -340,20 +360,21 @@ button {
     padding-top: .5rem;
     height: 100%;
     resize: none;
+    flex: 1 1 100%;
+    background-color: #fff;
+    border: 1px solid #ececec;
+    margin-top: .25rem;
 }
 
 .notepad-input {
     flex: 1 1 auto;
-    border: 1px solid #ececec;
+    border: 1px solid #fff;
     /*margin: .25rem;*/
 }
 
-.notepad-btn{
+.notepad-btn {
     flex: 1 1 auto;
 }
-
-
-
 
 
 /*/////////////////////////////Signature/////////////////////////////////////////////////////////////////////*/
@@ -370,30 +391,33 @@ button {
     justify-content: space-between;
 }
 
-.bottom-nav a,
-.bottom-nav i {
-  text-decoration: none;
-  color: #777879;
+.bottom-nav a, .bottom-nav i {
+    text-decoration: none;
+    color: #777879;
 }
 
-.bottom-nav a:hover,
-.bottom-nav i:hover{
-  color: #7998a6;
-  cursor: pointer;
+.bottom-nav a:hover, .bottom-nav i:hover {
+    color: #7998a6;
+    cursor: pointer;
 }
+
 
 /*Taken from internet for quick solution*/
+
+
 /* Tooltip container */
+
 .tooltip {
     position: relative;
     display: inline-block;
-
 }
 
+
 /* Tooltip text */
+
 .tooltip .tooltiptext {
     visibility: hidden;
-border: 1px solid #7998a6;
+    border: 1px solid #7998a6;
     width: auto;
     background-color: #ececec;
     color: #777879;
@@ -407,13 +431,14 @@ border: 1px solid #7998a6;
     bottom: 125%;
     left: 50%;
     margin-left: -60px;
-
     /* Fade in tooltip */
     opacity: 0;
     transition: opacity 1s;
 }
 
+
 /* Tooltip arrow */
+
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
@@ -425,7 +450,9 @@ border: 1px solid #7998a6;
     border-color: #7998a6 transparent transparent transparent;
 }
 
+
 /* Show the tooltip text when you mouse over the tooltip container */
+
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
