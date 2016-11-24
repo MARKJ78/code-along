@@ -156,10 +156,13 @@ button {
     z-index: 2;
     opacity: 0;
     transition: opacity .75s;
+    z-index: -1;
 }
 
-.note-detail-panel.active {
+.note-detail-panel.show {
     opacity: 1;
+    z-index: 2;
+    transition: opacity .75s;
 }
 
 
@@ -297,14 +300,13 @@ button {
     overflow: auto;
     bottom: 0;
     right: -320px;
-    width: 312px;
     transition: right .75s ease;
     background-color: #fff;
     color: #777879;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-left: 1px solid #7998a6;
+    border-left: 1px solid #cecece;
     z-index: 10;
 }
 
@@ -323,7 +325,7 @@ button {
 }
 
 .saved-notes-list-item {
-    width: 275px;
+    width: 253px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -332,7 +334,7 @@ button {
     outline: 0px;
     background-color: #f4f3f3;
     color: #777879;
-    margin: .5rem auto;
+    margin: .5rem;
     padding: .5rem;
 }
 
@@ -399,6 +401,60 @@ button {
 .notepad-btn {
     flex: 1 1 auto;
 }
+
+
+/*//////////////////////////////  NOTEPAD - EDITOR PANEL /////////////////////////////////////////////////////////////////*/
+
+body {
+    height: 100vh;
+}
+
+.edit-note-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f3f3;
+    height: 100%;
+}
+
+.edit-note-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em;
+    flex: 1 1 auto;
+    color: #777879;
+}
+
+.edit-note-header-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+#edit-note-controls {
+    display: flex;
+    flex-direction: row;
+    margin: .5rem;
+}
+
+.edit-note-text {
+    height: 80%;
+    resize: none;
+    padding: 1rem;
+    overflow: auto;
+    background-color: #fff;
+    margin: .5rem;
+}
+
+
+/*.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}*/
 
 
 /*/////////////////////////////Signature/////////////////////////////////////////////////////////////////////*/

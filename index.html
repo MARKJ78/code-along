@@ -29,13 +29,7 @@
         </div>
         <div id="editor-panel" class="bottom-row editor-panel">
             <iframe frameborder="0" id="repl" src="https://repl.it/login"></iframe>
-            <div id="note-detail-panel" class="bottom-row editor-panel note-detail-panel">
-                <p>There are a lot of different kinds of ways to write loops in Javascript. You have your standard for loop and while loop, but beyond that you have the do-while loop, the object properties loop, and lots of different variation of all four
-                    “basic” loops. In this post, we’ll examine the four basic loops, the reverse for loop, the reverse while loop, the short reverse while loop, object property loops, and more. I’ll also explain a bit about loop unrolling and where/how
-                    it can help you optimize your code. Read on, if you dare! The classic for loop What I like to call the classic for loop is perhaps the most basic of all loops in Javascript. It looks like this: This is the basic loop model provided
-                    by Javascript and is by far the most common variation of the for loop. You initialize an iterator (i), set a finish condition for i, and finally specify how i will be modified each iteration of the loop. Since i++ is just a statement,
-                    it’s possible to modify i however you want in the loop header using statement operators. will increment i by two each iteration, for example.</p>
-            </div>
+            <div id="note-detail-panel" class="bottom-row editor-panel note-detail-panel"> </div>
         </div>
 
     </section>
@@ -61,8 +55,9 @@
                 <button id="myNotes" class="notepad-btn btn">My Notes</button>
                 <button id="relatedNotes" class="notepad-btn btn">Related</button>
             </div>
+
             <input readonly id="noteTitle" type="text" placeholder="Related Video" class="notepad-input note-title" />
-            <textarea id="note" name="note" placeholder="Enter a note or snippet" class="notepad-input note"></textarea>
+            <textarea id="note" name="note" placeholder="Quick Add - Enter a note or snippet" class="notepad-input note"></textarea>
 
         </form>
         <div id="mySavedNotes" class="saved-notes-panel">

@@ -214,6 +214,7 @@ function parsePlaylistVids(response) {
             '<div class="video-title">' + videoTitle + '</div>',
             '</div>'
         ].join('\n');
+        scrollTo(panel, panel.offsetTop, 0);
         panel.insertAdjacentHTML('beforeend', videoContainer);
         createVideo(videoId, videoTitle);
     }
@@ -235,6 +236,7 @@ function createVideo(videoId, videoTitle) {
             '  allowfullscreen>',
             '</iframe>'
         ].join('\n');
+        scrollTo(panel, panel.offsetTop, 0);
         panel.insertAdjacentHTML('beforeend', video);
         Cookies.set('LastViewedVideo', video);
         title.value = videoTitle;

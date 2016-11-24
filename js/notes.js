@@ -19,6 +19,7 @@ var relatedNotesButton = document.getElementById('relatedNotes');
 var confirm = document.getElementsByName('note')[0];
 var myNotesList = mySavedNotesPanel.getElementsByTagName("ul")[0];
 var noteListItems;
+var noteDetailPanel = document.getElementById('note-detail-panel');
 /*////////////////////////////////////////
 Sets the last note, for use in "pick up where you left off"  lastVidPlayed.onclick = function() in main.js
  ////////////////////////////////////////*/
@@ -43,7 +44,7 @@ saveNoteButton.onclick = function(e) {
         var thisNote = {};
         thisNote.id = new Date().getTime();
         thisNote.date = dateString;
-        thisNote.note = note.value;
+        thisNote.note = note.value.replace(/\n/g, '<br/>');
         thisNote.title = title.value;
         findRelatedNotes(thisNote);
     } else {
@@ -51,7 +52,7 @@ saveNoteButton.onclick = function(e) {
     }
 };
 /*////////////////////////////////////////
-On save, Assemble the note into an object and send on to be saved
+called on save, checks for exsisting note
  ////////////////////////////////////////*/
 function findRelatedNotes(thisNote) {
     console.log('findRelatedNotes has been called');
@@ -66,7 +67,7 @@ function findRelatedNotes(thisNote) {
                 console.log('found match');
                 console.log('appending to note');
                 var currentNoteVal = myNotes[i].note;
-                var newNoteVal = currentNoteVal + '<br/><br/><strong>' + dateString + '</strong> | ' + thisNote.note;
+                var newNoteVal = currentNoteVal + '<br/><br/>' + dateString + ' | ' + thisNote.note;
                 //console.log(newNoteVal);
                 myNotes[i].note = newNoteVal;
                 Cookies.set('storedNotes', myNotes);
@@ -147,24 +148,70 @@ function displayNotes(noteToBuild) {
     //push to list
     mySavedNote.innerHTML = myNoteslistItem;
     myNotesList.appendChild(mySavedNote);
-    /////////////////////////////////////////////////////////////////////////////
+    /*/////////////////////////////////////////////////////////////////////////////////////
+    Set up note editing features
+     //////////////////////////////////////////////////////////////////////////////////////*/
     var editNote = document.getElementById(noteId);
-
-    editNote.onclick = function(e) {
+    editNote.addEventListener('click', function(e) {
         e.preventDefault();
-        console.log(editNote);
-        var noteDetailPanel = document.getElementById('note-detail-panel');
         var noteId = this.id;
-        console.log(noteId);
+        /*/////////////////////////////////////////////////////
+        loop through notes to find the right note based id: value
+         ////////////////////////////////////////////////////*/
         for (var i = 0; i < myNotes.length; i++) {
             if (myNotes[i].id == noteId) {
-                console.log(myNotes[i]);
-                noteDetailPanel.innerHTML = myNotes[i].note;
+                //console.log(myNotes[i]);
+                /*/////////////////////////////////////////////////////
+                Set up the editor panel
+                 ////////////////////////////////////////////////////*/
+                var editNoteContent = [
+                    '<div class="edit-note-container">',
+                    '<header class="edit-note-header">',
+                    '<div class="edit-note-header-item" id="edit-note-id">Note ID: ' + noteId + '</div>',
+                    '<div class="edit-note-header-item" id="edit-note-title"><h3>' + myNotes[i].title + '</h3></div>',
+                    '<div class="edit-note-header-item" id="edit-note-controls">',
+                    '     <div class="btn" id="save-saved-notes"><i class="fa fa-check-circle fa-2x green edit-note-control" aria-hidden="true"></i> Close &amp; Save &nbsp;</div>',
+                    '     <div class="btn" id="close-edit-notes"><i class="fa fa-times-circle fa-2x red edit-note-control" aria-hidden="true"></i> Cancel&nbsp;</div>',
+                    '</div>',
+                    ' </header>',
+                    ' <div contenteditable id="edit-panel-' + noteId + '" class="edit-note-text"></div>',
+                    '</div>'
+                ].join('\n');
+                noteDetailPanel.innerHTML = editNoteContent;
+                var editPanel = document.getElementById('edit-panel-' + noteId);
+                editPanel.innerHTML = myNotes[i].note + '<br/><br/>' + dateString + ' | ';
             }
         }
-        noteDetailPanel.classList.add('active');
-    };
+        /*/////////////////////////////////////////////////////
+        Set up note editing panel buttons
+         ////////////////////////////////////////////////////*/
+        //save and close button setup
+        document.getElementById('save-saved-notes').addEventListener('click', function() {
+            var newContent = editPanel.innerHTML.replace(/(<([^>]+)>)/ig, '<br/>'); //regex removes and html elements present and replaces them with a line break
+            //console.log(newContent);
+            for (var i = 0; i < myNotes.length; i++) {
+                if (myNotes[i].id == noteId) {
+                    console.log(myNotes[i].note);
+                    myNotes[i].note = newContent;
+                    console.log(myNotes[i].note);
+                    Cookies.set('storedNotes', myNotes);
+                    noteDetailPanel.classList.remove('show');
+                    break;
+                }
+            }
+        });
+        //cancel and close panel setup
+        document.getElementById('close-edit-notes').addEventListener('click', function() {
+            e.preventDefault();
+            noteDetailPanel.classList.remove('show');
+        });
+        //
+        noteDetailPanel.classList.add('show');
+        mySavedNotesPanel.classList.remove('notes-open');
+    });
 }
+
+
 /*////////////////////////////////////////
 close saved notes panel
  ////////////////////////////////////////*/
@@ -173,6 +220,8 @@ closeSavedNotes.onclick = function(e) {
     e.preventDefault();
     mySavedNotesPanel.classList.remove('notes-open');
 };
+
+
 /*////////////////////////////////////////
 find notes relative to current notepad title
  ////////////////////////////////////////*/
