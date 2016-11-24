@@ -29,7 +29,15 @@
         </div>
         <div id="editor-panel" class="bottom-row editor-panel">
             <iframe frameborder="0" id="repl" src="https://repl.it/login"></iframe>
+            <div id="note-detail-panel" class="bottom-row editor-panel note-detail-panel">
+                <p>There are a lot of different kinds of ways to write loops in Javascript. You have your standard for loop and while loop, but beyond that you have the do-while loop, the object properties loop, and lots of different variation of all four
+                    “basic” loops. In this post, we’ll examine the four basic loops, the reverse for loop, the reverse while loop, the short reverse while loop, object property loops, and more. I’ll also explain a bit about loop unrolling and where/how
+                    it can help you optimize your code. Read on, if you dare! The classic for loop What I like to call the classic for loop is perhaps the most basic of all loops in Javascript. It looks like this: This is the basic loop model provided
+                    by Javascript and is by far the most common variation of the for loop. You initialize an iterator (i), set a finish condition for i, and finally specify how i will be modified each iteration of the loop. Since i++ is just a statement,
+                    it’s possible to modify i however you want in the loop header using statement operators. will increment i by two each iteration, for example.</p>
+            </div>
         </div>
+
     </section>
 
     <section class="right-panel">
@@ -54,19 +62,19 @@
                 <button id="relatedNotes" class="notepad-btn btn">Related</button>
             </div>
             <input readonly id="noteTitle" type="text" placeholder="Related Video" class="notepad-input note-title" />
-            <textarea id="note" placeholder="Enter a note or snippet" class="notepad-input note"></textarea>
+            <textarea id="note" name="note" placeholder="Enter a note or snippet" class="notepad-input note"></textarea>
 
         </form>
         <div id="mySavedNotes" class="saved-notes-panel">
             <i id="close-saved-notes" class="fa fa-times-circle fa-2x close-notes" aria-hidden="true"></i>
-            <ul></ul>
+            <ul class="notes-list"></ul>
         </div>
         <ul class="bottom-nav bottom-container">
             <li class="nav-item"><a href="https://markj78.github.io/portfolio/" target="_blank"><i class="fa fa-arrow-circle-o-left fa-lg" aria-hidden="true"></i>&nbsp; More toys </a></li>
             <li>
 
                 <div class="tooltip"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                    <span class="tooltiptext">Made with plane old HTML5/CSS3 and JavaScript</span>
+                    <span class="tooltiptext">Made with plane old HTML5/CSS3 and JavaScript.<br/><br/> With thanks to <a href="https://github.com/js-cookie" target="_blank">js-cookie</a></span>
                 </div>
             </li>
             <li class="nav-item"><a href="https://github.com/MARKJ78/code-along" target="_blank">Repo&nbsp; <i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>

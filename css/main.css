@@ -133,6 +133,7 @@ button {
 /*//////////////////////////////  editor-panel //////////////////////////////////////////////////////*/
 
 .editor-panel {
+    position: relative;
     height: 50vh;
     overflow: hidden;
     transition: height .5s ease;
@@ -144,6 +145,21 @@ button {
     /*height: calc(100% + 30px);*/
     height: calc(100% + 91px);
     top: -61px;
+}
+
+.note-detail-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity .75s;
+}
+
+.note-detail-panel.active {
+    opacity: 1;
 }
 
 
@@ -296,6 +312,10 @@ button {
     right: 0;
 }
 
+.notes-list {
+    padding: 0;
+}
+
 .saved-notes-list {
     padding: .5rem;
     margin: 0;
@@ -303,6 +323,7 @@ button {
 }
 
 .saved-notes-list-item {
+    width: 275px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -311,7 +332,7 @@ button {
     outline: 0px;
     background-color: #f4f3f3;
     color: #777879;
-    margin: .5rem;
+    margin: .5rem auto;
     padding: .5rem;
 }
 
@@ -324,6 +345,9 @@ button {
     width: 100%;
     padding: .25rem;
     border: 1px solid #ececec;
+    max-height: 15rem;
+    overflow: auto;
+    word-wrap: break-word;
 }
 
 .close-notes {
