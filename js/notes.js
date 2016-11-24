@@ -180,6 +180,9 @@ function displayNotes(noteToBuild) {
                 noteDetailPanel.innerHTML = editNoteContent;
                 var editPanel = document.getElementById('edit-panel-' + noteId);
                 editPanel.innerHTML = myNotes[i].note + '<br/><br/>' + dateString + ' | ';
+                rightPanel.classList.remove('menu-open');
+                leftPanel.classList.remove('menu-open');
+                mySavedNotesPanel.classList.remove('notes-open'); //var is declaired in notes.js
             }
         }
         /*/////////////////////////////////////////////////////
@@ -238,15 +241,8 @@ relatedNotesButton.onclick = function(e) {
             mySavedNotesPanel.classList.add('notes-open');
             break;
         }
-
     }
     if (flag === false) {
         console.log('No Related Notes Found');
     }
 };
-/*////////////////////////////////////////
-Open a note from the saved notes panel
- ////////////////////////////////////////*/
-/*var result = jsObjects.filter(function(obj) {
-    return obj.b == 6;
-});*/

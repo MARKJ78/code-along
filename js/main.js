@@ -295,3 +295,16 @@ vidSmall.onclick = function() {
     vidLarge.classList.remove('active');
     vidSmall.classList.add('active');
 };
+
+
+/*////////////////////////////////////////
+Menu slide control
+ ////////////////////////////////////////*/
+
+var handle = document.getElementById('menu-handle');
+var rightPanel = document.getElementById('right-panel');
+var leftPanel = document.getElementById('left-panel');
+handle.addEventListener('click', function() {
+    rightPanel.classList.toggle('menu-open');
+    leftPanel.classList.toggle('menu-open');
+});
