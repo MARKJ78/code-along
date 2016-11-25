@@ -265,6 +265,7 @@ lastVidPlayed.onclick = function() {
 /*////////////////////////////////////////
 Resize Video panel
  ////////////////////////////////////////*/
+
 var vidLarge = document.getElementById('videoLarge');
 var vidDefault = document.getElementById('videoDefault');
 var vidSmall = document.getElementById('videoSmall');
@@ -297,10 +298,31 @@ vidSmall.onclick = function() {
 };
 
 
+
+
 /*////////////////////////////////////////
 Menu slide control
  ////////////////////////////////////////*/
+//hides menu on resize if below 1024px
+window.onload = function() {
+    var width = window.innerWidth;
+    if (width > 1024) {
+        rightPanel.classList.add('menu-open');
+        leftPanel.classList.add('menu-open');
+    }
+};
+window.onresize = function() {
+    var width = window.innerWidth;
+    if (width <= 1024) {
+        rightPanel.classList.remove('menu-open');
+        leftPanel.classList.remove('menu-open');
+    } else if (width > 1024) {
+        rightPanel.classList.add('menu-open');
+        leftPanel.classList.add('menu-open');
+    }
+};
 
+//handle functionality
 var handle = document.getElementById('menu-handle');
 var rightPanel = document.getElementById('right-panel');
 var leftPanel = document.getElementById('left-panel');
