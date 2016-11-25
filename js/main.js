@@ -157,7 +157,10 @@ function parsePlaylists(response) {
         playListContainer = [
             '<div class="play-list-container">',
             '<div id="' + playlistId + '" class="thumbnail"><img src="' + thumbnail + '"></div>',
-            '<div class="playlist-title"><p>' + playlistTitle + '</p><p class="video-num">' + videoNum + '</p><p>Video\'s</p></div>',
+            '<div class="playlist-title">',
+            '<p>' + playlistTitle + '</p>',
+            '<p class="video-num">' + videoNum + ' Video\'s</p>',
+            '</div>',
             '</div>'
         ].join('\n');
         scrollTo(panel, panel.offsetTop, 0);

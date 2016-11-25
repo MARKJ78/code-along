@@ -20,6 +20,7 @@ var confirm = document.getElementsByName('note')[0];
 var myNotesList = mySavedNotesPanel.getElementsByTagName("ul")[0];
 var noteListItems;
 var noteDetailPanel = document.getElementById('note-detail-panel');
+var width = window.innerWidth;
 /*////////////////////////////////////////
 Sets the last note, for use in "pick up where you left off"  lastVidPlayed.onclick = function() in main.js
  ////////////////////////////////////////*/
@@ -132,8 +133,8 @@ function displayNotes(noteToBuild) {
     var noteId = noteToBuild.id;
     myNoteslistItem = [
         '<p class="note-title">' + noteTitle + '</p>',
-        '<p class="date">' + noteDate + '</p>',
         '<i id="' + noteId + '" class="fa fa-pencil-square fa-lg edit-note" aria-hidden="true"></i>',
+        '<p class="date">' + noteDate + '</p>',
         '<p class="saved-note">' + note + '</p>'
     ].join('\n');
     myNotesList.appendChild(mySavedNote);
@@ -159,6 +160,7 @@ function displayNotes(noteToBuild) {
         loop through notes to find the right note based id: value
          ////////////////////////////////////////////////////*/
         for (var i = 0; i < myNotes.length; i++) {
+            console.log(myNotes[i]);
             if (myNotes[i].id == noteId) {
                 //console.log(myNotes[i]);
                 /*/////////////////////////////////////////////////////
@@ -168,10 +170,10 @@ function displayNotes(noteToBuild) {
                     '<div class="edit-note-container">',
                     '<header class="edit-note-header">',
                     '<div class="edit-note-header-item" id="edit-note-id">Note ID: ' + noteId + '</div>',
-                    '<div class="edit-note-header-item" id="edit-note-title"><h3>' + myNotes[i].title + '</h3></div>',
+                    '<div class="edit-note-header-item" id="edit-note-title"><h3 class="edit-note-title">' + myNotes[i].title + '</h3></div>',
                     '<div class="edit-note-header-item" id="edit-note-controls">',
-                    '     <div class="btn" id="save-saved-notes"><i class="fa fa-check-circle fa-2x green edit-note-control" aria-hidden="true"></i> Close &amp; Save &nbsp;</div>',
-                    '     <div class="btn" id="close-edit-notes"><i class="fa fa-times-circle fa-2x red edit-note-control" aria-hidden="true"></i> Cancel&nbsp;</div>',
+                    '     <div class="btn2" id="save-saved-notes"><i class="fa fa-check-circle fa-lg edit-note-control" aria-hidden="true"></i> &nbsp; Close &amp; Save &nbsp;</div>',
+                    '     <div class="btn2" id="close-edit-notes"><i class="fa fa-times-circle fa-lg edit-note-control" aria-hidden="true"></i> &nbsp; Cancel&nbsp;</div>',
                     '</div>',
                     ' </header>',
                     ' <div contenteditable id="edit-panel-' + noteId + '" class="edit-note-text"></div>',
@@ -199,14 +201,21 @@ function displayNotes(noteToBuild) {
                     console.log(myNotes[i].note);
                     Cookies.set('storedNotes', myNotes);
                     noteDetailPanel.classList.remove('show');
-                    break;
                 }
+            }
+            if (width > 1024) {
+                rightPanel.classList.toggle('menu-open');
+                leftPanel.classList.toggle('menu-open');
             }
         });
         //cancel and close panel setup
         document.getElementById('close-edit-notes').addEventListener('click', function() {
             e.preventDefault();
             noteDetailPanel.classList.remove('show');
+            if (width > 1024) {
+                rightPanel.classList.toggle('menu-open');
+                leftPanel.classList.toggle('menu-open');
+            }
         });
         //
         noteDetailPanel.classList.add('show');

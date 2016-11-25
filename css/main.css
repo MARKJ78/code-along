@@ -123,7 +123,7 @@ button {
 
 .play-list-container, .video-container {
     width: 320px;
-    height: 240px;
+    min-height: 240px;
     margin: .75rem;
     background-color: #0e1628;
 }
@@ -132,8 +132,14 @@ button {
     color: #f4f4f4;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding: .5rem;
+    text-align: center;
+}
+
+.video-num {
+    width: 3rem;
 }
 
 
@@ -353,6 +359,11 @@ button {
     padding: .5rem;
 }
 
+.saved-notes-list-item p {
+    margin: 0;
+    padding: .5rem;
+}
+
 .saved-notes-list-item:hover {
     border: 1px solid #7998a6;
 }
@@ -388,12 +399,19 @@ button {
 
 .note-title {
     padding: .25rem;
-    flex: 1 1 60%
+    flex: 1 1 100%
 }
 
 .date {
+    flex: 1 1 50%;
+    padding: .25rem;
+    text-align: right;
+}
+
+.edit-note {
     flex: 1 1 25%;
     padding: .25rem;
+    text-align: left;
 }
 
 .note {
@@ -436,10 +454,6 @@ button {
 
 /*//////////////////////////////  NOTEPAD - EDITOR PANEL /////////////////////////////////////////////////////////////////*/
 
-body {
-    height: 100vh;
-}
-
 .edit-note-container {
     display: flex;
     flex-direction: column;
@@ -453,24 +467,43 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: .5em;
-    flex: 1 1 auto;
+    padding: .5rem;
     color: #777879;
 }
 
 .edit-note-header-item {
     text-align: center;
-    padding: 1rem;
+    padding: 0.25rem;
+}
+
+.edit-note-title {
+    margin: 0;
 }
 
 #edit-note-controls {
     display: flex;
     flex-direction: row;
-    margin: .5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: .25rem;
+    border: 1px solid #ececec;
+}
+
+.btn2:hover {
+    background-color: #7998a6;
+    color: #fff;
+    border: 1px solid #7998a6;
 }
 
 .edit-note-text {
-    height: 80%;
+    flex: 1 1 75%;
     resize: none;
     padding: 1rem;
     overflow: auto;
