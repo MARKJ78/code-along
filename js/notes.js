@@ -8,8 +8,8 @@
 var myNotes = [];
 var lastNote = 0;
 var date = new Date();
-month = date.getMonth() + 1;
-dateString = date.getDate() + "/" + month + "/" + date.getFullYear();
+var month = date.getMonth() + 1;
+var dateString = date.getDate() + "/" + month + "/" + date.getFullYear();
 var title = document.getElementById('noteTitle');
 var note = document.getElementById('note');
 var saveNoteButton = document.getElementById('saveNote');
@@ -27,7 +27,7 @@ Sets the last note, for use in "pick up where you left off"  lastVidPlayed.oncli
 if (typeof Cookies('storedNotes') !== 'undefined') {
     myNotes = Cookies.getJSON('storedNotes');
     lastNote = myNotes.length - 1;
-    console.log(myNotes);
+    //console.log(myNotes);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
@@ -160,7 +160,7 @@ function displayNotes(noteToBuild) {
         loop through notes to find the right note based id: value
          ////////////////////////////////////////////////////*/
         for (var i = 0; i < myNotes.length; i++) {
-            console.log(myNotes[i]);
+            //console.log(myNotes[i]);
             if (myNotes[i].id == noteId) {
                 //console.log(myNotes[i]);
                 /*/////////////////////////////////////////////////////
@@ -196,9 +196,9 @@ function displayNotes(noteToBuild) {
             //console.log(newContent);
             for (var i = 0; i < myNotes.length; i++) {
                 if (myNotes[i].id == noteId) {
-                    console.log(myNotes[i].note);
+                    //console.log(myNotes[i].note);
                     myNotes[i].note = newContent;
-                    console.log(myNotes[i].note);
+                    //console.log(myNotes[i].note);
                     Cookies.set('storedNotes', myNotes);
                     noteDetailPanel.classList.remove('show');
                 }
