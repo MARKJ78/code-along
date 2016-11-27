@@ -330,6 +330,7 @@ var handle = document.getElementById('menu-handle');
 var rightPanel = document.getElementById('right-panel');
 var leftPanel = document.getElementById('left-panel');
 handle.addEventListener('click', function() {
+    handle.classList.toggle('menu-open');
     rightPanel.classList.toggle('menu-open');
     leftPanel.classList.toggle('menu-open');
 });

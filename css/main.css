@@ -143,6 +143,24 @@ button {
     text-align: center;
 }
 
+.lg2 {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .lg1 {
+        display: none;
+    }
+    .lg2 {
+        display: block;
+        border: 1px solid #ff3232;
+        border-radius: 5px;
+        margin: 1.5rem;
+        background-color: pink;
+        color: #ff3232;
+    }
+}
+
 .logo {
     font-family: 'Audiowide', cursive;
     font-size: 4rem;
@@ -196,6 +214,15 @@ button {
     overflow: hidden;
     -webkit-transition: height .5s ease;
     transition: height .5s ease;
+}
+
+@media screen and (max-width: 767px) {
+    #repl {
+        display: none;
+    }
+    .editor-panel {
+        height: 0;
+    }
 }
 
 #repl {
@@ -553,11 +580,20 @@ button {
     color: #7998a6;
     padding: .75rem;
     cursor: pointer;
+    transition: left .75s ease;
+    transition: top .75s ease;
 }
 
 @media screen and (max-width: 1024px) {
     #menu-handle {
         display: block;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #menu-handle.menu-open {
+        left: 10px;
+        top: -1px;
     }
 }
 
@@ -574,6 +610,24 @@ button {
     flex-direction: column;
     background-color: #f4f3f3;
     height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+    .video-panel {
+        height: 100vh;
+    }
+    .video-panel.edit-note-open {
+        height: 40vh;
+    }
+    .editor-panel.edit-note-open {
+        height: 60vh;
+    }
+    .note-detail-panel {
+        height: 0vh;
+    }
+    .note-detail-panel.edit-note-open {
+        height: 60vh;
+    }
 }
 
 .edit-note-header {
@@ -709,7 +763,7 @@ button {
     border-radius: 6px;
     padding: .5rem;
     width: 250px;
-    left: -120px;
+    left: -135px;
     margin-right: 150px;
     /* Position the tooltip text */
     position: absolute;
@@ -728,7 +782,7 @@ button {
     content: "";
     position: absolute;
     top: 100%;
-    right: 50%;
+    right: 119px;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
