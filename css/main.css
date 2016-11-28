@@ -174,7 +174,7 @@ button {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.thumbnail {
+.thumbnail, .playlist-title {
     cursor: pointer;
 }
 
@@ -373,6 +373,11 @@ button {
     border-top: 1px solid #cecece;
 }
 
+.playlist-controls {
+    display: flex;
+    flex-direction: row;
+}
+
 .search-youtube {
     margin: 0.25rem;
     border: 1px solid #f4f3f3;
@@ -508,7 +513,7 @@ button {
     background-color: #f4f4f4;
     border: 1px solid #ececec;
     margin: .5rem;
-    height: 50vh;
+    height: 35vh;
 }
 
 .notepad-controls {

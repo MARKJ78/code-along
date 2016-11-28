@@ -29,8 +29,6 @@ var channelsList = {
     codeman: "UCJUmE61LxhbhudzUugHL2wQ"
         //BradTraversy: "TechGuyWeb"
 };
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -66,27 +64,27 @@ function request(url) {
 /*////////////////////////////////////////
  Loops through channelsList and builds url for each channel to send to fetchChannels
  ////////////////////////////////////////*/
-function getChannelsList() {
+function getChannels() {
     for (var key in channelsList) {
         /*console.log(key + " " + channelsList[key]);*/
         var channel = "&id=" + channelsList[key];
         var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet" + channel + apik;
-        fetchChannelsList(url);
+        fetchChannels(url);
     }
 }
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response. called as many times as there are channels
  ////////////////////////////////////////*/
-function fetchChannelsList(url) {
+function fetchChannels(url) {
     //console.log(url);
     request(url).then(function(response) {
-        parseChannelsList(response);
+        parseChannels(response);
     });
 }
 /*////////////////////////////////////////
  Creates & configures entries in channels list
  ////////////////////////////////////////*/
-function parseChannelsList(response) {
+function parseChannels(response) {
     var listItem = [];
     var channelId = response.items[0].id;
     var title = response.items[0].snippet.title;
@@ -115,16 +113,15 @@ function parseChannelsList(response) {
 function creatPlaylistLinks(channelId) {
     var channelListEntries = document.getElementById(channelId);
     channelListEntries.onclick = function() {
-        //this.classList.add('active');
         getPlaylists(channelId);
-
+        //this.classList.add('active');
 
     };
 }
 /*////////////////////////////////////////
  initialise script
  ////////////////////////////////////////*/
-getChannelsList();
+getChannels();
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -152,7 +149,6 @@ function fetchPlaylists(url) {
  Creates & configures entries in main panel. Playlists.
  ////////////////////////////////////////*/
 function parsePlaylists(response) {
-    //console.log(response);
     panel.innerHTML = "";
     var playListContainer = [];
     var playLists = response.items;
@@ -210,7 +206,12 @@ function fetchPlaylistVids(url) {
 /*////////////////////////////////////////
  Creates & configures entries in main panel. Playlists individual videos.
  ////////////////////////////////////////*/
+var responseBin;
+var currentlyPlaying = 0;
+
 function parsePlaylistVids(response) {
+    responseBin = response;
+    console.log(response);
     panel.innerHTML = "";
     var videoContainer = [];
     var videos = response.items;
@@ -226,22 +227,21 @@ function parsePlaylistVids(response) {
         ].join('\n');
         scrollTo(panel, panel.offsetTop, 0);
         panel.insertAdjacentHTML('beforeend', videoContainer);
-        createVideo(response, i); // i will be used to record a the current video's index, to allow configure the video controls
+        createFirstVideo(videoId, videoTitle, i);
+
     }
+
 }
 /*////////////////////////////////////////
 Set up playlist thumbnail to bring up video
 ////////////////////////////////////////*/
-function createVideo(response, i) {
-    var videoId = response.items[i].snippet.resourceId.videoId;
-
-    console.log(videoId);
+function createFirstVideo(videoId, videoTitle, i) {
     var playlistEntry = document.getElementById(videoId);
     playlistEntry.onclick = function() {
+        currentlyPlaying = i;
         panel.innerHTML = "";
         var video = [
             '<iframe',
-            'id="' + i + '"',
             '  src="//www.youtube.com/embed/' + videoId + '"',
             '  width="100%"',
             '  height="100%"',
@@ -253,35 +253,34 @@ function createVideo(response, i) {
         scrollTo(panel, panel.offsetTop, 0);
         panel.insertAdjacentHTML('beforeend', video);
         Cookies.set('LastViewedVideo', video);
-        title.value = response.items[i].snippet.title;
-
-        thisVideo = document.getElementById(i);
-        console.log(thisVideo);
-
+        title.value = videoTitle;
+        setUpVidControls();
     };
 }
 /*////////////////////////////////////////
 Set up Next Video Button
 ////////////////////////////////////////*/
+function setUpVidControls() {
+    var thisPlaylist = document.getElementById('allPlaylistVid');
+    thisPlaylist.addEventListener('click', function() {
+        console.log('all');
 
-var thisPlaylist = document.getElementById('allPlaylistVid');
-thisPlaylist.addEventListener('click', function() {
+    });
+    var previousVid = document.getElementById('lastPlaylistVid');
+    previousVid.addEventListener('click', function() {
+        console.log('last');
 
-    console.log('all');
-});
-var previousVid = document.getElementById('lastPlaylistVid');
-previousVid.addEventListener('click', function() {
-    var thisVideo = document.getElementsByTagName('iframe');
-    var id = thisVideo.id;
-    console.log(thisVideo);
-    console.log(id);
-});
-var nextPlaylistVid = document.getElementById('nextPlaylistVid');
-nextPlaylistVid.addEventListener('click', function() {
-    console.log('next');
-});
+    });
+    var nextPlaylistVid = document.getElementById('nextPlaylistVid');
+    nextPlaylistVid.addEventListener('click', function() {
+        console.log('next');
 
+    });
+}
 
+/*////////////////////////////////////////
+Set up last Video Button
+////////////////////////////////////////*/
 
 
 

@@ -215,7 +215,7 @@ function displayNotes(noteToBuild) {
                 rightPanel.classList.toggle('menu-open');
                 leftPanel.classList.toggle('menu-open');
             }
-
+            //Quickly added to enable notes on smaller screens - need to sort this out.
             document.getElementById('video-panel').classList.remove('edit-note-open');
             document.getElementById('editor-panel').classList.remove('edit-note-open');
             document.getElementById('note-detail-panel').classList.remove('edit-note-open');
@@ -229,6 +229,7 @@ function displayNotes(noteToBuild) {
                 rightPanel.classList.toggle('menu-open');
                 leftPanel.classList.toggle('menu-open');
             }
+            //Quickly added to enable notes on smaller screens - need to sort this out.
             document.getElementById('video-panel').classList.remove('edit-note-open');
             document.getElementById('editor-panel').classList.remove('edit-note-open');
             document.getElementById('note-detail-panel').classList.remove('edit-note-open');
