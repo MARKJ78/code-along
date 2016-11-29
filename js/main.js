@@ -191,27 +191,33 @@ function createPlaylistVideos(playlistId) {
 //                        set up next / last video functionality                                    //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-var listProgress = 0; //This variable corresponds to the Array index in response to allow for playlist control
+var listProgress; //This variable corresponds to the Array index in response to allow for playlist control
 var responseBin; //this variable allows playlist control without passing response around
+var binLength; //required for if statement on next video buttons
 var currentPlaylist; // for thisPlaylist button line 272
 /*////////////////////////////////////////
 Activated when playlist thumbnail is clicked, builds API url to fetch the vdeos
  ////////////////////////////////////////*/
 function getPlaylistVideos(playlistId) {
     currentPlaylist = playlistId;
+    Cookies.set('lastPlaylist', currentPlaylist);
     var playlistVids = "&playlistId=" + playlistId;
     var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
     fetchPlaylistVids(url);
 }
+
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response.
  ////////////////////////////////////////*/
 function fetchPlaylistVids(url) {
     request(url).then(function(response) {
+        console.log('Fetch PlaylistVids Initiated');
         responseBin = response;
+        binLength = responseBin.items.length - 1;
         parsePlaylistVids(responseBin);
     });
 }
+
 /*////////////////////////////////////////
  Creates & configures entries in main panel. Playlists individual videos.
  ////////////////////////////////////////*/
@@ -235,9 +241,6 @@ function parsePlaylistVids(response) {
     }
 }
 
-function loadPlaylists() {
-
-}
 /*////////////////////////////////////////
 Set up playlist thumbnail to bring up video
 ////////////////////////////////////////*/
@@ -250,6 +253,8 @@ function createVideo(response, i) {
 }
 
 function insertVid(response, i) {
+    listProgress = i;
+    Cookies.set('listItem', listProgress);
     var videoId = response.items[i].snippet.resourceId.videoId;
     panel.innerHTML = "";
     var video = [
@@ -265,9 +270,10 @@ function insertVid(response, i) {
     ].join('\n');
     scrollTo(panel, panel.offsetTop, 0);
     panel.insertAdjacentHTML('beforeend', video);
-    Cookies.set('LastViewedVideo', videoId);
+    Cookies.set('lastViewedVideo', videoId);
     title.value = response.items[i].snippet.title;
-    listProgress = i;
+
+
 }
 /*////////////////////////////////////////
 Set up Video controls
@@ -278,13 +284,20 @@ thisPlaylist.addEventListener('click', function() {
 });
 var previousVid = document.getElementById('lastPlaylistVid');
 previousVid.addEventListener('click', function() {
-    var prev = listProgress - 1;
-    insertVid(responseBin, prev);
+    if (listProgress > 0) {
+        insertVid(responseBin, listProgress - 1);
+    } else {
+        console.log('Begining of playlist');
+    }
 });
 var nextPlaylistVid = document.getElementById('nextPlaylistVid');
 nextPlaylistVid.addEventListener('click', function() {
-    var nxt = listProgress + 1;
-    insertVid(responseBin, nxt);
+    if (listProgress < binLength) {
+        insertVid(responseBin, listProgress + 1);
+    } else {
+        console.log('End of playlist');
+    }
+
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -294,14 +307,37 @@ nextPlaylistVid.addEventListener('click', function() {
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+//CONTINUE WHERE LEFT OFF
 /*////////////////////////////////////////
- Load Last video & Note
+Activated when continue where you left off clicked, builds API url to fetch the vdeos
+ ////////////////////////////////////////*/
+function getLastPlaylistVideos(playlistId) {
+    return new Promise(function(sendBack) {
+        console.log('getLastPlaylistVideos Promise Initiated');
+        currentPlaylist = playlistId;
+        var playlistVids = "&playlistId=" + playlistId;
+        var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
+        request(url).then(function(response) {
+            console.log('Fetch LastPlaylistVids Initiated');
+            responseBin = response;
+            binLength = responseBin.items.length - 1;
+            sendBack(response);
+        });
+    });
+}
+/*////////////////////////////////////////
+ Configure Continue Button
  ////////////////////////////////////////*/
 var lastVidPlayed = document.getElementById('lastVid');
 lastVidPlayed.onclick = function() {
-    if (typeof Cookies('LastViewedVideo') !== 'undefined') {
-        panel.innerHTML = Cookies('LastViewedVideo');
-        title.value = myNotes[lastNote].title; //variable is declared in notes.js
+    if (typeof Cookies('lastViewedVideo') !== 'undefined') {
+        var lastPlaylistId = Cookies.get('lastPlaylist');
+        listProgress = Cookies.getJSON('listItem');
+        var lastVideo = Cookies.get('lastViewedVideo');
+        getLastPlaylistVideos(lastPlaylistId).then(function(response) {
+            console.log('Last Promise Returned');
+            insertVid(responseBin, listProgress);
+        });
     } else {
         alert('You can\'t continue what you havn\'t started. Choose a playlist and watch a video to get started.');
     }
