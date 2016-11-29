@@ -176,7 +176,6 @@ function parsePlaylists(response) {
 /*////////////////////////////////////////
  Set up playlist thumbnail to bring up video's
  ////////////////////////////////////////*/
-
 function createPlaylistVideos(playlistId) {
     var playlistEntry = document.getElementById(playlistId);
     playlistEntry.onclick = function() {
@@ -251,7 +250,9 @@ function createVideo(response, i) {
         insertVid(response, i);
     };
 }
-
+/*////////////////////////////////////////
+Insert a/the video into video panel.
+////////////////////////////////////////*/
 function insertVid(response, i) {
     listProgress = i;
     Cookies.set('listItem', listProgress);
@@ -278,26 +279,35 @@ function insertVid(response, i) {
 /*////////////////////////////////////////
 Set up Video controls
 ////////////////////////////////////////*/
+//This playlist
 var thisPlaylist = document.getElementById('allPlaylistVid');
 thisPlaylist.addEventListener('click', function() {
     getPlaylistVideos(currentPlaylist);
 });
+//Previous video in playlist
 var previousVid = document.getElementById('lastPlaylistVid');
 previousVid.addEventListener('click', function() {
     if (listProgress > 0) {
         insertVid(responseBin, listProgress - 1);
+        previousVid.classList.remove('flash');
+        nextPlaylistVid.classList.remove('flash');
     } else {
+        previousVid.classList.toggle('flash');
         console.log('Begining of playlist');
+
     }
 });
+//Next video in playlist
 var nextPlaylistVid = document.getElementById('nextPlaylistVid');
 nextPlaylistVid.addEventListener('click', function() {
     if (listProgress < binLength) {
         insertVid(responseBin, listProgress + 1);
+        previousVid.classList.remove('flash');
+        nextPlaylistVid.classList.remove('flash');
     } else {
+        nextPlaylistVid.classList.toggle('flash');
         console.log('End of playlist');
     }
-
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -330,6 +340,7 @@ function getLastPlaylistVideos(playlistId) {
  ////////////////////////////////////////*/
 var lastVidPlayed = document.getElementById('lastVid');
 lastVidPlayed.onclick = function() {
+    //check if visitor has used the site before
     if (typeof Cookies('lastViewedVideo') !== 'undefined') {
         var lastPlaylistId = Cookies.get('lastPlaylist');
         listProgress = Cookies.getJSON('listItem');
@@ -346,7 +357,6 @@ lastVidPlayed.onclick = function() {
 /*////////////////////////////////////////
 Resize Video panel
  ////////////////////////////////////////*/
-
 var vidLarge = document.getElementById('videoLarge');
 var vidDefault = document.getElementById('videoDefault');
 var vidSmall = document.getElementById('videoSmall');

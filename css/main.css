@@ -376,7 +376,7 @@ button {
 .playlist-controls {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #cecece;
+    /*border-bottom: 1px solid #cecece;*/
 }
 
 .search-youtube {
@@ -799,4 +799,38 @@ button {
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+}
+
+@-webkit-keyframes bump-stop {
+    from {
+        background: #ff3232;
+    }
+    to {
+        background: #7998a6;
+    }
+}
+
+@-moz-keyframes bump-stop {
+    from {
+        background: #ff3232;
+    }
+    to {
+        background: #7998a6;
+    }
+}
+
+@keyframes bump-stop {
+    from {
+        background: #ff3232;
+    }
+    to {
+        background: #7998a6;
+    }
+}
+
+.flash {
+    -webkit-animation: bump-stop 1s ease-in-out 0s;
+    -moz-animation: bump-stop 1s ease-in-out 0s;
+    -o-animation: bump-stop 1s ease-in-out 0s;
+    animation: bump-stop 1s ease-in-out 0s;
 }
