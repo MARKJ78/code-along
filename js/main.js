@@ -117,8 +117,6 @@ function creatPlaylistLinks(channelId) {
     channelListEntries.onclick = function() {
         //this.classList.add('active');
         getPlaylists(channelId);
-
-
     };
 }
 /*////////////////////////////////////////
@@ -178,23 +176,29 @@ function parsePlaylists(response) {
 /*////////////////////////////////////////
  Set up playlist thumbnail to bring up video's
  ////////////////////////////////////////*/
+
 function createPlaylistVideos(playlistId) {
     var playlistEntry = document.getElementById(playlistId);
     playlistEntry.onclick = function() {
         getPlaylistVideos(playlistId);
+
     };
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
 //       3: Load playlists videos into main panel  + configure iframe for insertion on click        //
-//                        set up next / last video functionality                                                                      //
+//                        set up next / last video functionality                                    //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+var listProgress = 0; //This variable corresponds to the Array index in response to allow for playlist control
+var responseBin; //this variable allows playlist control without passing response around
+var currentPlaylist; // for thisPlaylist button line 272
 /*////////////////////////////////////////
 Activated when playlist thumbnail is clicked, builds API url to fetch the vdeos
  ////////////////////////////////////////*/
 function getPlaylistVideos(playlistId) {
+    currentPlaylist = playlistId;
     var playlistVids = "&playlistId=" + playlistId;
     var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
     fetchPlaylistVids(url);
@@ -204,7 +208,8 @@ requests an API call from step 0 waits for response.
  ////////////////////////////////////////*/
 function fetchPlaylistVids(url) {
     request(url).then(function(response) {
-        parsePlaylistVids(response);
+        responseBin = response;
+        parsePlaylistVids(responseBin);
     });
 }
 /*////////////////////////////////////////
@@ -229,70 +234,63 @@ function parsePlaylistVids(response) {
         createVideo(response, i); // i will be used to record a the current video's index, to allow configure the video controls
     }
 }
+
+function loadPlaylists() {
+
+}
 /*////////////////////////////////////////
 Set up playlist thumbnail to bring up video
 ////////////////////////////////////////*/
 function createVideo(response, i) {
     var videoId = response.items[i].snippet.resourceId.videoId;
-
-    console.log(videoId);
     var playlistEntry = document.getElementById(videoId);
     playlistEntry.onclick = function() {
-        panel.innerHTML = "";
-        var video = [
-            '<iframe',
-            'id="' + i + '"',
-            '  src="//www.youtube.com/embed/' + videoId + '"',
-            '  width="100%"',
-            '  height="100%"',
-            '  frameborder="0"',
-            '  scrolling="no"',
-            '  allowfullscreen>',
-            '</iframe>'
-        ].join('\n');
-        scrollTo(panel, panel.offsetTop, 0);
-        panel.insertAdjacentHTML('beforeend', video);
-        Cookies.set('LastViewedVideo', video);
-        title.value = response.items[i].snippet.title;
-
-        thisVideo = document.getElementById(i);
-        console.log(thisVideo);
-
+        insertVid(response, i);
     };
 }
-/*////////////////////////////////////////
-Set up Next Video Button
-////////////////////////////////////////*/
 
+function insertVid(response, i) {
+    var videoId = response.items[i].snippet.resourceId.videoId;
+    panel.innerHTML = "";
+    var video = [
+        '<iframe',
+        'id="' + i + '"',
+        '  src="//www.youtube.com/embed/' + videoId + '"',
+        '  width="100%"',
+        '  height="100%"',
+        '  frameborder="0"',
+        '  scrolling="no"',
+        '  allowfullscreen>',
+        '</iframe>'
+    ].join('\n');
+    scrollTo(panel, panel.offsetTop, 0);
+    panel.insertAdjacentHTML('beforeend', video);
+    Cookies.set('LastViewedVideo', videoId);
+    title.value = response.items[i].snippet.title;
+    listProgress = i;
+}
+/*////////////////////////////////////////
+Set up Video controls
+////////////////////////////////////////*/
 var thisPlaylist = document.getElementById('allPlaylistVid');
 thisPlaylist.addEventListener('click', function() {
-
-    console.log('all');
+    getPlaylistVideos(currentPlaylist);
 });
 var previousVid = document.getElementById('lastPlaylistVid');
 previousVid.addEventListener('click', function() {
-    var thisVideo = document.getElementsByTagName('iframe');
-    var id = thisVideo.id;
-    console.log(thisVideo);
-    console.log(id);
+    var prev = listProgress - 1;
+    insertVid(responseBin, prev);
 });
 var nextPlaylistVid = document.getElementById('nextPlaylistVid');
 nextPlaylistVid.addEventListener('click', function() {
-    console.log('next');
+    var nxt = listProgress + 1;
+    insertVid(responseBin, nxt);
 });
-
-
-
-
-
-
-
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
-//                                           FEATURES                                               //
+//                                        OTHER FEATURES                                            //
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////

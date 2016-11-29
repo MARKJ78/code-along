@@ -376,6 +376,7 @@ button {
 .playlist-controls {
     display: flex;
     flex-direction: row;
+    border-bottom: 1px solid #cecece;
 }
 
 .search-youtube {
@@ -403,9 +404,7 @@ button {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
+    flex: 1 1 30%;
     width: auto;
     color: #777879;
     cursor: pointer;
