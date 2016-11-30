@@ -29,8 +29,6 @@ var channelsList = {
     codeman: "UCJUmE61LxhbhudzUugHL2wQ"
         //BradTraversy: "TechGuyWeb"
 };
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -204,7 +202,6 @@ function getPlaylistVideos(playlistId) {
     var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
     fetchPlaylistVids(url);
 }
-
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response.
  ////////////////////////////////////////*/
@@ -216,7 +213,6 @@ function fetchPlaylistVids(url) {
         parsePlaylistVids(responseBin);
     });
 }
-
 /*////////////////////////////////////////
  Creates & configures entries in main panel. Playlists individual videos.
  ////////////////////////////////////////*/
@@ -239,7 +235,6 @@ function parsePlaylistVids(response) {
         createVideo(response, i); // i will be used to record a the current video's index, to allow configure the video controls
     }
 }
-
 /*////////////////////////////////////////
 Set up playlist thumbnail to bring up video
 ////////////////////////////////////////*/
@@ -273,8 +268,6 @@ function insertVid(response, i) {
     panel.insertAdjacentHTML('beforeend', video);
     Cookies.set('lastViewedVideo', videoId);
     title.value = response.items[i].snippet.title;
-
-
 }
 /*////////////////////////////////////////
 Set up Video controls
@@ -294,7 +287,6 @@ previousVid.addEventListener('click', function() {
     } else {
         previousVid.classList.toggle('flash');
         console.log('Begining of playlist');
-
     }
 });
 //Next video in playlist
@@ -309,7 +301,6 @@ nextPlaylistVid.addEventListener('click', function() {
         console.log('End of playlist');
     }
 });
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -323,13 +314,14 @@ Activated when continue where you left off clicked, builds API url to fetch the 
  ////////////////////////////////////////*/
 function getLastPlaylistVideos(playlistId) {
     return new Promise(function(sendBack) {
+        //build url, get response then return promise to block below for video build.
         console.log('getLastPlaylistVideos Promise Initiated');
         currentPlaylist = playlistId;
         var playlistVids = "&playlistId=" + playlistId;
         var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
         request(url).then(function(response) {
             console.log('Fetch LastPlaylistVids Initiated');
-            responseBin = response;
+            responseBin = response; //update response bin & Length
             binLength = responseBin.items.length - 1;
             sendBack(response);
         });
@@ -345,6 +337,7 @@ lastVidPlayed.onclick = function() {
         var lastPlaylistId = Cookies.get('lastPlaylist');
         listProgress = Cookies.getJSON('listItem');
         var lastVideo = Cookies.get('lastViewedVideo');
+        //when continue button is clicked, go and get the playlist, then load the last video (uses cookies)
         getLastPlaylistVideos(lastPlaylistId).then(function(response) {
             console.log('Last Promise Returned');
             insertVid(responseBin, listProgress);
@@ -352,7 +345,6 @@ lastVidPlayed.onclick = function() {
     } else {
         alert('You can\'t continue what you havn\'t started. Choose a playlist and watch a video to get started.');
     }
-
 };
 /*////////////////////////////////////////
 Resize Video panel
@@ -387,14 +379,10 @@ vidSmall.onclick = function() {
     vidLarge.classList.remove('active');
     vidSmall.classList.add('active');
 };
-
-
-
-
 /*////////////////////////////////////////
 Menu slide control
  ////////////////////////////////////////*/
-//hides menu on resize if below 1024px
+//shows menu on load if above 1024px
 window.onload = function() {
     var width = window.innerWidth;
     if (width > 1024) {
@@ -402,6 +390,7 @@ window.onload = function() {
         leftPanel.classList.add('menu-open');
     }
 };
+//hides menu on resize if below 1024px
 window.onresize = function() {
     var width = window.innerWidth;
     if (width <= 1024) {
@@ -412,7 +401,6 @@ window.onresize = function() {
         leftPanel.classList.add('menu-open');
     }
 };
-
 //handle functionality
 var handle = document.getElementById('menu-handle');
 var rightPanel = document.getElementById('right-panel');

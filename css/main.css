@@ -380,7 +380,12 @@ button {
 }
 
 .playlist-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
     /*border-bottom: 1px solid #cecece;*/
 }
@@ -410,6 +415,8 @@ button {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 30%;
     flex: 1 1 30%;
     width: auto;
     color: #777879;
@@ -590,7 +597,9 @@ button {
     color: #7998a6;
     padding: .75rem;
     cursor: pointer;
+    -webkit-transition: left .75s ease;
     transition: left .75s ease;
+    -webkit-transition: top .75s ease;
     transition: top .75s ease;
 }
 
@@ -807,16 +816,10 @@ button {
     opacity: 1;
 }
 
-@-webkit-keyframes bump-stop {
-    from {
-        background: #ff3232;
-    }
-    to {
-        background: #7998a6;
-    }
-}
 
-@-moz-keyframes bump-stop {
+/*Colour animation for end of list.*/
+
+@-webkit-keyframes bump-stop {
     from {
         background: #ff3232;
     }
@@ -836,7 +839,34 @@ button {
 
 .flash {
     -webkit-animation: bump-stop 1s ease-in-out 0s;
-    -moz-animation: bump-stop 1s ease-in-out 0s;
-    -o-animation: bump-stop 1s ease-in-out 0s;
     animation: bump-stop 1s ease-in-out 0s;
+}
+
+
+/*Colour animation for no note found or saved*/
+
+@-webkit-keyframes text-area-red {
+    from {
+        background: #ff3232;
+    }
+    to {
+        background: #7998a6;
+    }
+}
+
+@keyframes bump-stop {
+    from {
+        background: #ff3232;
+    }
+    to {
+        background: #7998a6;
+        -webkit-box-shadow: inset 2px 2px 2px 0px #ff3232;
+        -moz-box-shadow: inset 2px 2px 2px 0px #ff3232;
+        box-shadow: inset 2px 2px 2px 0px #ff3232;
+    }
+}
+
+.flash {
+    -webkit-animation: text-area-red 1s ease-in-out 0s;
+    animation: text-area-red 1s ease-in-out 0s;
 }
