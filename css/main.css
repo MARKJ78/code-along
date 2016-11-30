@@ -837,7 +837,7 @@ button {
     }
 }
 
-.flash {
+.bump-stop {
     -webkit-animation: bump-stop 1s ease-in-out 0s;
     animation: bump-stop 1s ease-in-out 0s;
 }
@@ -845,28 +845,64 @@ button {
 
 /*Colour animation for no note found or saved*/
 
-@-webkit-keyframes text-area-red {
+@-webkit-keyframes text-area-red-shaddow {
     from {
-        background: #ff3232;
+        -webkit-box-shadow: inset 0 0 30px #ff3232;
+        -moz-box-shadow: inset 0 0 30px #ff3232;
+        box-shadow: inset 0 0 30px #ff3232;
     }
     to {
-        background: #7998a6;
+        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
+        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
+        box-shadow: inset 2px 2px 15px 5px #fff;
     }
 }
 
-@keyframes bump-stop {
+@keyframes text-area-red-shaddow {
     from {
-        background: #ff3232;
+        -webkit-box-shadow: inset 0 0 30px #ff3232;
+        -moz-box-shadow: inset 0 0 30px #ff3232;
+        box-shadow: inset 0 0 30px #ff3232;
     }
     to {
-        background: #7998a6;
-        -webkit-box-shadow: inset 2px 2px 2px 0px #ff3232;
-        -moz-box-shadow: inset 2px 2px 2px 0px #ff3232;
-        box-shadow: inset 2px 2px 2px 0px #ff3232;
+        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
+        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
+        box-shadow: inset 2px 2px 15px 5px #fff;
     }
 }
 
-.flash {
-    -webkit-animation: text-area-red 1s ease-in-out 0s;
-    animation: text-area-red 1s ease-in-out 0s;
+.heyNo {
+    -webkit-animation: text-area-red-shaddow 1s linear 0s;
+    animation: text-area-red-shaddow 1s linear 0s;
+}
+
+@-webkit-keyframes text-area-green-shadow {
+    from {
+        -webkit-box-shadow: inset 0 0 30px #32ff32;
+        -moz-box-shadow: inset 0 0 30px #32ff32;
+        box-shadow: inset 0 0 30px #32ff32;
+    }
+    to {
+        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
+        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
+        box-shadow: inset 2px 2px 15px 5px #fff;
+    }
+}
+
+@keyframes text-area-green-shadow {
+    from {
+        -webkit-box-shadow: inset 0 0 30px #32ff32;
+        -moz-box-shadow: inset 0 0 30px #32ff32;
+        box-shadow: inset 0 0 30px #32ff32;
+    }
+    to {
+        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
+        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
+        box-shadow: inset 2px 2px 15px 5px #fff;
+    }
+}
+
+.ohYeh {
+    -webkit-animation: text-area-green-shadow 1s linear 0s;
+    animation: text-area-green-shadow 1s linear 0s;
 }

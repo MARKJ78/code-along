@@ -282,25 +282,41 @@ var previousVid = document.getElementById('lastPlaylistVid');
 previousVid.addEventListener('click', function() {
     if (listProgress > 0) {
         insertVid(responseBin, listProgress - 1);
-        previousVid.classList.remove('flash');
-        nextPlaylistVid.classList.remove('flash');
     } else {
-        previousVid.classList.toggle('flash');
-        console.log('Begining of playlist');
+        bumpStart(previousVid).then(function(animationDone) {
+            previousVid.classList.remove('bump-stop');
+        });
     }
 });
+
+function bumpStart(el) {
+    return new Promise(function(animate) {
+        previousVid.classList.add('bump-stop');
+        setTimeout(function() {
+            animate();
+        }, 1000);
+    });
+}
 //Next video in playlist
 var nextPlaylistVid = document.getElementById('nextPlaylistVid');
 nextPlaylistVid.addEventListener('click', function() {
     if (listProgress < binLength) {
         insertVid(responseBin, listProgress + 1);
-        previousVid.classList.remove('flash');
-        nextPlaylistVid.classList.remove('flash');
     } else {
-        nextPlaylistVid.classList.toggle('flash');
-        console.log('End of playlist');
+        bumpEnd(nextPlaylistVid).then(function(animationDone) {
+            nextPlaylistVid.classList.remove('bump-stop');
+        });
     }
 });
+
+function bumpEnd(el) {
+    return new Promise(function(animate) {
+        nextPlaylistVid.classList.add('bump-stop');
+        setTimeout(function() {
+            animate();
+        }, 1000);
+    });
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -410,3 +426,17 @@ handle.addEventListener('click', function() {
     rightPanel.classList.toggle('menu-open');
     leftPanel.classList.toggle('menu-open');
 });
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                        SEARCH                                                    //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////

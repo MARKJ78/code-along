@@ -48,10 +48,34 @@ saveNoteButton.onclick = function(e) {
         thisNote.note = note.value.replace(/\n/g, '<br/>');
         thisNote.title = title.value;
         findRelatedNotes(thisNote);
+        good(note).then(function(animationDone) {
+            note.classList.remove('ohYeh');
+        });
     } else {
-        alert("Nothing to save");
+        confirm.placeholder = 'Nothing To Save';
+        bad(note).then(function(animationDone) {
+            note.classList.remove('heyNo');
+        });
     }
 };
+
+function good(el) {
+    return new Promise(function(animate) {
+        note.classList.add('ohYeh');
+        setTimeout(function() {
+            animate();
+        }, 1000);
+    });
+}
+
+function bad(el) {
+    return new Promise(function(animate) {
+        note.classList.add('heyNo');
+        setTimeout(function() {
+            animate();
+        }, 1000);
+    });
+}
 /*////////////////////////////////////////
 called on save, checks for exsisting note
  ////////////////////////////////////////*/
@@ -269,6 +293,9 @@ relatedNotesButton.onclick = function(e) {
         }
     }
     if (flag === false) {
-        console.log('No Related Notes Found');
+        confirm.placeholder = 'You have no related notes to this video';
+        bad(note).then(function(animationDone) {
+            note.classList.remove('heyNo');
+        });
     }
 };
