@@ -161,6 +161,12 @@ button {
     }
 }
 
+.f11 {
+    color: #7998a6;
+    font-family: 'Audiowide', cursive;
+    font-weight: bolder;
+}
+
 .logo {
     font-family: 'Audiowide', cursive;
     font-size: 4rem;
