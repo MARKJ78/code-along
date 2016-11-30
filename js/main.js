@@ -339,7 +339,7 @@ lastVidPlayed.onclick = function() {
         var lastVideo = Cookies.get('lastViewedVideo');
         //when continue button is clicked, go and get the playlist, then load the last video (uses cookies)
         getLastPlaylistVideos(lastPlaylistId).then(function(response) {
-            console.log('Last Promise Returned');
+            console.log('Promise Returned');
             insertVid(responseBin, listProgress);
         });
     } else {
