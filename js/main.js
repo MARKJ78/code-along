@@ -24,8 +24,13 @@ var channelsList = {
     LevelUpTuts: "UCJbPGzawDH1njbqV-D5HqKw",
     coderGuide: "UCwHrYi0GL6dmYaRB0StEbEA",
     easyDevTuts: "UCI-vEugj8uNGB_ZFuutlMYw",
-    CodeSchool: "UCUFbBYzSUafxMpUbTmroGhg"
+    CodeSchool: "UCUFbBYzSUafxMpUbTmroGhg",
+    MindSpace: "UCSJbGtTlrDami-tDGPUV9-w",
+    codeman: "UCJUmE61LxhbhudzUugHL2wQ"
+        //BradTraversy: "TechGuyWeb"
 };
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -61,27 +66,27 @@ function request(url) {
 /*////////////////////////////////////////
  Loops through channelsList and builds url for each channel to send to fetchChannels
  ////////////////////////////////////////*/
-function getChannels() {
+function getChannelsList() {
     for (var key in channelsList) {
         /*console.log(key + " " + channelsList[key]);*/
         var channel = "&id=" + channelsList[key];
         var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet" + channel + apik;
-        fetchChannels(url);
+        fetchChannelsList(url);
     }
 }
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response. called as many times as there are channels
  ////////////////////////////////////////*/
-function fetchChannels(url) {
+function fetchChannelsList(url) {
     //console.log(url);
     request(url).then(function(response) {
-        parseChannels(response);
+        parseChannelsList(response);
     });
 }
 /*////////////////////////////////////////
  Creates & configures entries in channels list
  ////////////////////////////////////////*/
-function parseChannels(response) {
+function parseChannelsList(response) {
     var listItem = [];
     var channelId = response.items[0].id;
     var title = response.items[0].snippet.title;
@@ -110,15 +115,14 @@ function parseChannels(response) {
 function creatPlaylistLinks(channelId) {
     var channelListEntries = document.getElementById(channelId);
     channelListEntries.onclick = function() {
-        getPlaylists(channelId);
         //this.classList.add('active');
-
+        getPlaylists(channelId);
     };
 }
 /*////////////////////////////////////////
  initialise script
  ////////////////////////////////////////*/
-getChannels();
+getChannelsList();
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -146,6 +150,7 @@ function fetchPlaylists(url) {
  Creates & configures entries in main panel. Playlists.
  ////////////////////////////////////////*/
 function parsePlaylists(response) {
+    //console.log(response);
     panel.innerHTML = "";
     var playListContainer = [];
     var playLists = response.items;
@@ -175,31 +180,43 @@ function createPlaylistVideos(playlistId) {
     var playlistEntry = document.getElementById(playlistId);
     playlistEntry.onclick = function() {
         getPlaylistVideos(playlistId);
+
     };
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
-//       3: Load playlists entries into main panel  + configure iframe for insertion on click       //
-//                                                                                                  //
+//       3: Load playlists videos into main panel  + configure iframe for insertion on click        //
+//                        set up next / last video functionality                                    //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+var listProgress; //This variable corresponds to the Array index in response to allow for playlist control
+var responseBin; //this variable allows playlist control without passing response around
+var binLength; //required for if statement on next video buttons
+var currentPlaylist; // for thisPlaylist button line 272
 /*////////////////////////////////////////
 Activated when playlist thumbnail is clicked, builds API url to fetch the vdeos
  ////////////////////////////////////////*/
 function getPlaylistVideos(playlistId) {
+    currentPlaylist = playlistId;
+    Cookies.set('lastPlaylist', currentPlaylist);
     var playlistVids = "&playlistId=" + playlistId;
     var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
     fetchPlaylistVids(url);
 }
+
 /*////////////////////////////////////////
 requests an API call from step 0 waits for response.
  ////////////////////////////////////////*/
 function fetchPlaylistVids(url) {
     request(url).then(function(response) {
-        parsePlaylistVids(response);
+        console.log('Fetch PlaylistVids Initiated');
+        responseBin = response;
+        binLength = responseBin.items.length - 1;
+        parsePlaylistVids(responseBin);
     });
 }
+
 /*////////////////////////////////////////
  Creates & configures entries in main panel. Playlists individual videos.
  ////////////////////////////////////////*/
@@ -219,47 +236,119 @@ function parsePlaylistVids(response) {
         ].join('\n');
         scrollTo(panel, panel.offsetTop, 0);
         panel.insertAdjacentHTML('beforeend', videoContainer);
-        createVideo(videoId, videoTitle);
+        createVideo(response, i); // i will be used to record a the current video's index, to allow configure the video controls
     }
 }
+
 /*////////////////////////////////////////
-Set up playlist thumbnail to bring up video's
+Set up playlist thumbnail to bring up video
 ////////////////////////////////////////*/
-function createVideo(videoId, videoTitle) {
+function createVideo(response, i) {
+    var videoId = response.items[i].snippet.resourceId.videoId;
     var playlistEntry = document.getElementById(videoId);
     playlistEntry.onclick = function() {
-        panel.innerHTML = "";
-        var video = [
-            '<iframe',
-            '  src="//www.youtube.com/embed/' + videoId + '"',
-            '  width="100%"',
-            '  height="100%"',
-            '  frameborder="0"',
-            '  scrolling="no"',
-            '  allowfullscreen>',
-            '</iframe>'
-        ].join('\n');
-        scrollTo(panel, panel.offsetTop, 0);
-        panel.insertAdjacentHTML('beforeend', video);
-        Cookies.set('LastViewedVideo', video);
-        title.value = videoTitle;
+        insertVid(response, i);
     };
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                  //
-//                                                                                                  //
-//                                           FEATURES                                               //
-//                                                                                                  //
-//                                                                                                  //
-//////////////////////////////////////////////////////////////////////////////////////////////////////
 /*////////////////////////////////////////
- Load Last video & Note
+Insert a/the video into video panel.
+////////////////////////////////////////*/
+function insertVid(response, i) {
+    listProgress = i;
+    Cookies.set('listItem', listProgress);
+    var videoId = response.items[i].snippet.resourceId.videoId;
+    panel.innerHTML = "";
+    var video = [
+        '<iframe',
+        'id="' + i + '"',
+        '  src="//www.youtube.com/embed/' + videoId + '"',
+        '  width="100%"',
+        '  height="100%"',
+        '  frameborder="0"',
+        '  scrolling="no"',
+        '  allowfullscreen>',
+        '</iframe>'
+    ].join('\n');
+    scrollTo(panel, panel.offsetTop, 0);
+    panel.insertAdjacentHTML('beforeend', video);
+    Cookies.set('lastViewedVideo', videoId);
+    title.value = response.items[i].snippet.title;
+
+
+}
+/*////////////////////////////////////////
+Set up Video controls
+////////////////////////////////////////*/
+//This playlist
+var thisPlaylist = document.getElementById('allPlaylistVid');
+thisPlaylist.addEventListener('click', function() {
+    getPlaylistVideos(currentPlaylist);
+});
+//Previous video in playlist
+var previousVid = document.getElementById('lastPlaylistVid');
+previousVid.addEventListener('click', function() {
+    if (listProgress > 0) {
+        insertVid(responseBin, listProgress - 1);
+        previousVid.classList.remove('flash');
+        nextPlaylistVid.classList.remove('flash');
+    } else {
+        previousVid.classList.toggle('flash');
+        console.log('Begining of playlist');
+
+    }
+});
+//Next video in playlist
+var nextPlaylistVid = document.getElementById('nextPlaylistVid');
+nextPlaylistVid.addEventListener('click', function() {
+    if (listProgress < binLength) {
+        insertVid(responseBin, listProgress + 1);
+        previousVid.classList.remove('flash');
+        nextPlaylistVid.classList.remove('flash');
+    } else {
+        nextPlaylistVid.classList.toggle('flash');
+        console.log('End of playlist');
+    }
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                        OTHER FEATURES                                            //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//CONTINUE WHERE LEFT OFF
+/*////////////////////////////////////////
+Activated when continue where you left off clicked, builds API url to fetch the vdeos
+ ////////////////////////////////////////*/
+function getLastPlaylistVideos(playlistId) {
+    return new Promise(function(sendBack) {
+        console.log('getLastPlaylistVideos Promise Initiated');
+        currentPlaylist = playlistId;
+        var playlistVids = "&playlistId=" + playlistId;
+        var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
+        request(url).then(function(response) {
+            console.log('Fetch LastPlaylistVids Initiated');
+            responseBin = response;
+            binLength = responseBin.items.length - 1;
+            sendBack(response);
+        });
+    });
+}
+/*////////////////////////////////////////
+ Configure Continue Button
  ////////////////////////////////////////*/
 var lastVidPlayed = document.getElementById('lastVid');
 lastVidPlayed.onclick = function() {
-    if (typeof Cookies('LastViewedVideo') !== 'undefined') {
-        panel.innerHTML = Cookies('LastViewedVideo');
-        title.value = myNotes[lastNote].title; //variable is declared in notes.js
+    //check if visitor has used the site before
+    if (typeof Cookies('lastViewedVideo') !== 'undefined') {
+        var lastPlaylistId = Cookies.get('lastPlaylist');
+        listProgress = Cookies.getJSON('listItem');
+        var lastVideo = Cookies.get('lastViewedVideo');
+        getLastPlaylistVideos(lastPlaylistId).then(function(response) {
+            console.log('Last Promise Returned');
+            insertVid(responseBin, listProgress);
+        });
     } else {
         alert('You can\'t continue what you havn\'t started. Choose a playlist and watch a video to get started.');
     }
@@ -268,7 +357,6 @@ lastVidPlayed.onclick = function() {
 /*////////////////////////////////////////
 Resize Video panel
  ////////////////////////////////////////*/
-
 var vidLarge = document.getElementById('videoLarge');
 var vidDefault = document.getElementById('videoDefault');
 var vidSmall = document.getElementById('videoSmall');
@@ -330,6 +418,7 @@ var handle = document.getElementById('menu-handle');
 var rightPanel = document.getElementById('right-panel');
 var leftPanel = document.getElementById('left-panel');
 handle.addEventListener('click', function() {
+    handle.classList.toggle('menu-open');
     rightPanel.classList.toggle('menu-open');
     leftPanel.classList.toggle('menu-open');
 });

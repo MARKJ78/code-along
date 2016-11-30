@@ -182,9 +182,17 @@ function displayNotes(noteToBuild) {
                 noteDetailPanel.innerHTML = editNoteContent;
                 var editPanel = document.getElementById('edit-panel-' + noteId);
                 editPanel.innerHTML = myNotes[i].note + '<br/><br/>' + dateString + ' | ';
+                handle.classList.remove('menu-open');
                 rightPanel.classList.remove('menu-open');
                 leftPanel.classList.remove('menu-open');
                 mySavedNotesPanel.classList.remove('notes-open'); //var is declaired in notes.js
+                if (width < 768) {
+                    document.getElementById('video-panel').classList.add('edit-note-open');
+                    document.getElementById('editor-panel').classList.add('edit-note-open');
+                    document.getElementById('note-detail-panel').classList.add('edit-note-open');
+                }
+
+
             }
         }
         /*/////////////////////////////////////////////////////
@@ -207,7 +215,12 @@ function displayNotes(noteToBuild) {
                 rightPanel.classList.toggle('menu-open');
                 leftPanel.classList.toggle('menu-open');
             }
+            //Quickly added to enable notes on smaller screens - need to sort this out.
+            document.getElementById('video-panel').classList.remove('edit-note-open');
+            document.getElementById('editor-panel').classList.remove('edit-note-open');
+            document.getElementById('note-detail-panel').classList.remove('edit-note-open');
         });
+
         //cancel and close panel setup
         document.getElementById('close-edit-notes').addEventListener('click', function() {
             e.preventDefault();
@@ -216,6 +229,10 @@ function displayNotes(noteToBuild) {
                 rightPanel.classList.toggle('menu-open');
                 leftPanel.classList.toggle('menu-open');
             }
+            //Quickly added to enable notes on smaller screens - need to sort this out.
+            document.getElementById('video-panel').classList.remove('edit-note-open');
+            document.getElementById('editor-panel').classList.remove('edit-note-open');
+            document.getElementById('note-detail-panel').classList.remove('edit-note-open');
         });
         //
         noteDetailPanel.classList.add('show');
