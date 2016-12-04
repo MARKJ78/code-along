@@ -273,8 +273,6 @@ closeSavedNotes.onclick = function(e) {
     e.preventDefault();
     mySavedNotesPanel.classList.remove('notes-open');
 };
-
-
 /*////////////////////////////////////////
 find notes relative to current notepad title
  ////////////////////////////////////////*/

@@ -18,7 +18,6 @@ body {
     flex-direction: row;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
 }
 
 .btn {
@@ -38,6 +37,40 @@ body {
     background-color: #7998a6;
     color: #fff;
     border: 1px solid #7998a6;
+}
+
+.btn2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+    padding: .25rem;
+    border: 1px solid #ececec;
+    margin: .5rem;
+}
+
+.btn2:hover {
+    background-color: #7998a6;
+    color: #fff;
+    border: 1px solid #7998a6;
+}
+
+.btn2.danger:hover {
+    background-color: #ff3232;
+    color: #fff;
+    border: 1px solid #ff3232;
+}
+
+.btn2.good:hover {
+    background-color: #87b091;
+    color: #fff;
+    border: 1px solid #87b091;
 }
 
 .active {
@@ -124,14 +157,11 @@ button {
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
-    height: 60vh;
+    height: 100vh;
     overflow: auto;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
     -webkit-transition: height .5s ease;
     transition: height .5s ease;
     border-bottom: 1px solid #ececec;
@@ -175,7 +205,7 @@ button {
 .play-list-container, .video-container {
     width: 320px;
     min-height: 240px;
-    margin: .75rem;
+    margin: .25rem;
     background-color: #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -216,7 +246,7 @@ button {
 
 .editor-panel {
     position: relative;
-    height: 50vh;
+    height: 0vh;
     overflow: hidden;
     -webkit-transition: height .5s ease;
     transition: height .5s ease;
@@ -270,12 +300,86 @@ button {
     height: 40vh;
 }
 
+.video-panel.default {
+    height: 50vh;
+}
+
 .editor-panel.large {
     height: 60vh;
 }
 
 .editor-panel.small {
     height: 25vh;
+}
+
+.editor-panel.default {
+    height: 50vh;
+}
+
+
+/*/////////////////////SEARCH GENERATED CHANNEL CARDS//////////////////////////////////////////////*/
+
+.channel-container {
+    flex: 0 4 1060px;
+    margin-bottom: .5rem;
+    max-width: 1060px;
+    min-height: 200px;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: #777879;
+}
+
+.channel-container a {
+    text-decoration: none;
+    color: #777879;
+}
+
+.channel-container a:hover {
+    text-decoration: none;
+    color: #7998a6;
+}
+
+.channel-banner img {
+    max-width: 100%;
+}
+
+.channel-details {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    border-bottom: 1px solid #cecece;
+}
+
+.channel-title h2, .channel-description p {
+    word-wrap: break-word;
+    margin: 0;
+    margin: .75rem;
+}
+
+.channel-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.channel-playlists-container {
+    border-top: 1px solid #ececec;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    max-height: calc(100vh - 305px);
+    overflow: auto;
+}
+
+.hide {
+    display: none;
+}
+
+.squash {
+    height: 0px;
+    border: none;
 }
 
 
@@ -390,10 +494,15 @@ button {
     /*border-bottom: 1px solid #cecece;*/
 }
 
+.search-box-container {
+    background-color: #777879;
+}
+
 .search-youtube {
-    margin: 0.25rem;
-    border: 1px solid #f4f3f3;
-    width: 100%;
+    margin: 1rem;
+    border: 1px solid #777879;
+    height: 2rem;
+    width: calc(100% - 2rem);
 }
 
 .resize-title {
@@ -694,27 +803,6 @@ button {
     align-items: center;
 }
 
-.btn2 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    cursor: pointer;
-    padding: .25rem;
-    border: 1px solid #ececec;
-}
-
-.btn2:hover {
-    background-color: #7998a6;
-    color: #fff;
-    border: 1px solid #7998a6;
-}
-
 .edit-note-text {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 75%;
@@ -878,9 +966,9 @@ button {
 
 @-webkit-keyframes text-area-green-shadow {
     from {
-        -webkit-box-shadow: inset 0 0 30px #32ff32;
-        -moz-box-shadow: inset 0 0 30px #32ff32;
-        box-shadow: inset 0 0 30px #32ff32;
+        -webkit-box-shadow: inset 0 0 30px #87b091;
+        -moz-box-shadow: inset 0 0 30px #87b091;
+        box-shadow: inset 0 0 30px #87b09187b091;
     }
     to {
         -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
@@ -891,9 +979,9 @@ button {
 
 @keyframes text-area-green-shadow {
     from {
-        -webkit-box-shadow: inset 0 0 30px #32ff32;
-        -moz-box-shadow: inset 0 0 30px #32ff32;
-        box-shadow: inset 0 0 30px #32ff32;
+        -webkit-box-shadow: inset 0 0 30px #87b091;
+        -moz-box-shadow: inset 0 0 30px #87b091;
+        box-shadow: inset 0 0 30px #87b091;
     }
     to {
         -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
