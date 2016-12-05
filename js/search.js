@@ -5,7 +5,6 @@
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-
 /*////////////////////////////////////////
 Activates the search when user hits enter.
  ////////////////////////////////////////*/
@@ -21,7 +20,7 @@ searchBox.addEventListener('keypress', function(e) {
     }
 });
 /*////////////////////////////////////////
-fetches an API call from step 0 in main.js and waits for response.
+fetches an API call from promise and waits for response.
  ////////////////////////////////////////*/
 //returns and object of results. Each result is an array.
 //Since the search api call only accepts snippet as the part (argument),
@@ -31,7 +30,7 @@ function searchYoutube(term) {
     var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&limit=50&type=channel" + q + apik;
     fetch(url).then(function(results) {
         /*////////////////////////////////////////
-        Loops through returned search results and sends each i (channel) to an API fetch
+        Loops through returned search results and sends each iteration (channel) to an API fetch
          ////////////////////////////////////////*/
         //URL asks for object with one result array containing branding, content details & snippet.
         var response = results.items;
@@ -46,22 +45,25 @@ function searchYoutube(term) {
 /*////////////////////////////////////////
 fetchs an API call from step 0 in main.js and waits for response.
  ////////////////////////////////////////*/
-//recieves and object from API call with one result array containing branding, content details & snippet.
+//Requests and object from API call with one result array containing branding, content details & snippet.
+//seperated to keep the promise out of the loop
 function fetchSearchChannels(url) {
     fetch(url).then(function(response) {
         buildChannelCard(response);
     });
+
 }
-//Recieves an object containing one result array containing branding, content details & snippet of a channel.
+//Recieves an object containing one result array with branding, content details & snippet of a channel.
 function buildChannelCard(response) {
     //call the result a channel so we know what we are dealing with
     var channel = response.items[0];
     var channelId = channel.id; //store the channel id
-    var channelCard = []; //create an empty array to store the channel card
-    //store some of the data for use later
+    currentChannel = channelId;
+    //get reqiured properties
     var channelBanner = channel.brandingSettings.image.bannerImageUrl;
     var channelTitle = channel.brandingSettings.channel.title;
     var descriptionLong = channel.brandingSettings.channel.description;
+    //shoten the description as it can be ridiculously long
     var descriptionShort = "";
     if (descriptionLong) {
         descriptionShort = truncateString(descriptionLong, 180); //shorten the description
@@ -72,7 +74,7 @@ function buildChannelCard(response) {
         flag = true;
     }
     //Build channel cards
-    channelCard = [
+    var channelCard = [
         '<div class="channel-container">',
         '<div id="' + channelTitle + '" class="channel-banner"><img src="' + channelBanner + '"></div>',
         '<div class="channel-details">',
@@ -89,15 +91,15 @@ function buildChannelCard(response) {
         '<p>' + descriptionShort + '</p>',
         '</div>',
         '<div id="channelPlaylists' + channelId + '" class="channel-playlists-container hide"></div>',
-        '<div id="playlistVideos' + channelId + '" class="channel-playlists-container hide"></div>',
+        '<div id="playlistVideos' + channelId + '" class="playlists-video-container hide"></div>',
         '</div>'
     ].join('\n');
-    //inserts each channel into the main panel
+    //inserts each channel into the main panel, single card for fave channels and multiples for search results.
     panel.insertAdjacentHTML('beforeend', channelCard);
     //changes the add or remove button depending on weather its already a fave, based on the flag value.
-    var removeChannel = document.getElementById('removeChannel' + channelId); //get the remove button from the channel card
-    var addChannel = document.getElementById('addChannel' + channelId); //get the remove button from the channel card
     if (flag) {
+        var removeChannel = document.getElementById('removeChannel' + channelId); //get the remove button from the channel card
+        var addChannel = document.getElementById('addChannel' + channelId); //get the remove button from the channel card
         removeChannel.classList.remove('hide');
         addChannel.classList.add('hide');
     }

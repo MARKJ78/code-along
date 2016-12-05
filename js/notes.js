@@ -58,24 +58,6 @@ saveNoteButton.onclick = function(e) {
         });
     }
 };
-
-function good(el) {
-    return new Promise(function(animate) {
-        note.classList.add('ohYeh');
-        setTimeout(function() {
-            animate();
-        }, 1000);
-    });
-}
-
-function bad(el) {
-    return new Promise(function(animate) {
-        note.classList.add('heyNo');
-        setTimeout(function() {
-            animate();
-        }, 1000);
-    });
-}
 /*////////////////////////////////////////
 called on save, checks for exsisting note
  ////////////////////////////////////////*/
@@ -194,7 +176,7 @@ function displayNotes(noteToBuild) {
                     '<div class="edit-note-container">',
                     '<header class="edit-note-header">',
                     '<div class="edit-note-header-item" id="edit-note-id">Note ID: ' + noteId + '</div>',
-                    '<div class="edit-note-header-item" id="edit-note-title"><h3 class="edit-note-title">' + myNotes[i].title + '</h3></div>',
+                    '<div class="edit-note-header-item" id="edit-note-title"><h2 class="edit-note-title">' + myNotes[i].title + '</h2></div>',
                     '<div class="edit-note-header-item" id="edit-note-controls">',
                     '     <div class="btn2" id="save-saved-notes"><i class="fa fa-check-circle fa-lg edit-note-control" aria-hidden="true"></i> &nbsp; Close &amp; Save &nbsp;</div>',
                     '     <div class="btn2" id="close-edit-notes"><i class="fa fa-times-circle fa-lg edit-note-control" aria-hidden="true"></i> &nbsp; Cancel&nbsp;</div>',
@@ -224,7 +206,7 @@ function displayNotes(noteToBuild) {
          ////////////////////////////////////////////////////*/
         //save and close button setup
         document.getElementById('save-saved-notes').addEventListener('click', function() {
-            var newContent = editPanel.innerHTML.replace(/(<([^>]+)>)/ig, '<br/>'); //regex removes and html elements present and replaces them with a line break
+            var newContent = editPanel.innerHTML.replace(/(<([^>]+)>)/ig, '<br/>'); //regex removes all html elements present and replaces them with a line break
             //console.log(newContent);
             for (var i = 0; i < myNotes.length; i++) {
                 if (myNotes[i].id == noteId) {
@@ -238,6 +220,7 @@ function displayNotes(noteToBuild) {
             if (width > 1024) {
                 rightPanel.classList.toggle('menu-open');
                 leftPanel.classList.toggle('menu-open');
+
             }
             //Quickly added to enable notes on smaller screens - need to sort this out.
             document.getElementById('video-panel').classList.remove('edit-note-open');
@@ -291,7 +274,7 @@ relatedNotesButton.onclick = function(e) {
         }
     }
     if (flag === false) {
-        confirm.placeholder = 'You have no related notes to this video';
+        confirm.placeholder = 'You have no notes related to this video';
         bad(note).then(function(animationDone) {
             note.classList.remove('heyNo');
         });
