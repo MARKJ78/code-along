@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
     <section id="left-panel" class="left-panel">
         <div id="video-panel" class="top-row video-panel">
             <div class="welcome">
@@ -29,12 +28,10 @@
             </div>
         </div>
         <div id="editor-panel" class="bottom-row editor-panel">
-            <iframe frameborder="0" id="repl" src="https://repl.it/languages"></iframe>
-            <div id="note-detail-panel" class="bottom-row editor-panel note-detail-panel"> </div>
+            <iframe frameborder="0" id="repl" src="https://repl.it"></iframe>
+            <div id="note-detail-panel" class="bottom-row editor-panel note-detail-panel"></div>
         </div>
-
     </section>
-
     <section id="right-panel" class="right-panel">
         <div id="menu-handle">
             <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
@@ -42,22 +39,19 @@
         <div id="channels" class="top-row-right">
             <ul></ul>
         </div>
-        <!--<input id="searchYoutube" type="search" placeholder="Search Youtube (Coming Soon)" class="search-youtube" />-->
+        <div class="search-box-container">
+            <input id="searchYoutube" type="search" placeholder="Search YouTube" class="search-youtube" />
+        </div>
         <div class="controls">
-
-            <div id="videoLarge" class="resize"><i class="fa fa-youtube fa-3x" aria-hidden="true"></i></div>
-            <div id="videoDefault" class="resize active"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></div>
-            <div id="videoSmall" class="resize"><i class="fa fa-youtube fa-lg" aria-hidden="true"></i></div>
-            <!--<div id="" class="resize"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></div>
-            <div id="" class="resize"><i class="fa fa-sticky-note-o fa-2x" aria-hidden="true"></i></div>
-            <div id="" class="resize"><i class="fa fa-sticky-note-o fa-3x" aria-hidden="true"></i></div>-->
+            <div id="videoLarge" class="resize videoLarge"><i class="fa fa-youtube fa-3x" aria-hidden="true"></i></div>
+            <div id="videoDefault" class="resize videoDefault"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></div>
+            <div id="videoSmall" class="resize videoSmall"><i class="fa fa-youtube fa-lg" aria-hidden="true"></i></div>
         </div>
         <div id="playlistControls" class="playlist-controls">
             <div id="lastPlaylistVid" class="resize"><i class="fa fa-step-backward" aria-hidden="true"></i></div>
             <div id="allPlaylistVid" class="resize"><i class="fa fa-list" aria-hidden="true"></i></div>
             <div id="nextPlaylistVid" class="resize"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
         </div>
-
         <form id="notepad" class="bottom-row-right notepad">
             <div class="notepad-controls">
                 <button id="saveNote" class="notepad-btn btn">Save</button>
@@ -66,7 +60,6 @@
             </div>
             <input readonly id="noteTitle" type="text" placeholder="Related Video" class="notepad-input note-title" />
             <textarea id="note" name="note" placeholder="Quick Add - Enter a note or snippet" class="notepad-input note"></textarea>
-
         </form>
         <div id="mySavedNotes" class="saved-notes-panel">
             <i id="close-saved-notes" class="fa fa-times-circle fa-2x close-notes" aria-hidden="true"></i>
@@ -75,16 +68,21 @@
         <ul class="bottom-nav bottom-container">
             <li class="nav-item"><a href="https://markj78.github.io/portfolio/" target="_blank"><i class="fa fa-arrow-circle-o-left fa-lg" aria-hidden="true"></i>&nbsp; More toys </a></li>
             <li>
-
                 <div class="tooltip"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-                    <span class="tooltiptext">Made in England, with plane old HTML5/CSS3 and JavaScript.<br/><br/><a href="https://github.com/js-cookie" target="_blank"> With thanks to js-cookie</a></span>
+                    <span class="tooltiptext">Made in England, with plane old HTML5/CSS3 and JavaScript.
+                      <br/>
+                      <br/>
+                      <a href="https://github.com/js-cookie" target="_blank"> With thanks to js-cookie</a></span>
                 </div>
             </li>
             <li class="nav-item"><a href="https://github.com/MARKJ78/code-along" target="_blank">Repo&nbsp; <i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
         </ul>
     </section>
     <script type="text/javascript" src="js/vendors/js.cookie.js"></script>
+    <script type="text/javascript" src="js/page.js"></script>
     <script type="text/javascript" src="js/notes.js"></script>
+    <script type="text/javascript" src="js/promises.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script>
         (function(b, o, i, l, e, r) {
