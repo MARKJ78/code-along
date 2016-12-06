@@ -141,7 +141,9 @@ function insertVid(playlistId, index) {
         panel.insertAdjacentHTML('beforeend', video); //insert vid into main panel
         title.value = videoTitle; // give the note the right title - important for notes.js functions
         relatedVidLink = [playlistId, index];
-        vidDefault.click(); //bring up editor/notes panel
+        if (!editorIsOpen) { //check if the editor panel is closed
+            vidDefault.click(); //bring up editor/notes panel
+        }
     });
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
