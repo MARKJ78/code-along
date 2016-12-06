@@ -16,7 +16,7 @@ function fetch(url) {
                 data = JSON.parse(this.response);
                 resolve(data); //back to you fetcher
             } else {
-                //console.log('Not found / not working or something like that');
+                console.log('Not found / not working or something like that');
             }
         };
         request.send();

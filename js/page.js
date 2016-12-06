@@ -6,7 +6,7 @@ var editor = document.getElementById('editor-panel');
 var playlistLength; //required to calculate when the video controls should 'bump'
 var listProgress; //represented by an index # and paired with currentPlaylist.
 var currentChannel; // for thisPlaylist button
-var currentPlaylist; //updated everytime a new play list is loaded. this variable allows playlist control without passing response around
+var currentPlaylist; //updated everytime a new play list is loaded (the videos). this variable allows playlist control without passing response around
 var playlistContent; // holds raw html to loaded back into 'panel' when user clicks playlist button when watching vid
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
@@ -18,7 +18,7 @@ var playlistContent; // holds raw html to loaded back into 'panel' when user cli
 var pickUpLeftOffButton = document.getElementById('lastVid');
 pickUpLeftOffButton.onclick = function() {
     //check if visitor has used the site before
-    if (typeof Cookies('playlist') !== 'undefined') {
+    if ((currentPlaylist !== undefined) && (listProgress !== undefined)) {
         insertVid(currentPlaylist, listProgress);
     } else {
         alert('You can\'t continue what you havn\'t started. Choose a playlist and watch a video to get started.');
@@ -46,13 +46,8 @@ function showPlaylists(channelId) {
         playlistVideos.classList.add('hide');
         //set current playlist var
         currentChannel = channelId; //update the global current channel with current channel in playlist (for use in continue where you left off button)
-        //hide editor panel (with these classes removed, the video panel is 100% height)
-        panel.classList.remove('small', 'default', 'large');
-        editor.classList.remove('small', 'default', 'large');
-        //remove active from resize buttons - as the editor panel is now hidden
-        vidDefault.classList.remove('active');
-        vidLarge.classList.remove('active');
-        vidSmall.classList.remove('active');
+        //hide editor panel (with the classes removed, the video panel is 100% height)
+        closeEditor();
         var playLists = response.items; //shorten the path
         channelPlaylists.innerHTML = ""; //prevent playlist pileup
         for (var i = 0; i < playLists.length; i++) { //loop through array of playlists
@@ -66,8 +61,8 @@ function showPlaylists(channelId) {
                 '<div class="play-list-container">',
                 '<div id="' + playlistId + '" class="thumbnail"><img src="' + thumbnail + '" onclick="showVideos(\'' + playlistId + '\')"></div>',
                 '<div class="playlist-title">',
-                '<p>' + playlistTitle + '</p>',
-                '<p class="video-num">' + videoNum + ' Video\'s</p>',
+                '<div>' + playlistTitle + '</div>',
+                '<div class="video-num">' + videoNum + ' Video\'s</div>',
                 '</div>',
                 '</div>'
             ].join('\n');
@@ -145,6 +140,7 @@ function insertVid(playlistId, index) {
         scrollTo(panel, panel.offsetTop, 0); //make sure we're at the top of the panel
         panel.insertAdjacentHTML('beforeend', video); //insert vid into main panel
         title.value = videoTitle; // give the note the right title - important for notes.js functions
+        relatedVidLink = [playlistId, index];
         vidDefault.click(); //bring up editor/notes panel
     });
 }
@@ -230,49 +226,15 @@ previousVid.addEventListener('click', function() {
         });
     }
 });
-var vidLarge = document.getElementById('videoLarge');
-var vidDefault = document.getElementById('videoDefault');
-var vidSmall = document.getElementById('videoSmall');
-vidLarge.onclick = function() {
-    panel.classList.remove('small');
-    panel.classList.remove('default');
-    panel.classList.add('large');
-    editor.classList.remove('large');
-    editor.classList.remove('default');
-    editor.classList.add('small');
-    vidDefault.classList.remove('active');
-    vidSmall.classList.remove('active');
-    vidLarge.classList.add('active');
-};
-vidDefault.onclick = function() {
-    panel.classList.remove('small');
-    panel.classList.remove('large');
-    panel.classList.add('default');
-    editor.classList.remove('large');
-    editor.classList.remove('small');
-    editor.classList.add('default');
-    vidSmall.classList.remove('active');
-    vidLarge.classList.remove('active');
-    vidDefault.classList.add('active');
-};
-vidSmall.onclick = function() {
-    panel.classList.add('small');
-    panel.classList.remove('large');
-    panel.classList.remove('default');
-    editor.classList.add('large');
-    editor.classList.remove('default');
-    editor.classList.remove('small');
-    vidDefault.classList.remove('active');
-    vidLarge.classList.remove('active');
-    vidSmall.classList.add('active');
-};
+
+
 /*////////////////////////////////////////
 Menu slide control
  ////////////////////////////////////////*/
 //shows menu on load if above 1024px
 window.onload = function() {
     var width = window.innerWidth;
-    if (width > 1024) {
+    if (width > 768) {
         rightPanel.classList.add('menu-open');
         leftPanel.classList.add('menu-open');
     }
@@ -280,10 +242,10 @@ window.onload = function() {
 //hides menu on resize if below 1024px
 window.onresize = function() {
     var width = window.innerWidth;
-    if (width <= 1024) {
+    if (width <= 768) {
         rightPanel.classList.remove('menu-open');
         leftPanel.classList.remove('menu-open');
-    } else if (width > 1024) {
+    } else if (width > 768) {
         rightPanel.classList.add('menu-open');
         leftPanel.classList.add('menu-open');
     }
@@ -297,6 +259,64 @@ handle.addEventListener('click', function() {
     rightPanel.classList.toggle('menu-open');
     leftPanel.classList.toggle('menu-open');
 });
+/*////////////////////////////////////////
+panel sizing
+ ////////////////////////////////////////*/
+var editorIsOpen = false; //reset flag - for showing note editor panel
+var vidLarge = document.getElementById('videoLarge');
+var vidDefault = document.getElementById('videoDefault');
+var vidSmall = document.getElementById('videoSmall');
+vidLarge.onclick = function() {
+    editorIsOpen = true;
+    panel.classList.remove('small');
+    panel.classList.remove('default');
+    panel.classList.add('large');
+    editor.classList.remove('large');
+    editor.classList.remove('default');
+    editor.classList.add('small');
+    vidDefault.classList.remove('active');
+    vidSmall.classList.remove('active');
+    vidLarge.classList.add('active');
+};
+vidDefault.onclick = function() {
+    editorIsOpen = true;
+    panel.classList.remove('small');
+    panel.classList.remove('large');
+    panel.classList.add('default');
+    editor.classList.remove('large');
+    editor.classList.remove('small');
+    editor.classList.add('default');
+    vidSmall.classList.remove('active');
+    vidLarge.classList.remove('active');
+    vidDefault.classList.add('active');
+};
+vidSmall.onclick = function() {
+    editorIsOpen = true;
+    panel.classList.add('small');
+    panel.classList.remove('large');
+    panel.classList.remove('default');
+    editor.classList.add('large');
+    editor.classList.remove('default');
+    editor.classList.remove('small');
+    vidDefault.classList.remove('active');
+    vidLarge.classList.remove('active');
+    vidSmall.classList.add('active');
+};
+
+function closeEditor() {
+    editorIsOpen = false;
+    panel.classList.remove('small');
+    panel.classList.remove('large');
+    panel.classList.remove('default');
+    editor.classList.remove('large');
+    editor.classList.remove('default');
+    editor.classList.remove('small');
+    vidDefault.classList.remove('active');
+    vidLarge.classList.remove('active');
+    vidSmall.classList.remove('active');
+}
+
+
 //Just to truncate anything thats too long if needed
 function truncateString(str, num) {
     var truncated = "";

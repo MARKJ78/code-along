@@ -82,9 +82,29 @@ body {
     color: #fff;
 }
 
-button {
-    border: 0;
+ ::-webkit-scrollbar {
+    width: .5rem;
 }
+
+ ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #ececec;
+    border-radius: 10%;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background-color: #7998a6;
+    outline: 1px solid #7998a6;
+}
+
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                      Left Hand Panel                                             //
+//                                                                                                  //
+//                                                                                                  //
+////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 .left-panel {
     position: relative;
@@ -102,31 +122,8 @@ button {
     margin-right: 312px;
     -webkit-transition: margin .75s ease;
     transition: margin .75s ease;
+    background: -webkit-linear-gradient(left, #fff, #f4f4f4);
     background: linear-gradient(to right, #fff, #f4f4f4);
-}
-
-.right-panel {
-    position: fixed;
-    right: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: column;
-    flex-flow: column;
-    background-color: #f4f4f4;
-    height: 100vh;
-    width: 312px;
-    -webkit-transition: margin .75s ease;
-    transition: margin .75s ease;
-    /*border-left: 1px solid #ececec;*/
-}
-
-.right-panel {
-    margin-right: -312px;
-}
-
-.right-panel.menu-open {
-    margin-right: 0;
 }
 
 .left-panel {
@@ -136,15 +133,6 @@ button {
 .left-panel.menu-open {
     margin-right: 312px;
 }
-
-
-/*////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                  //
-//                                                                                                  //
-//                                      Left Hand Panel                                             //
-//                                                                                                  //
-//                                                                                                  //
-////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 
 /*//////////////////////////////  video-panel //////////////////////////////////////////////////////*/
@@ -203,12 +191,109 @@ button {
     font-size: 4rem;
 }
 
+
+/*/////////////////////SEARCH GENERATED CHANNEL CARDS//////////////////////////////////////////////*/
+
+.channel-container {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 4 1060px;
+    flex: 0 4 1060px;
+    margin-bottom: .5rem;
+    max-width: 1060px;
+    max-height: 98vh;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    color: #777879;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.channel-container a {
+    text-decoration: none;
+    color: #777879;
+}
+
+.channel-container a:hover {
+    text-decoration: none;
+    color: #7998a6;
+}
+
+.channel-banner img {
+    max-width: 100%;
+}
+
+.channel-details {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #cecece;
+}
+
+.edit-note-title h2, .channel-title h2, .channel-description p {
+    word-wrap: break-word;
+    margin: 0;
+    margin: .75rem;
+}
+
+.subscribers {
+    font-weight: bolder;
+    color: #7998a6;
+}
+
+.channel-buttons, .edit-note-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.channel-playlists-container, .playlists-video-container {
+    border-top: 1px solid #ececec;
+    background: -webkit-linear-gradient(left, #fff, #f4f4f4);
+    background: linear-gradient(to right, #fff, #f4f4f4);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    /*max-height: calc(100vh - 335px);*/
+    overflow: auto;
+}
+
+.hide {
+    display: none;
+}
+
+.squash {
+    height: 0px;
+    border: none;
+}
+
 .play-list-container, .video-container {
     width: 320px;
     min-height: 240px;
-    margin: .25rem;
+    margin: .5rem;
     background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    /*border: 1px solid #ececec;*/
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22), 0 1px 2px rgba(0, 0, 0, 0.34);
+    -webkit-transition: all 0.5s cubic-bezier(.25, .8, .25, 1);
+    transition: all 0.5s cubic-bezier(.25, .8, .25, 1);
+}
+
+.play-list-container:hover, .video-container:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.32);
 }
 
 .thumbnail, .playlist-title {
@@ -253,7 +338,7 @@ button {
     transition: height .5s ease;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     #repl {
         display: none;
     }
@@ -265,7 +350,6 @@ button {
 #repl {
     position: relative;
     width: 100%;
-    /*height: calc(100% + 30px);*/
     height: calc(100% + 91px);
     top: -61px;
 }
@@ -318,72 +402,6 @@ button {
 }
 
 
-/*/////////////////////SEARCH GENERATED CHANNEL CARDS//////////////////////////////////////////////*/
-
-.channel-container {
-    flex: 0 4 1060px;
-    margin-bottom: .5rem;
-    max-width: 1060px;
-    overflow: auto;
-    background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    color: #777879;
-}
-
-.channel-container a {
-    text-decoration: none;
-    color: #777879;
-}
-
-.channel-container a:hover {
-    text-decoration: none;
-    color: #7998a6;
-}
-
-.channel-banner img {
-    max-width: 100%;
-}
-
-.channel-details {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    border-bottom: 1px solid #cecece;
-}
-
-.edit-note-title h2, .channel-title h2, .channel-description p {
-    word-wrap: break-word;
-    margin: 0;
-    margin: .75rem;
-}
-
-.channel-buttons, .edit-note-controls {
-    display: flex;
-    flex-direction: row;
-}
-
-.channel-playlists-container, .playlists-video-container {
-    border-top: 1px solid #ececec;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    max-height: calc(100vh - 305px);
-    overflow: auto;
-}
-
-.hide {
-    display: none;
-}
-
-.squash {
-    height: 0px;
-    border: none;
-}
-
-
 /*////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
@@ -392,18 +410,74 @@ button {
 //                                                                                                  //
 ////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+.right-panel {
+    position: fixed;
+    margin-right: -312px;
+    right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    background-color: #f4f4f4;
+    height: 100vh;
+    width: 312px;
+    -webkit-transition: margin .75s ease;
+    transition: margin .75s ease;
+    /*border-left: 1px solid #ececec;*/
+}
+
+.right-panel.menu-open {
+    margin-right: 0;
+}
+
+#menu-handle {
+    /*display: none;*/
+    position: absolute;
+    left: -60px;
+    top: 25px;
+    color: #777879;
+    padding: .75rem;
+    cursor: pointer;
+    -webkit-transition: left .75s ease;
+    transition: left .75s ease;
+    -webkit-transition: top .75s ease;
+    transition: top .75s ease;
+}
+
+@media screen and (max-width: 1024px) {
+    #menu-handle {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #menu-handle.menu-open {
+        left: 10px;
+        top: -1px;
+    }
+}
+
 
 /*//////////////////////////////  Channel list //////////////////////////////////////////////////////*/
+
+#channels {
+    overflow: auto;
+    max-height: 40vh;
+    width: 312px;
+    transition: height .7s ease;
+}
+
+@media screen and (max-height: 504px) {
+    /*get rid of channels from menu when ipad keyboard is up*/
+    #channels {
+        height: 0;
+    }
+}
 
 #channels ul {
     padding: 0;
     margin: 0;
-}
-
-#channels {
-    overflow: auto;
-    height: 45vh;
-    width: 312px;
 }
 
 .li-channel {
@@ -451,49 +525,8 @@ button {
     width: 46px;
 }
 
- ::-webkit-scrollbar {
-    width: .5rem;
-}
 
- ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #ececec;
-    border-radius: 10%;
-}
-
- ::-webkit-scrollbar-thumb {
-    background-color: #7998a6;
-    outline: 1px solid #7998a6;
-}
-
-
-/*//////////////////////////////  Control Panel //////////////////////////////////////////////////////*/
-
-.controls {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-    background-color: #f4f3f3;
-    border-top: 1px solid #cecece;
-}
-
-.playlist-controls {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    /*border-bottom: 1px solid #cecece;*/
-}
+/*//////////////////////////////  SEARCH BOX //////////////////////////////////////////////////////*/
 
 .search-box-container {
     background-color: #777879;
@@ -504,6 +537,23 @@ button {
     border: 1px solid #777879;
     height: 2rem;
     width: calc(100% - 2rem);
+}
+
+
+/*//////////////////////////////  Control Panel //////////////////////////////////////////////////////*/
+
+.controls, .playlist-controls {
+    -webkit-box-flex: 1;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    background-color: #f4f3f3;
 }
 
 .resize-title {
@@ -539,7 +589,84 @@ button {
 }
 
 
-/*//////////////////////////////  NOTEPAD /////////////////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                           NOTEPAD                                                //
+//                                                                                                  //
+//                                                                                                  //
+////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.notepad {
+    flex: 1 1 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border: 1px solid #ececec;
+    margin: .5rem;
+    height: 35vh;
+}
+
+.notepad-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 3rem
+}
+
+.note-title {
+    padding: .25rem;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 100%;
+    flex: 1 1 100%
+}
+
+.date {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 50%;
+    flex: 1 1 50%;
+    padding: .25rem;
+    text-align: right;
+}
+
+.note {
+    padding-left: .5rem;
+    padding-top: .5rem;
+    height: 100%;
+    resize: none;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 100%;
+    flex: 1 1 100%;
+    background-color: #fff;
+    border: 1px solid #ececec;
+    margin-top: .25rem;
+}
+
+.notepad-input {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    border: 1px solid #fff;
+    /*margin: .25rem;*/
+}
+
+.notepad-btn {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+
+/*////////////////////////////              SAVED NOTES            /////////////////////////////////////////////////////////////*/
 
 .saved-notes-panel {
     position: absolute;
@@ -622,46 +749,11 @@ button {
 
 .close-notes {
     margin: .5rem;
+    cursor: pointer;
 }
 
-.notepad {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #f4f4f4;
-    border: 1px solid #ececec;
-    margin: .5rem;
-    height: 35vh;
-}
-
-.notepad-controls {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    height: 3rem
-}
-
-.note-title {
-    padding: .25rem;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 100%;
-    flex: 1 1 100%
-}
-
-.date {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 50%;
-    flex: 1 1 50%;
-    padding: .25rem;
-    text-align: right;
+.close-notes:hover {
+    color: #7998a6;
 }
 
 .edit-note {
@@ -670,65 +762,21 @@ button {
     flex: 1 1 25%;
     padding: .25rem;
     text-align: left;
-}
-
-.note {
-    padding-left: .5rem;
-    padding-top: .5rem;
-    height: 100%;
-    resize: none;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 100%;
-    flex: 1 1 100%;
-    background-color: #fff;
-    border: 1px solid #ececec;
-    margin-top: .25rem;
-}
-
-.notepad-input {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    border: 1px solid #fff;
-    /*margin: .25rem;*/
-}
-
-.notepad-btn {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-}
-
-#menu-handle {
-    /*display: none;*/
-    position: absolute;
-    left: -60px;
-    top: 25px;
-    color: #7998a6;
-    padding: .75rem;
     cursor: pointer;
-    -webkit-transition: left .75s ease;
-    transition: left .75s ease;
-    -webkit-transition: top .75s ease;
-    transition: top .75s ease;
 }
 
-@media screen and (max-width: 1024px) {
-    #menu-handle {
-        display: block;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    #menu-handle.menu-open {
-        left: 10px;
-        top: -1px;
-    }
+.edit-note:hover {
+    color: #7998a6;
 }
 
 
 /*//////////////////////////////  NOTEPAD - EDITOR PANEL /////////////////////////////////////////////////////////////////*/
-
+.video-panel.edit-note-open {
+    height: 40vh;
+}
+.editor-panel.edit-note-open {
+    height: 60vh;
+}
 .edit-note-container {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -741,41 +789,10 @@ button {
     height: 100%;
 }
 
-@media screen and (max-width: 767px) {
-    .video-panel {
-        height: 100vh;
-    }
-    .video-panel.edit-note-open {
-        height: 40vh;
-    }
-    .editor-panel.edit-note-open {
-        height: 60vh;
-    }
-    .note-detail-panel {
-        height: 0vh;
-    }
-    .note-detail-panel.edit-note-open {
-        height: 60vh;
-    }
-}
-
 .edit-note-header {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
+    flex-flow: row wrap;
     justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: .5rem;
     color: #777879;
 }
 
@@ -789,20 +806,23 @@ button {
 }
 
 #edit-note-controls {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
+    flex-flow: row wrap;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
 }
+@media screen and (max-width: 768px){
+  .noteResize{
+    display: none;
+  }
+  .edit-note-title{
+    font-size: 1rem;
+  }
+  .btn2{
+        margin: .1rem;
+  }
+}
+
 
 .edit-note-text {
     -webkit-box-flex: 1;
@@ -816,7 +836,13 @@ button {
 }
 
 
-/*/////////////////////////////Signature/////////////////////////////////////////////////////////////////////*/
+/*////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                           Signature                                              //
+//                                                                                                  //
+//                                                                                                  //
+////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 .bottom-container {
     list-style: none;
@@ -847,6 +873,13 @@ button {
     cursor: pointer;
 }
 
+@media screen and (max-height: 416px) {
+    /*get rid of channels from menu when ipad keyboard is up*/
+    .bottom-nav {
+        display: none;
+    }
+}
+
 
 /*Taken from internet for quick solution*/
 
@@ -863,7 +896,7 @@ button {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    border: 1px solid #7998a6;
+    border: 1px solid #777879;
     background-color: #ececec;
     color: #777879;
     text-align: center;
@@ -906,6 +939,15 @@ button {
 }
 
 
+/*////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                          ANIMATIONS                                              //
+//                                                                                                  //
+//                                                                                                  //
+////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
 /*Colour animation for end of list.*/
 
 @-webkit-keyframes bump-stop {
@@ -936,26 +978,18 @@ button {
 
 @-webkit-keyframes text-area-red-shaddow {
     from {
-        -webkit-box-shadow: inset 0 0 30px #ff3232;
-        -moz-box-shadow: inset 0 0 30px #ff3232;
         box-shadow: inset 0 0 30px #ff3232;
     }
     to {
-        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
-        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
         box-shadow: inset 2px 2px 15px 5px #fff;
     }
 }
 
 @keyframes text-area-red-shaddow {
     from {
-        -webkit-box-shadow: inset 0 0 30px #ff3232;
-        -moz-box-shadow: inset 0 0 30px #ff3232;
         box-shadow: inset 0 0 30px #ff3232;
     }
     to {
-        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
-        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
         box-shadow: inset 2px 2px 15px 5px #fff;
     }
 }
@@ -967,26 +1001,18 @@ button {
 
 @-webkit-keyframes text-area-green-shadow {
     from {
-        -webkit-box-shadow: inset 0 0 30px #87b091;
-        -moz-box-shadow: inset 0 0 30px #87b091;
         box-shadow: inset 0 0 30px #87b09187b091;
     }
     to {
-        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
-        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
         box-shadow: inset 2px 2px 15px 5px #fff;
     }
 }
 
 @keyframes text-area-green-shadow {
     from {
-        -webkit-box-shadow: inset 0 0 30px #87b091;
-        -moz-box-shadow: inset 0 0 30px #87b091;
         box-shadow: inset 0 0 30px #87b091;
     }
     to {
-        -webkit-box-shadow: inset 2px 2px 15px 5px #fff;
-        -moz-box-shadow: inset 2px 2px 15px 5px #fff;
         box-shadow: inset 2px 2px 15px 5px #fff;
     }
 }

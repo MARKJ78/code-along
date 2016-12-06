@@ -17,6 +17,7 @@ searchBox.addEventListener('keypress', function(e) {
         searchYoutube(term);
         //if 'notes' is selected
         //searchNotes(term);
+
     }
 });
 /*////////////////////////////////////////
@@ -27,7 +28,7 @@ fetches an API call from promise and waits for response.
 //getChannelDetails() is required to get the channel branding and content
 function searchYoutube(term) {
     var q = "&q=" + term;
-    var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&limit=50&type=channel" + q + apik;
+    var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&limit=20" + q + apik;
     fetch(url).then(function(results) {
         /*////////////////////////////////////////
         Loops through returned search results and sends each iteration (channel) to an API fetch
@@ -37,7 +38,7 @@ function searchYoutube(term) {
         panel.innerHTML = '';
         for (var i = 0; i < response.length; i++) { // build url for each channel
             var thisChannel = "&id=" + response[i].id.channelId;
-            var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2CcontentDetails" + thisChannel + apik;
+            var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2CcontentDetails%2Cstatistics" + thisChannel + apik;
             fetchSearchChannels(url);
         }
     });
@@ -63,6 +64,7 @@ function buildChannelCard(response) {
     var channelBanner = channel.brandingSettings.image.bannerImageUrl;
     var channelTitle = channel.brandingSettings.channel.title;
     var descriptionLong = channel.brandingSettings.channel.description;
+    var subscribers = channel.statistics.subscriberCount;
     //shoten the description as it can be ridiculously long
     var descriptionShort = "";
     if (descriptionLong) {
@@ -76,19 +78,22 @@ function buildChannelCard(response) {
     //Build channel cards
     var channelCard = [
         '<div class="channel-container">',
+        '<div class="channel-header">',
         '<div id="' + channelTitle + '" class="channel-banner"><img src="' + channelBanner + '"></div>',
         '<div class="channel-details">',
         '<div class="channel-title">',
         '<h2><a href="https://www.youtube.com/channel/' + channelId + '" target="_blank">' + channelTitle + '</a></h2>',
         '</div>',
         '<div class="channel-buttons">',
-        '<div id="showPlaylists' + channelId + '" class="btn2" onclick="showPlaylists(\'' + channelId + '\')"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Playlists</div>',
+        '<div id="showPlaylists' + channelId + '" class="btn2" onclick = "showPlaylists(\'' + channelId + '\')"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Playlists</div>',
         '<div id="removeChannel' + channelId + '" class="btn2 hide danger" onclick="removeChannel(\'' + channelId + '\')"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Remove Channel</div>',
         '<div id="addChannel' + channelId + '" class="btn2 good" onclick="addChannel(\'' + channelId + '\')"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Channel</div>',
         '</div>',
         '</div>',
         '<div class="channel-description">',
+        '<p><span class="subscribers">' + subscribers + '</span> Subscribers</p>',
         '<p>' + descriptionShort + '</p>',
+        '</div>',
         '</div>',
         '<div id="channelPlaylists' + channelId + '" class="channel-playlists-container hide"></div>',
         '<div id="playlistVideos' + channelId + '" class="playlists-video-container hide"></div>',
@@ -103,4 +108,8 @@ function buildChannelCard(response) {
         removeChannel.classList.remove('hide');
         addChannel.classList.add('hide');
     }
+    if ((width <= 768) && (handle.classList.contains('menu-open'))) { //closes the menu automatically for better view of channel cards on smaller screens
+        handle.click();
+    }
+
 }
