@@ -27,6 +27,24 @@ pickUpLeftOffButton.onclick = function() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
+//                                    Load a favorite channel                                        //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//URL asks for object with one result array containing branding,
+//content details & snippet. For building single fave channel card without going through youtube search api,
+//which can create duplicate entry bug
+function loadFaveChannelCard(id) {
+    panel.innerHTML = '';
+    var thisChannel = "&id=" + id;
+    var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics" + thisChannel + apik;
+    fetch(url).then(function(response) {
+        buildChannelCard(response);
+    });
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
 //                                  CHANNEL CARD BUTTONS                                            //
 //                                                                                                  //
 //                                                                                                  //

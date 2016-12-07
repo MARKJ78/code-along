@@ -48,7 +48,7 @@ function loadChannelsList(url) {
         var title = response.items[0].snippet.title;
         var logo = response.items[0].snippet.thumbnails.default.url;
         listItem = [ //build list item contents
-            '<div class="list-item button" onclick="searchYoutube(\'' + channelId + '\')">', //load channel into main view
+            '<div class="list-item button" onclick="loadFaveChannelCard(\'' + channelId + '\')">', //load channel into main view
             '<p class="channel-title">' + title + '</p>',
             '<span class="channel-logo" id="logo-' + channelId + '"><img src="' + logo + '"></span>',
             '</div>'

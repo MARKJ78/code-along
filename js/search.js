@@ -37,8 +37,8 @@ function searchYoutube(term) {
         var response = results.items;
         panel.innerHTML = '';
         for (var i = 0; i < response.length; i++) { // build url for each channel
-            var thisChannel = "&id=" + response[i].id.channelId;
-            var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2CcontentDetails%2Cstatistics" + thisChannel + apik;
+            var thisChannel = "&id=" + response[i].snippet.channelId;
+            var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics" + thisChannel + apik;
             fetchSearchChannels(url);
         }
     });
@@ -79,7 +79,7 @@ function buildChannelCard(response) {
     var channelCard = [
         '<div class="channel-container">',
         '<div class="channel-header">',
-        '<div id="' + channelTitle + '" class="channel-banner"><img src="' + channelBanner + '"></div>',
+        '<div id="' + channelId + '" class="channel-banner"><img src="' + channelBanner + '"></div>',
         '<div class="channel-details">',
         '<div class="channel-title">',
         '<h2><a href="https://www.youtube.com/channel/' + channelId + '" target="_blank">' + channelTitle + '</a></h2>',
