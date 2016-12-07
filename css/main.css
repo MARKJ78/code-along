@@ -608,7 +608,7 @@ body {
     flex-direction: column;
     background-color: #f4f4f4;
     border: 1px solid #ececec;
-    margin: .5rem;
+    margin: 0 .5rem;
     height: 35vh;
 }
 
@@ -771,12 +771,15 @@ body {
 
 
 /*//////////////////////////////  NOTEPAD - EDITOR PANEL /////////////////////////////////////////////////////////////////*/
+
 .video-panel.edit-note-open {
     height: 40vh;
 }
+
 .editor-panel.edit-note-open {
     height: 60vh;
 }
+
 .edit-note-container {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -811,18 +814,18 @@ body {
     justify-content: center;
     align-items: center;
 }
-@media screen and (max-width: 768px){
-  .noteResize{
-    display: none;
-  }
-  .edit-note-title{
-    font-size: 1rem;
-  }
-  .btn2{
-        margin: .1rem;
-  }
-}
 
+@media screen and (max-width: 768px) {
+    .noteResize {
+        display: none;
+    }
+    .edit-note-title {
+        font-size: 1rem;
+    }
+    .btn2 {
+        margin: .1rem;
+    }
+}
 
 .edit-note-text {
     -webkit-box-flex: 1;

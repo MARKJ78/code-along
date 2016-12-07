@@ -27,6 +27,24 @@ pickUpLeftOffButton.onclick = function() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                  //
 //                                                                                                  //
+//                                    Load a favorite channel                                        //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//URL asks for object with one result array containing branding,
+//content details & snippet. For building single fave channel card without going through youtube search api,
+//which can create duplicate entry bug
+function loadFaveChannelCard(id) {
+    panel.innerHTML = '';
+    var thisChannel = "&id=" + id;
+    var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics" + thisChannel + apik;
+    fetch(url).then(function(response) {
+        buildChannelCard(response);
+    });
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
 //                                  CHANNEL CARD BUTTONS                                            //
 //                                                                                                  //
 //                                                                                                  //
@@ -141,7 +159,9 @@ function insertVid(playlistId, index) {
         panel.insertAdjacentHTML('beforeend', video); //insert vid into main panel
         title.value = videoTitle; // give the note the right title - important for notes.js functions
         relatedVidLink = [playlistId, index];
-        vidDefault.click(); //bring up editor/notes panel
+        if (!editorIsOpen) { //check if the editor panel is closed
+            vidDefault.click(); //bring up editor/notes panel
+        }
     });
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
