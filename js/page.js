@@ -15,6 +15,61 @@ var playlistContent; // holds raw html to loaded back into 'panel' when user cli
 //                                                                                                  //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+/*/////////////////////////////////////////
+Activates the iFrame when user hits enter.
+ ////////////////////////////////////////*/
+//function loadUserIframe(url) {
+//  panel.innerHTML = ""; //clear the main panel to insert video
+/*var iframe = document.createElement("iframe");
+iframe.src = url;
+iframe.width = "100%";
+iframe.height = "100%";*/
+
+/*  var iframe = [ //build video iframe
+        '<iframe',
+        '  src="' + url + '"',
+        '  width="100%"',
+        '  height="100%"',
+        '  frameborder="0"',
+        '  allowfullscreen>',
+        '</iframe>'
+    ].join('\n');
+
+    scrollTo(panel, panel.offsetTop, 0); //make sure we're at the top of the panel
+    panel.insertAdjacentHTML('beforeend', iframe); //insert vid into main panel
+    //title.value = videoTitle; // give the note the right title - important for notes.js functions
+    //relatedVidLink = [playlistId, index];
+    if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
+        iframe.onreadystatechange = function() {
+            if (iframe.readyState == "complete") {
+                alert("Iframe is now loaded.");
+            }
+        };
+    } else {
+        iframe.onload = function() {
+            alert("Iframe is now loaded.");
+        };
+    }
+    if (!editorIsOpen) { //check if the editor panel is closed
+        vidDefault.click(); //bring up editor/notes panel
+    }
+
+}
+var userIframe = document.getElementById('user-iFrame-URL');
+userIframe.addEventListener('keypress', function(e) {
+    var key = e.which || e.keyCode;
+    if (key === 13) {
+        var url = userIframe.value;
+        loadUserIframe(url);
+    }
+});*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                  //
+//                                                                                                  //
+//                                           Load User iframe                                       //
+//                                                                                                  //
+//                                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 var pickUpLeftOffButton = document.getElementById('lastVid');
 pickUpLeftOffButton.onclick = function() {
     //check if visitor has used the site before
