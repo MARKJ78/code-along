@@ -2,43 +2,565 @@
 1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'install',
-1 verbose cli   '--save-dev',
-1 verbose cli   'surge',
 1 verbose cli   'git-scripts' ]
 2 info using npm@3.10.9
 3 info using node@v6.9.2
 4 silly loadCurrentTree Starting
 5 silly install loadCurrentTree
 6 silly install readLocalPackageData
-7 silly rollbackFailedOptional Starting
-8 silly rollbackFailedOptional Finishing
-9 silly runTopLevelLifecycles Finishing
-10 silly install printInstalled
-11 verbose stack Error: Failed to parse json
-11 verbose stack Unexpected token '/' at 33:1
-11 verbose stack /*
-11 verbose stack ^
-11 verbose stack     at parseError (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:390:11)
-11 verbose stack     at parseJson (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:79:23)
-11 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:48:5
-11 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:78:16
-11 verbose stack     at tryToString (fs.js:455:3)
-11 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:442:12)
-12 verbose cwd D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along
-13 error Windows_NT 10.0.14393
-14 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save-dev" "surge" "git-scripts"
-15 error node v6.9.2
-16 error npm  v3.10.9
-17 error file D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\package.json
-18 error code EJSONPARSE
-19 error Failed to parse json
-19 error Unexpected token '/' at 33:1
-19 error /*
-19 error ^
-20 error File: D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\package.json
-21 error Failed to parse package.json data.
-21 error package.json must be actual JSON, not just JavaScript.
-21 error
-21 error This is not a bug in npm.
-21 error Tell the package author to fix their package.json file. JSON.parse
-22 verbose exit [ 1, true ]
+7 silly fetchPackageMetaData git-scripts@0.2.1
+8 silly fetchNamedPackageData git-scripts
+9 silly mapToRegistry name git-scripts
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry data Result {
+12 silly mapToRegistry   raw: 'git-scripts',
+12 silly mapToRegistry   scope: null,
+12 silly mapToRegistry   escapedName: 'git-scripts',
+12 silly mapToRegistry   name: 'git-scripts',
+12 silly mapToRegistry   rawSpec: '',
+12 silly mapToRegistry   spec: 'latest',
+12 silly mapToRegistry   type: 'tag' }
+13 silly mapToRegistry uri https://registry.npmjs.org/git-scripts
+14 verbose request uri https://registry.npmjs.org/git-scripts
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 12:13:52 PM
+17 verbose request id c7f786daeb663876
+18 verbose etag W/"54d6fb17-290b"
+19 verbose lastModified Sun, 08 Feb 2015 05:58:47 GMT
+20 http request GET https://registry.npmjs.org/git-scripts
+21 http 304 https://registry.npmjs.org/git-scripts
+22 verbose headers { date: 'Tue, 20 Dec 2016 12:13:51 GMT',
+22 verbose headers   via: '1.1 varnish',
+22 verbose headers   'cache-control': 'max-age=300',
+22 verbose headers   etag: 'W/"54d6fb17-290b"',
+22 verbose headers   age: '124',
+22 verbose headers   connection: 'keep-alive',
+22 verbose headers   'x-served-by': 'cache-lhr6334-LHR',
+22 verbose headers   'x-cache': 'HIT',
+22 verbose headers   'x-cache-hits': '1',
+22 verbose headers   'x-timer': 'S1482236031.445013,VS0,VE0',
+22 verbose headers   vary: 'Accept-Encoding' }
+23 silly get cb [ 304,
+23 silly get   { date: 'Tue, 20 Dec 2016 12:13:51 GMT',
+23 silly get     via: '1.1 varnish',
+23 silly get     'cache-control': 'max-age=300',
+23 silly get     etag: 'W/"54d6fb17-290b"',
+23 silly get     age: '124',
+23 silly get     connection: 'keep-alive',
+23 silly get     'x-served-by': 'cache-lhr6334-LHR',
+23 silly get     'x-cache': 'HIT',
+23 silly get     'x-cache-hits': '1',
+23 silly get     'x-timer': 'S1482236031.445013,VS0,VE0',
+23 silly get     vary: 'Accept-Encoding' } ]
+24 verbose etag https://registry.npmjs.org/git-scripts from cache
+25 verbose get saving git-scripts to C:\Users\markj\AppData\Roaming\npm-cache\registry.npmjs.org\git-scripts\.cache.json
+26 verbose correctMkdir C:\Users\markj\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+27 silly install normalizeTree
+28 silly loadCurrentTree Finishing
+29 silly loadIdealTree Starting
+30 silly install loadIdealTree
+31 silly cloneCurrentTree Starting
+32 silly install cloneCurrentTreeToIdealTree
+33 silly cloneCurrentTree Finishing
+34 silly loadShrinkwrap Starting
+35 silly install loadShrinkwrap
+36 silly loadShrinkwrap Finishing
+37 silly loadAllDepsIntoIdealTree Starting
+38 silly install loadAllDepsIntoIdealTree
+39 silly resolveWithNewModule git-scripts@0.2.1 checking installable status
+40 silly cache add args [ 'git-scripts@0.2.1', null ]
+41 verbose cache add spec git-scripts@0.2.1
+42 silly cache add parsed spec Result {
+42 silly cache add   raw: 'git-scripts@0.2.1',
+42 silly cache add   scope: null,
+42 silly cache add   escapedName: 'git-scripts',
+42 silly cache add   name: 'git-scripts',
+42 silly cache add   rawSpec: '0.2.1',
+42 silly cache add   spec: '0.2.1',
+42 silly cache add   type: 'version' }
+43 silly addNamed git-scripts@0.2.1
+44 verbose addNamed "0.2.1" is a plain semver version for git-scripts
+45 silly mapToRegistry name git-scripts
+46 silly mapToRegistry using default registry
+47 silly mapToRegistry registry https://registry.npmjs.org/
+48 silly mapToRegistry data Result {
+48 silly mapToRegistry   raw: 'git-scripts',
+48 silly mapToRegistry   scope: null,
+48 silly mapToRegistry   escapedName: 'git-scripts',
+48 silly mapToRegistry   name: 'git-scripts',
+48 silly mapToRegistry   rawSpec: '',
+48 silly mapToRegistry   spec: 'latest',
+48 silly mapToRegistry   type: 'tag' }
+49 silly mapToRegistry uri https://registry.npmjs.org/git-scripts
+50 verbose addNameVersion registry:https://registry.npmjs.org/git-scripts not in flight; fetching
+51 verbose get https://registry.npmjs.org/git-scripts not expired, no request
+52 silly cache afterAdd git-scripts@0.2.1
+53 verbose afterAdd C:\Users\markj\AppData\Roaming\npm-cache\git-scripts\0.2.1\package\package.json not in flight; writing
+54 verbose correctMkdir C:\Users\markj\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+55 verbose afterAdd C:\Users\markj\AppData\Roaming\npm-cache\git-scripts\0.2.1\package\package.json written
+56 silly fetchNamedPackageData commander
+57 silly mapToRegistry name commander
+58 silly mapToRegistry using default registry
+59 silly mapToRegistry registry https://registry.npmjs.org/
+60 silly mapToRegistry data Result {
+60 silly mapToRegistry   raw: 'commander',
+60 silly mapToRegistry   scope: null,
+60 silly mapToRegistry   escapedName: 'commander',
+60 silly mapToRegistry   name: 'commander',
+60 silly mapToRegistry   rawSpec: '',
+60 silly mapToRegistry   spec: 'latest',
+60 silly mapToRegistry   type: 'tag' }
+61 silly mapToRegistry uri https://registry.npmjs.org/commander
+62 verbose request uri https://registry.npmjs.org/commander
+63 verbose request no auth needed
+64 info attempt registry request try #1 at 12:13:53 PM
+65 verbose etag W/"5855e197-fd28"
+66 verbose lastModified Sun, 18 Dec 2016 01:08:39 GMT
+67 http request GET https://registry.npmjs.org/commander
+68 http 304 https://registry.npmjs.org/commander
+69 verbose headers { date: 'Tue, 20 Dec 2016 12:13:51 GMT',
+69 verbose headers   via: '1.1 varnish',
+69 verbose headers   'cache-control': 'max-age=300',
+69 verbose headers   etag: 'W/"5855e197-fd28"',
+69 verbose headers   age: '71',
+69 verbose headers   connection: 'keep-alive',
+69 verbose headers   'x-served-by': 'cache-lhr6334-LHR',
+69 verbose headers   'x-cache': 'HIT',
+69 verbose headers   'x-cache-hits': '3178',
+69 verbose headers   'x-timer': 'S1482236031.628271,VS0,VE0',
+69 verbose headers   vary: 'Accept-Encoding' }
+70 silly get cb [ 304,
+70 silly get   { date: 'Tue, 20 Dec 2016 12:13:51 GMT',
+70 silly get     via: '1.1 varnish',
+70 silly get     'cache-control': 'max-age=300',
+70 silly get     etag: 'W/"5855e197-fd28"',
+70 silly get     age: '71',
+70 silly get     connection: 'keep-alive',
+70 silly get     'x-served-by': 'cache-lhr6334-LHR',
+70 silly get     'x-cache': 'HIT',
+70 silly get     'x-cache-hits': '3178',
+70 silly get     'x-timer': 'S1482236031.628271,VS0,VE0',
+70 silly get     vary: 'Accept-Encoding' } ]
+71 verbose etag https://registry.npmjs.org/commander from cache
+72 verbose get saving commander to C:\Users\markj\AppData\Roaming\npm-cache\registry.npmjs.org\commander\.cache.json
+73 verbose correctMkdir C:\Users\markj\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+74 silly resolveWithNewModule commander@2.6.0 checking installable status
+75 silly cache add args [ 'commander@2.6.0', null ]
+76 verbose cache add spec commander@2.6.0
+77 silly cache add parsed spec Result {
+77 silly cache add   raw: 'commander@2.6.0',
+77 silly cache add   scope: null,
+77 silly cache add   escapedName: 'commander',
+77 silly cache add   name: 'commander',
+77 silly cache add   rawSpec: '2.6.0',
+77 silly cache add   spec: '2.6.0',
+77 silly cache add   type: 'version' }
+78 silly addNamed commander@2.6.0
+79 verbose addNamed "2.6.0" is a plain semver version for commander
+80 silly mapToRegistry name commander
+81 silly mapToRegistry using default registry
+82 silly mapToRegistry registry https://registry.npmjs.org/
+83 silly mapToRegistry data Result {
+83 silly mapToRegistry   raw: 'commander',
+83 silly mapToRegistry   scope: null,
+83 silly mapToRegistry   escapedName: 'commander',
+83 silly mapToRegistry   name: 'commander',
+83 silly mapToRegistry   rawSpec: '',
+83 silly mapToRegistry   spec: 'latest',
+83 silly mapToRegistry   type: 'tag' }
+84 silly mapToRegistry uri https://registry.npmjs.org/commander
+85 verbose addNameVersion registry:https://registry.npmjs.org/commander not in flight; fetching
+86 verbose get https://registry.npmjs.org/commander not expired, no request
+87 silly cache afterAdd commander@2.6.0
+88 verbose afterAdd C:\Users\markj\AppData\Roaming\npm-cache\commander\2.6.0\package\package.json not in flight; writing
+89 verbose correctMkdir C:\Users\markj\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+90 verbose afterAdd C:\Users\markj\AppData\Roaming\npm-cache\commander\2.6.0\package\package.json written
+91 silly loadAllDepsIntoIdealTree Finishing
+92 silly loadIdealTree Finishing
+93 silly currentTree code-along@1.0.0
+93 silly currentTree +-- asn1@0.1.11
+93 silly currentTree +-- assert-plus@0.1.5
+93 silly currentTree +-- async@0.1.22
+93 silly currentTree +-- aws-sign2@0.5.0
+93 silly currentTree +-- balanced-match@0.4.2
+93 silly currentTree +-- block-stream@0.0.9
+93 silly currentTree +-- boom@0.4.2
+93 silly currentTree +-- brace-expansion@1.1.6
+93 silly currentTree +-- colors@0.6.2
+93 silly currentTree +-- combined-stream@0.0.7
+93 silly currentTree +-- commander@1.1.1
+93 silly currentTree +-- concat-map@0.0.1
+93 silly currentTree +-- cryptiles@0.2.2
+93 silly currentTree +-- ctype@0.5.3
+93 silly currentTree +-- cycle@1.0.3
+93 silly currentTree +-- date-now@1.0.1
+93 silly currentTree +-- debounce@1.0.0
+93 silly currentTree +-- deep-equal@1.0.1
+93 silly currentTree +-- delayed-stream@0.0.5
+93 silly currentTree +-- dom-utils@0.4.1
+93 silly currentTree +-- du@0.1.0
+93 silly currentTree +-- eyes@0.1.8
+93 silly currentTree +-- forever-agent@0.5.2
+93 silly currentTree +-- form-data@0.1.4
+93 silly currentTree | `-- async@0.9.2
+93 silly currentTree +-- fs.realpath@1.0.0
+93 silly currentTree +-- fstream-ignore@1.0.2
+93 silly currentTree +-- fstream@1.0.10
+93 silly currentTree +-- glob@7.1.1
+93 silly currentTree | `-- minimatch@3.0.3
+93 silly currentTree +-- graceful-fs@4.1.11
+93 silly currentTree +-- hawk@1.1.1
+93 silly currentTree +-- hoek@0.9.1
+93 silly currentTree +-- http-signature@0.10.1
+93 silly currentTree +-- i@0.3.5
+93 silly currentTree +-- inflight@1.0.6
+93 silly currentTree +-- inherits@2.0.3
+93 silly currentTree +-- is-domain@0.0.1
+93 silly currentTree +-- isstream@0.1.2
+93 silly currentTree +-- json-stringify-safe@5.0.1
+93 silly currentTree +-- keypress@0.1.0
+93 silly currentTree +-- mime-types@1.0.2
+93 silly currentTree +-- mime@1.2.11
+93 silly currentTree +-- minimatch@2.0.10
+93 silly currentTree +-- minimist@1.1.1
+93 silly currentTree +-- mkdirp@0.5.1
+93 silly currentTree | `-- minimist@0.0.8
+93 silly currentTree +-- moniker@0.1.2
+93 silly currentTree +-- mute-stream@0.0.6
+93 silly currentTree +-- natives@1.1.0
+93 silly currentTree +-- ncp@0.4.2
+93 silly currentTree +-- netrc@0.1.4
+93 silly currentTree +-- node-uuid@1.4.7
+93 silly currentTree +-- oauth-sign@0.3.0
+93 silly currentTree +-- object-assign@4.1.0
+93 silly currentTree +-- once@1.4.0
+93 silly currentTree +-- path-is-absolute@1.0.1
+93 silly currentTree +-- pkginfo@0.4.0
+93 silly currentTree +-- progress@1.1.8
+93 silly currentTree +-- prompt@0.2.14
+93 silly currentTree +-- punycode@1.4.1
+93 silly currentTree +-- qs@1.0.2
+93 silly currentTree +-- read@1.0.5
+93 silly currentTree +-- request@2.40.0
+93 silly currentTree +-- revalidator@0.1.8
+93 silly currentTree +-- rimraf@2.5.4
+93 silly currentTree +-- sntp@0.2.4
+93 silly currentTree +-- split@0.3.1
+93 silly currentTree +-- stack-trace@0.0.9
+93 silly currentTree +-- stringstream@0.0.5
+93 silly currentTree +-- surge-ignore@0.2.0
+93 silly currentTree +-- surge@0.18.0
+93 silly currentTree +-- tar.gz@0.1.1
+93 silly currentTree | +-- fstream@0.1.31
+93 silly currentTree | +-- graceful-fs@3.0.11
+93 silly currentTree | `-- tar@0.1.20
+93 silly currentTree +-- tar@1.0.0
+93 silly currentTree +-- through@2.3.8
+93 silly currentTree +-- tough-cookie@2.3.2
+93 silly currentTree +-- tunnel-agent@0.4.3
+93 silly currentTree +-- url-parse-as-address@1.0.0
+93 silly currentTree +-- utile@0.2.1
+93 silly currentTree | `-- async@0.2.10
+93 silly currentTree +-- winston@0.8.3
+93 silly currentTree | +-- async@0.2.10
+93 silly currentTree | `-- pkginfo@0.3.1
+93 silly currentTree `-- wrappy@1.0.2
+94 silly idealTree code-along@1.0.0
+94 silly idealTree +-- asn1@0.1.11
+94 silly idealTree +-- assert-plus@0.1.5
+94 silly idealTree +-- async@0.1.22
+94 silly idealTree +-- aws-sign2@0.5.0
+94 silly idealTree +-- balanced-match@0.4.2
+94 silly idealTree +-- block-stream@0.0.9
+94 silly idealTree +-- boom@0.4.2
+94 silly idealTree +-- brace-expansion@1.1.6
+94 silly idealTree +-- colors@0.6.2
+94 silly idealTree +-- combined-stream@0.0.7
+94 silly idealTree +-- commander@1.1.1
+94 silly idealTree +-- concat-map@0.0.1
+94 silly idealTree +-- cryptiles@0.2.2
+94 silly idealTree +-- ctype@0.5.3
+94 silly idealTree +-- cycle@1.0.3
+94 silly idealTree +-- date-now@1.0.1
+94 silly idealTree +-- debounce@1.0.0
+94 silly idealTree +-- deep-equal@1.0.1
+94 silly idealTree +-- delayed-stream@0.0.5
+94 silly idealTree +-- dom-utils@0.4.1
+94 silly idealTree +-- du@0.1.0
+94 silly idealTree +-- eyes@0.1.8
+94 silly idealTree +-- forever-agent@0.5.2
+94 silly idealTree +-- form-data@0.1.4
+94 silly idealTree | `-- async@0.9.2
+94 silly idealTree +-- fs.realpath@1.0.0
+94 silly idealTree +-- fstream-ignore@1.0.2
+94 silly idealTree +-- fstream@1.0.10
+94 silly idealTree +-- git-scripts@0.2.1
+94 silly idealTree | `-- commander@2.6.0
+94 silly idealTree +-- glob@7.1.1
+94 silly idealTree | `-- minimatch@3.0.3
+94 silly idealTree +-- graceful-fs@4.1.11
+94 silly idealTree +-- hawk@1.1.1
+94 silly idealTree +-- hoek@0.9.1
+94 silly idealTree +-- http-signature@0.10.1
+94 silly idealTree +-- i@0.3.5
+94 silly idealTree +-- inflight@1.0.6
+94 silly idealTree +-- inherits@2.0.3
+94 silly idealTree +-- is-domain@0.0.1
+94 silly idealTree +-- isstream@0.1.2
+94 silly idealTree +-- json-stringify-safe@5.0.1
+94 silly idealTree +-- keypress@0.1.0
+94 silly idealTree +-- mime-types@1.0.2
+94 silly idealTree +-- mime@1.2.11
+94 silly idealTree +-- minimatch@2.0.10
+94 silly idealTree +-- minimist@1.1.1
+94 silly idealTree +-- mkdirp@0.5.1
+94 silly idealTree | `-- minimist@0.0.8
+94 silly idealTree +-- moniker@0.1.2
+94 silly idealTree +-- mute-stream@0.0.6
+94 silly idealTree +-- natives@1.1.0
+94 silly idealTree +-- ncp@0.4.2
+94 silly idealTree +-- netrc@0.1.4
+94 silly idealTree +-- node-uuid@1.4.7
+94 silly idealTree +-- oauth-sign@0.3.0
+94 silly idealTree +-- object-assign@4.1.0
+94 silly idealTree +-- once@1.4.0
+94 silly idealTree +-- path-is-absolute@1.0.1
+94 silly idealTree +-- pkginfo@0.4.0
+94 silly idealTree +-- progress@1.1.8
+94 silly idealTree +-- prompt@0.2.14
+94 silly idealTree +-- punycode@1.4.1
+94 silly idealTree +-- qs@1.0.2
+94 silly idealTree +-- read@1.0.5
+94 silly idealTree +-- request@2.40.0
+94 silly idealTree +-- revalidator@0.1.8
+94 silly idealTree +-- rimraf@2.5.4
+94 silly idealTree +-- sntp@0.2.4
+94 silly idealTree +-- split@0.3.1
+94 silly idealTree +-- stack-trace@0.0.9
+94 silly idealTree +-- stringstream@0.0.5
+94 silly idealTree +-- surge-ignore@0.2.0
+94 silly idealTree +-- surge@0.18.0
+94 silly idealTree +-- tar.gz@0.1.1
+94 silly idealTree | +-- fstream@0.1.31
+94 silly idealTree | +-- graceful-fs@3.0.11
+94 silly idealTree | `-- tar@0.1.20
+94 silly idealTree +-- tar@1.0.0
+94 silly idealTree +-- through@2.3.8
+94 silly idealTree +-- tough-cookie@2.3.2
+94 silly idealTree +-- tunnel-agent@0.4.3
+94 silly idealTree +-- url-parse-as-address@1.0.0
+94 silly idealTree +-- utile@0.2.1
+94 silly idealTree | `-- async@0.2.10
+94 silly idealTree +-- winston@0.8.3
+94 silly idealTree | +-- async@0.2.10
+94 silly idealTree | `-- pkginfo@0.3.1
+94 silly idealTree `-- wrappy@1.0.2
+95 silly generateActionsToTake Starting
+96 silly install generateActionsToTake
+97 silly generateActionsToTake Finishing
+98 silly diffTrees action count 2
+99 silly diffTrees add commander@2.6.0
+100 silly diffTrees add git-scripts@0.2.1
+101 silly decomposeActions action count 16
+102 silly decomposeActions fetch commander@2.6.0
+103 silly decomposeActions extract commander@2.6.0
+104 silly decomposeActions test commander@2.6.0
+105 silly decomposeActions preinstall commander@2.6.0
+106 silly decomposeActions build commander@2.6.0
+107 silly decomposeActions install commander@2.6.0
+108 silly decomposeActions postinstall commander@2.6.0
+109 silly decomposeActions finalize commander@2.6.0
+110 silly decomposeActions fetch git-scripts@0.2.1
+111 silly decomposeActions extract git-scripts@0.2.1
+112 silly decomposeActions test git-scripts@0.2.1
+113 silly decomposeActions preinstall git-scripts@0.2.1
+114 silly decomposeActions build git-scripts@0.2.1
+115 silly decomposeActions install git-scripts@0.2.1
+116 silly decomposeActions postinstall git-scripts@0.2.1
+117 silly decomposeActions finalize git-scripts@0.2.1
+118 silly runTopLevelLifecycles Starting
+119 silly executeActions Starting
+120 silly install executeActions
+121 silly doSerial global-install 0
+122 silly doParallel fetch 2
+123 verbose correctMkdir C:\Users\markj\AppData\Roaming\npm-cache\_locks correctMkdir not in flight; initializing
+124 verbose lock using C:\Users\markj\AppData\Roaming\npm-cache\_locks\staging-6c46d00e6319ca27.lock for D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging
+125 silly doParallel extract 2
+126 silly extract commander@2.6.0
+127 silly extract git-scripts@0.2.1
+128 verbose unbuild node_modules\.staging\commander-0f4880cc
+129 verbose unbuild node_modules\.staging\git-scripts-2ad789ee
+130 silly gentlyRm D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc is being purged from base D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along
+131 verbose gentlyRm don't care about contents; nuking D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc
+132 verbose tar unpack C:\Users\markj\AppData\Roaming\npm-cache\commander\2.6.0\package.tgz
+133 verbose tar unpacking to D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc
+134 silly gentlyRm D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc is being purged
+135 verbose gentlyRm don't care about contents; nuking D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc
+136 silly gentlyRm D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee is being purged from base D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along
+137 verbose gentlyRm don't care about contents; nuking D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee
+138 silly gunzTarPerm modes [ '777', '666' ]
+139 verbose tar unpack C:\Users\markj\AppData\Roaming\npm-cache\git-scripts\0.2.1\package.tgz
+140 verbose tar unpacking to D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee
+141 silly gentlyRm D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee is being purged
+142 verbose gentlyRm don't care about contents; nuking D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee
+143 silly gunzTarPerm modes [ '777', '666' ]
+144 silly gunzTarPerm extractEntry package.json
+145 silly gunzTarPerm modified mode [ 'package.json', 436, 438 ]
+146 silly gunzTarPerm extractEntry package.json
+147 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+148 silly gunzTarPerm extractEntry index.js
+149 silly gunzTarPerm modified mode [ 'index.js', 436, 438 ]
+150 silly gunzTarPerm extractEntry Readme.md
+151 silly gunzTarPerm modified mode [ 'Readme.md', 436, 438 ]
+152 silly gunzTarPerm extractEntry History.md
+153 silly gunzTarPerm modified mode [ 'History.md', 436, 438 ]
+154 silly gunzTarPerm extractEntry .npmignore
+155 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+156 silly gunzTarPerm extractEntry README.md
+157 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+158 silly gunzTarPerm extractEntry LICENSE
+159 silly gunzTarPerm modified mode [ 'LICENSE', 420, 438 ]
+160 silly gunzTarPerm extractEntry index.js
+161 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+162 silly gunzTarPerm extractEntry bin/git-scripts
+163 silly gunzTarPerm modified mode [ 'bin/git-scripts', 493, 511 ]
+164 silly gunzTarPerm extractEntry bin/git-scripts-install
+165 silly gunzTarPerm modified mode [ 'bin/git-scripts-install', 493, 511 ]
+166 silly gunzTarPerm extractEntry bin/git-scripts-run
+167 silly gunzTarPerm modified mode [ 'bin/git-scripts-run', 493, 511 ]
+168 silly gunzTarPerm extractEntry bin/git-scripts-uninstall
+169 silly gunzTarPerm modified mode [ 'bin/git-scripts-uninstall', 493, 511 ]
+170 silly gunzTarPerm extractEntry bin/hooks/post-update
+171 silly gunzTarPerm modified mode [ 'bin/hooks/post-update', 493, 511 ]
+172 silly gunzTarPerm extractEntry bin/hooks/applypatch-msg
+173 silly gunzTarPerm modified mode [ 'bin/hooks/applypatch-msg', 493, 511 ]
+174 silly gunzTarPerm extractEntry bin/hooks/hook
+175 silly gunzTarPerm modified mode [ 'bin/hooks/hook', 493, 511 ]
+176 silly gunzTarPerm extractEntry bin/hooks/post-applypatch
+177 silly gunzTarPerm modified mode [ 'bin/hooks/post-applypatch', 493, 511 ]
+178 silly gunzTarPerm extractEntry bin/hooks/post-checkout
+179 silly gunzTarPerm modified mode [ 'bin/hooks/post-checkout', 493, 511 ]
+180 silly gunzTarPerm extractEntry bin/hooks/post-commit
+181 silly gunzTarPerm modified mode [ 'bin/hooks/post-commit', 493, 511 ]
+182 silly gunzTarPerm extractEntry bin/hooks/post-merge
+183 silly gunzTarPerm modified mode [ 'bin/hooks/post-merge', 493, 511 ]
+184 silly gentlyRm D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc\node_modules is being purged
+185 verbose gentlyRm don't care about contents; nuking D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc\node_modules
+186 silly gunzTarPerm extractEntry bin/hooks/post-receive
+187 silly gunzTarPerm modified mode [ 'bin/hooks/post-receive', 493, 511 ]
+188 silly gunzTarPerm extractEntry bin/hooks/post-rewrite
+189 silly gunzTarPerm modified mode [ 'bin/hooks/post-rewrite', 493, 511 ]
+190 silly gunzTarPerm extractEntry bin/hooks/commit-msg
+191 silly gunzTarPerm modified mode [ 'bin/hooks/commit-msg', 493, 511 ]
+192 silly gunzTarPerm extractEntry bin/hooks/pre-applypatch
+193 silly gunzTarPerm modified mode [ 'bin/hooks/pre-applypatch', 493, 511 ]
+194 silly gunzTarPerm extractEntry bin/hooks/pre-auto-gc
+195 silly gunzTarPerm modified mode [ 'bin/hooks/pre-auto-gc', 493, 511 ]
+196 silly gunzTarPerm extractEntry bin/hooks/pre-commit
+197 silly gunzTarPerm modified mode [ 'bin/hooks/pre-commit', 493, 511 ]
+198 silly gunzTarPerm extractEntry bin/hooks/pre-push
+199 silly gunzTarPerm modified mode [ 'bin/hooks/pre-push', 493, 511 ]
+200 silly gunzTarPerm extractEntry bin/hooks/pre-rebase
+201 silly gunzTarPerm modified mode [ 'bin/hooks/pre-rebase', 493, 511 ]
+202 silly gunzTarPerm extractEntry bin/hooks/pre-receive
+203 silly gunzTarPerm modified mode [ 'bin/hooks/pre-receive', 493, 511 ]
+204 silly gunzTarPerm extractEntry bin/hooks/prepare-commit-msg
+205 silly gunzTarPerm modified mode [ 'bin/hooks/prepare-commit-msg', 493, 511 ]
+206 silly gunzTarPerm extractEntry bin/hooks/update
+207 silly gunzTarPerm modified mode [ 'bin/hooks/update', 493, 511 ]
+208 silly gunzTarPerm extractEntry bin/install
+209 silly gunzTarPerm modified mode [ 'bin/install', 493, 511 ]
+210 silly gunzTarPerm extractEntry bin/uninstall
+211 silly gunzTarPerm modified mode [ 'bin/uninstall', 493, 511 ]
+212 silly gunzTarPerm extractEntry lib/git-scripts.js
+213 silly gunzTarPerm modified mode [ 'lib/git-scripts.js', 493, 511 ]
+214 silly gunzTarPerm extractEntry lib/index.js
+215 silly gunzTarPerm modified mode [ 'lib/index.js', 420, 438 ]
+216 silly gunzTarPerm extractEntry .travis.yml
+217 silly gunzTarPerm modified mode [ '.travis.yml', 420, 438 ]
+218 silly gentlyRm D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee\node_modules is being purged
+219 verbose gentlyRm don't care about contents; nuking D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee\node_modules
+220 silly doParallel preinstall 2
+221 silly preinstall commander@2.6.0 D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc
+222 info lifecycle commander@2.6.0~preinstall: commander@2.6.0
+223 silly preinstall git-scripts@0.2.1 D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee
+224 info lifecycle git-scripts@0.2.1~preinstall: git-scripts@0.2.1
+225 silly lifecycle commander@2.6.0~preinstall: no script for preinstall, continuing
+226 silly lifecycle git-scripts@0.2.1~preinstall: no script for preinstall, continuing
+227 silly doReverseSerial remove 0
+228 silly doSerial move 0
+229 silly doSerial finalize 2
+230 silly finalize D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\git-scripts\node_modules\commander
+231 silly finalize D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\git-scripts
+232 silly doSerial build 2
+233 silly build commander@2.6.0
+234 info linkStuff commander@2.6.0
+235 silly linkStuff commander@2.6.0 has D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\git-scripts\node_modules as its parent node_modules
+236 verbose linkBins commander@2.6.0
+237 verbose linkMans commander@2.6.0
+238 silly build git-scripts@0.2.1
+239 info linkStuff git-scripts@0.2.1
+240 silly linkStuff git-scripts@0.2.1 has D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules as its parent node_modules
+241 verbose linkBins git-scripts@0.2.1
+242 verbose link bins [ { 'git-scripts': './bin/git-scripts' },
+242 verbose link bins   'D:\\Cloud Storage\\Mark\\OneDrive\\Documents\\GitHub\\code-along\\node_modules\\.bin',
+242 verbose link bins   false ]
+243 verbose linkMans git-scripts@0.2.1
+244 silly doSerial global-link 0
+245 silly doParallel update-linked 0
+246 silly doSerial install 2
+247 silly install commander@2.6.0 D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc
+248 info lifecycle commander@2.6.0~install: commander@2.6.0
+249 silly lifecycle commander@2.6.0~install: no script for install, continuing
+250 silly install git-scripts@0.2.1 D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee
+251 info lifecycle git-scripts@0.2.1~install: git-scripts@0.2.1
+252 silly lifecycle git-scripts@0.2.1~install: no script for install, continuing
+253 silly doSerial postinstall 2
+254 silly postinstall commander@2.6.0 D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\commander-0f4880cc
+255 info lifecycle commander@2.6.0~postinstall: commander@2.6.0
+256 silly lifecycle commander@2.6.0~postinstall: no script for postinstall, continuing
+257 silly postinstall git-scripts@0.2.1 D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging\git-scripts-2ad789ee
+258 info lifecycle git-scripts@0.2.1~postinstall: git-scripts@0.2.1
+259 verbose lifecycle git-scripts@0.2.1~postinstall: unsafe-perm in lifecycle true
+260 verbose lifecycle git-scripts@0.2.1~postinstall: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\git-scripts\node_modules\.bin;D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.bin;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Skype\Phone\;C:\Program Files\QuickTime\QTSystem\;C:\Program Files\Git\cmd;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;%NVM_HOME%;%NVM_SYMLINK%;C:\Program Files\nodejs\;C:\Program Files\Microsoft VS Code\bin;C:\Users\markj\AppData\Local\atom\bin;C:\Users\markj\AppData\Local\Microsoft\WindowsApps;C:\Users\markj\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\markj\AppData\Roaming\npm
+261 verbose lifecycle git-scripts@0.2.1~postinstall: CWD: D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\git-scripts
+262 silly lifecycle git-scripts@0.2.1~postinstall: Args: [ '/d /s /c', './bin/install' ]
+263 silly lifecycle git-scripts@0.2.1~postinstall: Returned: code: 1  signal: null
+264 info lifecycle git-scripts@0.2.1~postinstall: Failed to exec postinstall script
+265 verbose unlock done using C:\Users\markj\AppData\Roaming\npm-cache\_locks\staging-6c46d00e6319ca27.lock for D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\node_modules\.staging
+266 silly rollbackFailedOptional Starting
+267 silly rollbackFailedOptional Finishing
+268 silly runTopLevelLifecycles Finishing
+269 silly install printInstalled
+270 verbose stack Error: git-scripts@0.2.1 postinstall: `./bin/install`
+270 verbose stack Exit status 1
+270 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:255:16)
+270 verbose stack     at emitTwo (events.js:106:13)
+270 verbose stack     at EventEmitter.emit (events.js:191:7)
+270 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:40:14)
+270 verbose stack     at emitTwo (events.js:106:13)
+270 verbose stack     at ChildProcess.emit (events.js:191:7)
+270 verbose stack     at maybeClose (internal/child_process.js:877:16)
+270 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+271 verbose pkgid git-scripts@0.2.1
+272 verbose cwd D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along
+273 error Windows_NT 10.0.14393
+274 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "git-scripts"
+275 error node v6.9.2
+276 error npm  v3.10.9
+277 error code ELIFECYCLE
+278 error git-scripts@0.2.1 postinstall: `./bin/install`
+278 error Exit status 1
+279 error Failed at the git-scripts@0.2.1 postinstall script './bin/install'.
+279 error Make sure you have the latest version of node.js and npm installed.
+279 error If you do, this is most likely a problem with the git-scripts package,
+279 error not with npm itself.
+279 error Tell the author that this fails on your system:
+279 error     ./bin/install
+279 error You can get information on how to open an issue for this project with:
+279 error     npm bugs git-scripts
+279 error Or if that isn't available, you can get their info via:
+279 error     npm owner ls git-scripts
+279 error There is likely additional logging output above.
+280 verbose exit [ 1, true ]

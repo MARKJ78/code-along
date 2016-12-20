@@ -10,11 +10,15 @@
     "surge": "latest",
     "git-scripts": "0.2.1"
   },
-  "git": {
-    "scripts": {
-      "pre-push": "surge --project ./ --domain code-along.surge.sh"
-    }
-  },
+ "git": {
+  "scripts": {
+    "post-commit": "npm run deploy",
+    "pre-push": "npm run deploy"
+  }
+},
+"scripts": {
+  "deploy": "surge --project ./ --domain my-project.surge.sh"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.co|m/MARKJ78/code-along.git"
@@ -27,34 +31,3 @@
   },
   "homepage": "https://github.com/MARKJ78/code-along#readme"
 }
-
-
-
-/*
-
-{
-  "name": "code-along",
-  "version": "1.0.0",
-  "description": "code-along",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MARKJ78/code-along.git"
-  },
-  "author": "MarkJ",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MARKJ78/code-along/issues"
-  },
-  "git": {
-  "scripts": {
-    "post-commit": "npm run deploy",
-    "pre-push": "npm run deploy",
-    "deploy": "surge --project ./ --domain code-along.surge.sh"
-  }
-}
-}
-  */
