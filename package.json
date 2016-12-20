@@ -17,7 +17,7 @@
   }
 },
 "scripts": {
-  "deploy": "surge --project ./ --domain my-project.surge.sh"
+  "deploy": "surge --project ./ --domain code-along.surge.sh"
 },
   "repository": {
     "type": "git",
