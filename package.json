@@ -1,6 +1,40 @@
 {
   "name": "code-along",
   "version": "1.0.0",
+  "description": "Code along to your favorite youtube turorials",
+  "main": "js/main.js",
+  "dependencies": {
+    "surge": "^0.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+      "surge": "latest",
+  "git-scripts": "0.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.co|m/MARKJ78/code-along.git"
+  },
+  "git": {
+  "scripts": {
+    "pre-push": "surge --project ./ --domain example-githooks.surge.sh"
+  }
+},
+  "author": "Mark Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MARKJ78/code-along/issues"
+  },
+  "homepage": "https://github.com/MARKJ78/code-along#readme"
+}
+
+
+
+/*
+
+{
+  "name": "code-along",
+  "version": "1.0.0",
   "description": "code-along",
   "main": "index.js",
   "scripts": {
@@ -23,5 +57,4 @@
   }
 }
 }
-  
-
+  */

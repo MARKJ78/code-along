@@ -1,0 +1,27 @@
+{
+  "name": "code-along",
+  "version": "1.0.0",
+  "description": "code-along",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MARKJ78/code-along.git"
+  },
+  "author": "MarkJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MARKJ78/code-along/issues"
+  },
+  "git": {
+  "scripts": {
+    "post-commit": "npm run deploy",
+    "pre-push": "npm run deploy",
+    "deploy": "surge --project ./ --domain code-along.surge.sh"
+  }
+}
+}
+  
+
