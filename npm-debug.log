@@ -15,7 +15,7 @@
 9 silly runTopLevelLifecycles Finishing
 10 silly install printInstalled
 11 verbose stack Error: Failed to parse json
-11 verbose stack Unexpected token '/' at 27:1
+11 verbose stack Unexpected token '/' at 33:1
 11 verbose stack /*
 11 verbose stack ^
 11 verbose stack     at parseError (C:\Program Files\nodejs\node_modules\npm\node_modules\read-package-json\read-json.js:390:11)
@@ -32,7 +32,7 @@
 17 error file D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\package.json
 18 error code EJSONPARSE
 19 error Failed to parse json
-19 error Unexpected token '/' at 27:1
+19 error Unexpected token '/' at 33:1
 19 error /*
 19 error ^
 20 error File: D:\Cloud Storage\Mark\OneDrive\Documents\GitHub\code-along\package.json
