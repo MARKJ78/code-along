@@ -18,11 +18,9 @@
   "git": {
   "scripts": {
     "post-commit": "npm run deploy",
-    "pre-push": "npm run deploy"
+    "pre-push": "npm run deploy",
+    "deploy": "surge --project ./ --domain code-along.surge.sh"
   }
-},
-"scripts": {
-  "deploy": "surge --project ./ --domain code-along.surge.sh"
 }
 }
   
