@@ -27,8 +27,8 @@ fetches an API call from promise and waits for response.
 //Since the search api call only accepts snippet as the part (argument),
 //getChannelDetails() is required to get the channel branding and content
 function searchYoutube(term) {
-    var q = "&q=" + term;
-    var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&limit=20" + q + apik;
+    var q = '&q=' + term;
+    var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&limit=20' + q + apik;
     fetch(url).then(function(results) {
         /*////////////////////////////////////////
         Loops through returned search results and sends each iteration (channel) to an API fetch
@@ -37,8 +37,8 @@ function searchYoutube(term) {
         var response = results.items;
         panel.innerHTML = '';
         for (var i = 0; i < response.length; i++) { // build url for each channel
-            var thisChannel = "&id=" + response[i].snippet.channelId;
-            var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics" + thisChannel + apik;
+            var thisChannel = '&id=' + response[i].snippet.channelId;
+            var url = 'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics' + thisChannel + apik;
             fetchSearchChannels(url);
         }
     });
@@ -66,7 +66,7 @@ function buildChannelCard(response) {
     var descriptionLong = channel.brandingSettings.channel.description;
     var subscribers = channel.statistics.subscriberCount;
     //shoten the description as it can be ridiculously long
-    var descriptionShort = "";
+    var descriptionShort = '';
     if (descriptionLong) {
         descriptionShort = truncateString(descriptionLong, 180); //shorten the description
     }

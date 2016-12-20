@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function fetch(url) {
     return new Promise(function(resolve) {
-        var rawData, data;
+        var data;
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.onload = function() {
@@ -16,7 +16,7 @@ function fetch(url) {
                 data = JSON.parse(this.response);
                 resolve(data); //back to you fetcher
             } else {
-                console.log('Not found / not working or something like that');
+                //console.log('Not found / not working or something like that');
             }
         };
         request.send();
@@ -31,8 +31,8 @@ function fetch(url) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function getPlaylists(channelId) {
     return new Promise(function(playlists) {
-        var channel = "&channelId=" + channelId;
-        var url = "https://www.googleapis.com/youtube/v3/playlists?part=id%2C+contentDetails%2C+player%2C+snippet&maxResults=50" + channel + apik;
+        var channel = '&channelId=' + channelId;
+        var url = 'https://www.googleapis.com/youtube/v3/playlists?part=id%2C+contentDetails%2C+player%2C+snippet&maxResults=50' + channel + apik;
         fetch(url).then(function(response) {
             playlists(response); //back to you
         });
@@ -47,8 +47,8 @@ function getPlaylists(channelId) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function getPlaylistVids(playlistId) {
     return new Promise(function(videos) {
-        var playlistVids = "&playlistId=" + playlistId;
-        var url = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50" + playlistVids + apik;
+        var playlistVids = '&playlistId=' + playlistId;
+        var url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50' + playlistVids + apik;
         fetch(url).then(function(response) {
             var length = response.items.length;
             currentPlaylist = playlistId;

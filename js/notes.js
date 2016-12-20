@@ -9,7 +9,7 @@ var myNotes = [];
 var lastNote = 0;
 var date = new Date();
 var month = date.getMonth() + 1;
-var dateString = date.getDate() + "/" + month + "/" + date.getFullYear();
+var dateString = date.getDate() + '/' + month + '/' + date.getFullYear();
 var title = document.getElementById('noteTitle');
 var note = document.getElementById('note');
 var saveNoteButton = document.getElementById('saveNote');
@@ -18,7 +18,7 @@ var myNotesButton = document.getElementById('myNotes');
 var relatedNotesButton = document.getElementById('relatedNotes');
 var relatedVidLink = [];
 var confirmation = document.getElementsByName('note')[0];
-var myNotesList = mySavedNotesPanel.getElementsByTagName("ul")[0];
+var myNotesList = mySavedNotesPanel.getElementsByTagName('ul')[0];
 var noteListItems;
 var noteDetailPanel = document.getElementById('note-detail-panel');
 var width = window.innerWidth;
@@ -43,7 +43,7 @@ On save, Assemble the note into an object and send on to be saved
  ////////////////////////////////////////*/
 saveNoteButton.onclick = function(e) {
     e.preventDefault();
-    if (note.value !== "") {
+    if (note.value !== '') {
         var thisNote = {};
         thisNote.id = new Date().getTime();
         thisNote.date = dateString;
@@ -64,7 +64,7 @@ saveNoteButton.onclick = function(e) {
 called on save, checks for exsisting note
  ////////////////////////////////////////*/
 function findRelatedNotes(thisNote) {
-    console.log('findRelatedNotes has been called');
+    //console.log('findRelatedNotes has been called');
     if (myNotes.length > 0) {
         //console.log('case 1');
         var flag = false; //initialise flag / flag state reset
@@ -73,17 +73,17 @@ function findRelatedNotes(thisNote) {
             //console.log('loop started');
             if (myNotes[i].title == thisNote.title) {
                 flag = true; //prevent note from being pushed as a new entry
-                console.log('found match');
-                console.log('appending to note');
+                //console.log('found match');
+                //console.log('appending to note');
                 var currentNoteVal = myNotes[i].note;
                 var newNoteVal = currentNoteVal + '<br/><br/>' + dateString + ' | ' + thisNote.note;
                 //console.log(newNoteVal);
                 myNotes[i].note = newNoteVal;
                 Cookies.set('storedNotes', myNotes);
                 //myNotes = Cookies.getJSON('storedNotes');
-                console.log('Saved');
+                //console.log('Saved');
                 confirmation.placeholder = 'The note for this subject has been updated';
-                note.value = "";
+                note.value = '';
             }
         }
         if (flag === false) {
@@ -102,9 +102,9 @@ function pushNote(thisNote) {
     myNotes.push(thisNote);
     Cookies.set('storedNotes', myNotes);
     //myNotes = Cookies.getJSON('storedNotes');
-    console.log('New Note Saved');
+    //console.log('New Note Saved');
     confirmation.placeholder = 'New note saved';
-    note.value = "";
+    note.value = '';
 }
 /*////////////////////////////////////////
 Load all notes and trigger My Notes panel into view
@@ -112,11 +112,11 @@ Load all notes and trigger My Notes panel into view
 myNotesButton.onclick = function(e) {
     e.preventDefault();
     //create UL and add class
-    var newUlClass = document.createAttribute("class");
-    newUlClass.value = "saved-notes-list";
+    var newUlClass = document.createAttribute('class');
+    newUlClass.value = 'saved-notes-list';
     myNotesList.setAttributeNode(newUlClass);
     //clear the list to allow regeneration
-    myNotesList.innerHTML = "";
+    myNotesList.innerHTML = '';
     //loop through notes array and create list items to append
     myNotes.reverse(); //Newest first
     for (var i = 0; i < myNotes.length; i++) {
@@ -143,7 +143,7 @@ function displayNotes(noteToBuild) {
     myNotesList.appendChild(mySavedNote);
     //add class to li's
     var newClass = document.createAttribute('class');
-    newClass.value = "saved-notes-list-item";
+    newClass.value = 'saved-notes-list-item';
     mySavedNote.setAttributeNode(newClass);
     //add id to li's
     var newId = document.createAttribute('id');
@@ -297,8 +297,8 @@ relatedNotesButton.onclick = function(e) {
     for (var i = 0; i < myNotes.length; i++) {
         if (myNotes[i].title == findThis) {
             flag = true;
-            myNotesList.innerHTML = "";
-            console.log('Match Found');
+            myNotesList.innerHTML = '';
+            //console.log('Match Found');
             displayNotes(myNotes[i]);
             mySavedNotesPanel.classList.add('notes-open');
             break;
