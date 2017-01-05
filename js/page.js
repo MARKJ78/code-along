@@ -1,7 +1,7 @@
 /*////////////////////////////////////////
 Global Variables
  ////////////////////////////////////////*/
-var panel = document.getElementById("video-panel");
+var panel = document.getElementById('video-panel');
 var editor = document.getElementById('editor-panel');
 var playlistLength; //required to calculate when the video controls should 'bump'
 var listProgress; //represented by an index # and paired with currentPlaylist.
@@ -91,8 +91,8 @@ pickUpLeftOffButton.onclick = function() {
 //which can create duplicate entry bug
 function loadFaveChannelCard(id) {
     panel.innerHTML = '';
-    var thisChannel = "&id=" + id;
-    var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics" + thisChannel + apik;
+    var thisChannel = '&id=' + id;
+    var url = 'https://www.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics' + thisChannel + apik;
     fetch(url).then(function(response) {
         buildChannelCard(response);
     });
@@ -122,7 +122,7 @@ function showPlaylists(channelId) {
         //hide editor panel (with the classes removed, the video panel is 100% height)
         closeEditor();
         var playLists = response.items; //shorten the path
-        channelPlaylists.innerHTML = ""; //prevent playlist pileup
+        channelPlaylists.innerHTML = ''; //prevent playlist pileup
         for (var i = 0; i < playLists.length; i++) { //loop through array of playlists
             //get required properties
             var playlistId = playLists[i].id;
@@ -176,7 +176,7 @@ function showVideos(playlistId) {
             videoCardStore.push(videoCard); //push this single video card to storage until all iterations are complete
         }
         var videoCardPanel = document.getElementById(videoCardStore[0]); //could be any odd numbered index in array as they are all the same data
-        videoCardPanel.innerHTML = ""; //clear playlist vids card panel
+        videoCardPanel.innerHTML = ''; //clear playlist vids card panel
         for (var j = 1; j < videoCardStore.length; j += 2) {
             videoCardPanel.insertAdjacentHTML('beforeend', videoCardStore[j]); //loop through the video card storage array and,
             // insert each (even number index) one into the playlist vids panel
@@ -199,7 +199,7 @@ function insertVid(playlistId, index) {
         var videoId = response.items[index].snippet.resourceId.videoId;
         var videoTitle = response.items[index].snippet.title;
         currentVideo = videoId; //update global var with current position in playlist (for use in controls & pickUpLeftOffButton). not cookied.
-        panel.innerHTML = ""; //clear the main panel to insert video
+        panel.innerHTML = ''; //clear the main panel to insert video
         var video = [ //build video iframe
             '<iframe',
             '  src="//www.youtube.com/embed/' + currentVideo + '"',
@@ -394,12 +394,12 @@ function closeEditor() {
 
 //Just to truncate anything thats too long if needed
 function truncateString(str, num) {
-    var truncated = "";
+    var truncated = '';
     if (str.length > num && num > 3) {
-        truncated = str.slice(0, num - 3) + "...";
+        truncated = str.slice(0, num - 3) + '...';
         return truncated;
     } else if (str.length > num && num <= 3) {
-        truncated = str.slice(0, num) + "...";
+        truncated = str.slice(0, num) + '...';
         return truncated;
     } else {
         return str;
