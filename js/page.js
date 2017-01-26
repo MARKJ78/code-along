@@ -242,6 +242,7 @@ function addChannel(channelId) {
 Remove Channel from faves
  ////////////////////////////////////////*/
 function removeChannel(channelId) {
+
     var addChannel = document.getElementById('addChannel' + channelId); //get the addChannel button from the channel card
     var removeChannel = document.getElementById('removeChannel' + channelId); //get the remove button from the channel card
     for (var i = 0; i < channelsList.length; i++) { //loop through channels list
@@ -261,6 +262,7 @@ Set up Video controls
 var thisPlaylist = document.getElementById('allPlaylistVid');
 thisPlaylist.addEventListener('click', function() {
     if (playlistContent) {
+      debugger;
         //hide editor panel (withthese classes removed, the video panal is 100% height)
         panel.classList.remove('small', 'default', 'large');
         editor.classList.remove('small', 'default', 'large');

@@ -46,6 +46,7 @@ function getPlaylists(channelId) {
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function getPlaylistVids(playlistId) {
+    //debugger;
     return new Promise(function(videos) {
         var playlistVids = '&playlistId=' + playlistId;
         var url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Cid%2Csnippet%2Cstatus&maxResults=50' + playlistVids + apik;
